@@ -12,7 +12,7 @@ import {
 import SearchImg from "../../components/img/search.svg";
 import DownArrow from "../../components/img/down.svg"
 import PurpleArrow  from "../../components/img/arrow-purple.svg"
-import { TradingViewEmbed, widgetType } from "react-tradingview-embed";
+//import { TradingViewEmbed, widgetType } from "react-tradingview-embed";
 //import yahooFinance from 'yahoo-finance2'; // Correct import
 
 // Updated data structure with multiple categories per month
@@ -100,7 +100,7 @@ const PriceChart = () => {
                                 <Bar dataKey="other" fill="#ffc658" name="other" />
                                 <Bar dataKey="other2" fill="#ffc658" name="other2" />
                             </BarChart> */}
-                            <TradingViewEmbed
+                            {/* <TradingViewEmbed
                                 widgetType={widgetType.ADVANCED_CHART}
                                 widgetConfig={{
                                     interval: "1D",
@@ -110,7 +110,7 @@ const PriceChart = () => {
                                     width: "100%",
                                     locale: "en",
                                 }}
-                            />
+                            /> */}
                         </div>
                         {/* <div className="chart-base d-flex justify-content-between ms-5 mb-2">
                             <h3 className="ps-3 graph-title">$20 678.89 <span>-1.5%</span><img src={PurpleArrow} className="mx-1"/></h3 >
