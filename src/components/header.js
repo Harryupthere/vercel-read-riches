@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '../components/img/icon/menu.svg'
 import User from '../components/img/Userman.png'
 import { FiChevronLeft } from 'react-icons/fi';
+import Avatar from "../components/img/avatar.png"
 
 
 const Header = () => {
@@ -107,7 +108,7 @@ const Header = () => {
                        <FiChevronLeft/> <button alt="Back Icon" onClick={toggleMenu} className="back-icon">Back</button>
                     </div>
                     <div className='mobile-login'>
-                        <img src={User}/>
+                        <img src={Avatar}/>
                         <p>Seems you havent logged in yet </p>
                         <button className="logoutbtn">Log In</button>
                     </div>
@@ -118,9 +119,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/stockview" onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
