@@ -79,9 +79,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link  ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/" onClick={navlinclickfunc} title='Home'>Home</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/stockview" onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
                     </li>
