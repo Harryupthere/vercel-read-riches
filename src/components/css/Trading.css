@@ -1,0 +1,49 @@
+
+.Tradecontainer{
+    display: flex;
+    width: max-content;
+    gap: 5rem;
+    /* justify-content: space-between; */
+    animation: scroll 1500s linear infinite;
+}
+
+@keyframes scroll{
+    to{
+      transform: translateX(-100%);
+    }
+  }
+
+.Stockele{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.Stockele > p:nth-child(2){
+    color: #000;
+    background-color: white;
+    border-radius: 5px;
+    padding-inline: 8px;
+    padding-block: 4px;
+    text-align: center;
+}
+
+.Stockele > p:nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Stockele svg{
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 875px){
+    .Tradecontainer{
+        display: none;
+    }
+
+}
