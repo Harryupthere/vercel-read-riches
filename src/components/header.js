@@ -93,9 +93,9 @@ const Header = () => {
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
                 </ul>
-                <div>
+                {/* <div>
                 {isLoggedIn ? <button className="logoutbtn" onClick={e=>{goToLogOut(e)}}>Log Out</button>:<button className="logoutbtn" onClick={e=>{goToLogin(e)}}>Log In</button>}
-                </div>
+                </div> */}
             </nav>
             </div>
             <div className='mobile-header'>
