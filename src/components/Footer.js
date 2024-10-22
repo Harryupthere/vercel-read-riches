@@ -34,7 +34,7 @@ const Footer = () => {
                 </h3>
                 <ul>
                   <li><Link to="/">Home</Link></li>
-                  <li><Link to="/stockview">Stocks Tracker</Link></li>
+                  {/* <li><Link to="/stockview">Stocks Tracker</Link></li> */}
                   <li><Link to="/about">About us</Link></li>
                   <li><Link to="/contact">Contact us</Link></li>
                 </ul>
@@ -54,18 +54,30 @@ const Footer = () => {
                   Contact Us
                 </h3>
                 <ul>
-                  <li><Link to=""><img src={Phone} className='me-2'/>888-888-8888</Link></li>
-                  <li><Link to=""><img src={Email} className='me-2' />Inforeadriches@gmail.com</Link></li>
+                  <li><Link to=""><img src={Phone} className='me-2'/>+91- 7340283616</Link></li>
+                  <li><Link to=""><img src={Email} className='me-2' /> info@readriches.com</Link></li>
                 </ul>
               </div>
             </div>
             <div className='mobile-social-icons footer-list'>
-              <ul>
-                <li><Link to=""><img src={Facebook} className='' /></Link></li>
-                <li><Link to=""><img src={Insta} className='' /></Link></li>
-                <li><Link to=""><img src={LinkedIn} className='' /></Link></li>
-                <li><Link to=""><img src={Twitter} className='' /></Link></li>
-              </ul>
+            <ul>
+                                        {/* <li><Link to=""><img src={Facebook} alt="Facebook" /></Link></li> */}
+                                        <li>
+                                            <Link to="https://www.instagram.com/readriches?igsh=MXY3ZnBmOWRjMWMwZA==" target="_blank" rel="noopener noreferrer">
+                                                <img src={Insta} alt="Instagram" />
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="https://www.linkedin.com/company/read-riches/" target="_blank" rel="noopener noreferrer">
+                                                <img src={LinkedIn} alt="LinkedIn" />
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="https://x.com/ReadRiches?t=RwnqDBwEFI5s4Twnx1KSMw&s=09" target="_blank" rel="noopener noreferrer">
+                                                <img src={Twitter} alt="Twitter" />
+                                            </Link>
+                                        </li>
+                                    </ul>
             </div>
           </Col>
           <Col lg={3} md={12} className='d-flex justify-content-lg-end  justify-content-center'>

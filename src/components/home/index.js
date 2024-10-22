@@ -419,7 +419,7 @@ const Home = () => {
                                     <h1>From< b> Pages </b>To <b>Profits</b></h1>
                                     <p>Explore simplified, in-depth analysis blending quantitative data with qualitative insights uncovering undervalued gems—all in one platform</p>
                                 </div>
-                                <button type="button" className="view">View now</button>
+                                {/* <button type="button" className="view">View now</button> */}
 
                             </Col>
                             <Col md={7}>
