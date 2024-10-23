@@ -16,7 +16,42 @@ import Arrow from '../../components/img/icon/arrowRight.svg';
 import ArrowDown from '../../components/img/icon/downArrow.svg';
 
 function Contact() {
-    const [activeKey, setActiveKey] = useState("0");
+    const [activeKey, setActiveKey] = useState(null);
+
+    const faqs = [
+        {
+            question: "How can I become a member of Read Riches?",
+            answer: "To become a member, simply sign up on our website, start your free trial by accessing three company analysis, and then choose a membership plan that suits your needs to continue enjoying unlimited access.",
+        },
+        {
+            question: "How does the free trial work?",
+            answer: "New users can access three company analysis for free to evaluate the quality and depth of our insights. After these initial reports, you will need to subscribe to our exclusive membership to continue accessing detailed analysis.",
+        },
+        {
+            question: "Who should use Read Riches?",
+            answer: "Read Riches is ideal for value investors, financial enthusiasts, and anyone looking for in-depth and easy-to-understand analysis of listed companies. Our platform caters to both seasoned professionals and those new to financial markets, enhancing their understanding and engagement with financial data.",
+        },
+        {
+            question: "Is Read Riches suitable for new investors?",
+            answer: "Absolutely, Read Riches is designed to assist both new and experienced investors. We offer easy-to-understand explanations alongside comprehensive data, making it suitable for anyone interested in financial markets.",
+        },
+        {
+            question: "What payment methods are accepted for Read Riches memberships?",
+            answer: "Read Riches accepts a variety of payment methods including credit cards, debit cards, net-banking and UPI. All transactions are secured to ensure your payment data is protected.",
+        },
+        {
+            question: "Can I access Read Riches analysis from multiple devices?",
+            answer: "Yes, once you have a membership, you can access Read Riches from any device, including smartphones, tablets, and computers, ensuring you can stay informed on the go.",
+        },
+        {
+            question: "Does Read Riches offer any discounts or promotions for new members?",
+            answer: "From time to time, we offer promotional rates and discounts for new members. Please check our website or subscribe to our newsletter for the latest offers and updates.",
+        },
+        {
+            question: "Who can I contact if I have technical issues with the platform?",
+            answer: "If you encounter any technical issues, please contact our support team directly through the contact form on our website or by emailing readriches@gmail.com. We are committed to resolving your issues promptly and efficiently.",
+        },
+    ];
 
     const handleToggle = (key) => {
         setActiveKey(activeKey === key ? null : key);
@@ -184,7 +219,7 @@ function Contact() {
             </section>
             <section className='m-bg'>
                 <div className='faq'>
-                    <Container>
+                    {/* <Container>
                         <Row>
                             <h2 className='home-heading mb-4'>Frequently <b>Asked Questions ?</b></h2>
                             <Accordion activeKey={activeKey}>
@@ -255,7 +290,30 @@ function Contact() {
                                 </Accordion.Item>
                             </Accordion>
                         </Row>
-                    </Container>
+                    </Container> */}
+
+<Container>
+            <Row>
+                <h2 className='home-heading mb-4'>Frequently <b>Asked Questions ?</b></h2>
+                <Accordion activeKey={activeKey}>
+                    {faqs.map((faq, index) => (
+                        <Accordion.Item eventKey={String(index)} key={index}>
+                            <Accordion.Header onClick={() => handleToggle(String(index))}>
+                                {faq.question}
+                                {activeKey === String(index) ? (
+                                    <img src={Arrow} className="ms-auto" alt="Open Icon" width="12" height="12" />
+                                ) : (
+                                    <img src={ArrowDown} className="ms-auto" alt="Closed Icon" width="12" height="12" />
+                                )}
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                {faq.answer}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    ))}
+                </Accordion>
+            </Row>
+        </Container>
                 </div>
             </section>
             <Footer />
