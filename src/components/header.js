@@ -86,9 +86,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
@@ -125,9 +125,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
-                    </li>
+                    </li> */}
                     </ul>
                 </div>
             </div>
