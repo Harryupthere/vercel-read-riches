@@ -266,7 +266,7 @@ export default function JoinMemberShip() {
                                                 <span>per quarter</span>
                                             </div>
                                             <hr className='w-100' />
-                                            <p>The free plan gives you a taste, but the membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
+                                            <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
                                             <ul>
                                                 <li><img src={Check} />Access to all Companies Synopsis</li>
                                                 <li><img src={Check} />Exclusive community</li>
