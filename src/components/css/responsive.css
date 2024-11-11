@@ -6,6 +6,9 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .slick-slide {
+    padding: 0 30px;
+}
   .two-trio::after{
     top: -36px!important;
     height: 160px!important;
@@ -38,7 +41,7 @@
     bottom: 45px;
   } */
 }
-@media screen and (max-width: 991px) and (min-width:768px){
+/* @media screen and (max-width: 991px) and (min-width:768px){
   .container, .container-md, .container-sm {
     max-width: 900px;
   }
@@ -50,23 +53,43 @@
   .container, .container-lg, .container-md, .container-sm {
       max-width: 1080px;
   }
-}
+} */
 
 @media (min-width: 1200px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 1200px;
   }
 }
-
+@media (min-width: 1400px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+      max-width: 1320px;
+  }
+}
 
 
 
 @media screen and (min-width: 768px) {
+  .inner-box{
+    border: 2px solid #73BBC3;
+    height: 150%;
+    position: absolute;
+    width: 97%;
+    top: 80px;
+    left: -10px;
+  }
+  .vision-box{
+    margin-top: 100px;
+  }
+  .arrow-position{
+    position: absolute;
+    left: 50px;
+    bottom: -35px;
+  }
   .h-web{
     display: block;
   }
   .user-sec {
-    width: 80%;
+  width: 85%;
     margin: auto;
   }
   .help-content {
@@ -85,16 +108,16 @@
     border-radius: 0;
 }
   .center-para-heading{
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
   }
   .about-read{
-    height: 600px;
+    padding: 0 50px;
     position: relative;
     z-index: -1;
   }
   .analys-section{
-    height: 250px;
+    height: 310px;
   }
   .small-table{
     width: 300px;
@@ -149,9 +172,9 @@
   }
 
   img.arro-bg {
-    right: -31px;
-    bottom: -10px;
-  }
+    right: -70px;
+    bottom: -120px;
+}
 }
 
 @media screen and (max-width: 1024px) {
@@ -212,6 +235,9 @@
   }
 }
 @media screen and (max-width: 991px) {
+  .navbar {
+    column-gap: 0;
+}
   .start-pages .back-icon{
     display: block;
 }
@@ -222,7 +248,25 @@
   display: block;
 }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width:767.98px) {
+  
+.dotted-circle.stock-box1::before {
+  content: "";
+  position: absolute;
+  top: 60px;
+  left: 21%;
+  transform: rotate(90deg);
+}
+.dotted-circle.stock-box2::before {
+  content: "";
+  position: absolute;
+  left: -85px;
+  transform: rotate(90deg);
+  top: 66px;
+}
+  section{
+    margin: 40px 0;
+  }
   .sub-heading {
     font-size: 20px;
     font-weight: 400;
@@ -246,7 +290,7 @@
     min-height: 235px;
 }
   .modal-90w.modal-dialog {
-    max-width: 100%;
+    max-width: 90%;
     width: 100%;
 }
 .data-page ul li {
@@ -485,7 +529,7 @@
 
   .mobile-view-show .man-img {
     max-width: 240px;
-    margin-top: 180px;
+    /* margin-top: 180px; */
     display: flex;
     justify-content: center;
     margin-left: auto;
@@ -501,12 +545,14 @@
   }
 
   .why-us {
-    top: 55%;
+    /* top: 55%; */
     text-align: center;
     border: 2px solid #1C656D;
-    padding: 10px 0;
+    padding: 10px 5px 25px 5px;
     width: 100%;
     left: 0;
+    margin-top: -15px;
+    z-index: 1;
   }
 
   .why-us h2 {
@@ -542,6 +588,7 @@
 
   .user-data {
     padding: 0 20px;
+    overflow-x: hidden;
   }
 
   /* .why p {
@@ -577,7 +624,7 @@
   }
 
   .data-heading h2 {
-    font-size: 25px;
+    font-size: 25px!important;
   }
 
   .rule {
@@ -634,6 +681,7 @@
   }
   .slider-arrows {
     height: 30px;
+    margin-top: 0;
 }
 .user-icon {
   margin-top: 40px;
@@ -709,14 +757,22 @@
 }
 
 @media (max-width:1200px) and (min-width:992px) {
+
   img.arro-bg {
     right: -75px;
-    bottom: -60px;
+    bottom: -100px;
   }
 
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  img.arro-bg {
+    right: -52px;
+    bottom: -105px;
+}
+
+
+}
 
 
 @media screen and (max-width: 520px) {
@@ -726,6 +782,11 @@
   }
 }
 @media screen and (max-width: 426px) {
+  img.arro-bg {
+    right: -52px;
+}
+
+
   .about-slider-item {
     padding: 10px 5px;
   }

@@ -2,11 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Container, Row, Col,Spinner } from "react-bootstrap";
-import "../../components/css/home.css"
-import Tata from "../../components/img/tata.svg"
-import Wipro from "../../components/img/wipro.svg"
-import Hindu from "../../components/img/hindu.svg"
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Header from "../header";
 import HeroImg from "../../components/img/heroImg.png"
 import Finance from "../../components/img/finance.svg"
@@ -16,8 +12,6 @@ import Competitor from "../../components/img/competitor.svg"
 import ManagementRing from "../../components/img/icon/managmentRing.svg"
 import InsightRing from "../../components/img/icon/insightRing.svg"
 import TailwindRIng from "../../components/img/icon/tailwindRing.svg"
-
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import Car from "../../components/img/icon/car.svg"
@@ -36,6 +30,7 @@ import Footer from "../Footer";
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'; // Importing icons for custom arrows
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
+import "../../components/css/home.css"
 
 
 
@@ -95,13 +90,18 @@ const Home = () => {
     const checkToken = localStorage.getItem("token");
 
     if (!checkToken) {
-      const checkRole = localStorage.getItem("role");
+        const checkRole = localStorage.getItem("role");
     }
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [token, setToken] = useState('')
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        // Clear the session storage key on homepage load
+        sessionStorage.removeItem("hasRefreshed");
+    }, []);
 
     useEffect(() => {
         const checkToken = localStorage.getItem("token");
@@ -132,7 +132,7 @@ const Home = () => {
         slidesToScroll: 1,
         initialSlide: 0,
         arrows: false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 1500,
         responsive: [
             {
@@ -291,49 +291,12 @@ const Home = () => {
                 }
 
 
-                try {
-                    const response = await fetch(`${config.apiUrl}stock/${itemId}`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${checkToken}` // Replace with actual token
-                        }
-                    });
 
-                    const result = await response.json();
-
-                    if (result.success) {
-                        // Prepare the data to send as props
-                        const dataToSend = {
-                            companyName: result.company_name,
-                            overviewData: result.data[0].overview,
-                            companyProfileData: result.data[0].companyProfile,
-                            industryInsideData: result.data[0].industryInside,
-                            HEADWINDS_TAILWINDSData: result.data[0].HEADWINDS_TAILWINDS,
-                            managementMattersData: result.data[0].managementMatters,
-                            financialXrayData: result.data[0].financialXray,
-                            valuationData: result.data[0].valuation,
-                            competitorCheckData: result.data[0].competitorCheck,
-                        };
-
-                        toast.error('Error message'); // Example toast message
-
-                        // Navigate to the overview page and pass the data as state
-                        navigate(`/overview/${itemId}`, { state: dataToSend });
-                    }
-                    setLoading(false)
-
-                } catch (error) {
-                    setLoading(false)
-
-                    console.error('Error fetching companies:', error);
-                } finally {
-                    setLoading(false); // Hide loader after data is fetched
-                }
-
+                navigate(`/overview/${itemId}`);
 
 
             } else {
-            setLoading(false)
+                setLoading(false)
 
                 navigate('/login');
 
@@ -404,25 +367,25 @@ const Home = () => {
                 <Header />
             </div>
             <section className="home-color white-header hero-section">
-            {loading && <div className="spinner-container">
-            <Spinner animation="border" variant="primary" className="spinner" />
-          </div>
-}
+                {loading && <div className="spinner-container">
+                    <Spinner animation="border" variant="primary" className="spinner" />
+                </div>
+                }
                 <Container>
                     <Header />
                     <Toaster />
-                    <div className="py-md-3 py-2">
-                        <Row className="d-flex align-items-center">
-                            <Col md={5} sm={12} >
-                                <img src={HeroImg} alt="hero-img" style={{ width: "100%" }} className="hero-img-mobile" />
+                    <div className="">
+                        <Row className="">
+                            <Col lg={5} md={12} sm={12} className="mt-md-5">
+                                <img src={HeroImg} alt="hero-img" style={{ width: "100%" ,marginLeft:"24px"}} className="hero-img-mobile" />
                                 <div className="landing-content">
                                     <h1>From< b> Pages </b>To <b>Profits</b></h1>
                                     <p>Explore simplified, in-depth analysis blending quantitative data with qualitative insights uncovering undervalued gems—all in one platform</p>
                                 </div>
-                                {/* <button type="button" className="view">View now</button> */}
+                                <button type="button" className="view">View now</button>
 
                             </Col>
-                            <Col md={7}>
+                            <Col lg={7} md={12} sm={12}>
                                 <img src={HeroImg} alt="hero-img" style={{ width: "100%" }} className="hero-img" />
                             </Col>
                         </Row>
@@ -441,16 +404,18 @@ const Home = () => {
                     <b>Analysis Scope</b>
                 </h2>
                 <div className="analys-section">
-                    <Container>
+                    <Container >
                         <Row>
-                            <Col md={10}>
+                            <Col md={11}>
                                 <div className="slider-container home-slider">
+                                    <div>
                                     <Slider
                                         ref={slider => {
                                             sliderRef = slider;
                                         }}
                                         {...settings}
                                     >
+                                         
                                         <div className="me-1">
                                             <div className="ana-card">
                                                 <div className="card-img">
@@ -515,9 +480,10 @@ const Home = () => {
                                             </div>
                                         </div> */}
                                     </Slider>
+                                    </div>
                                 </div>
                             </Col>
-                            <Col md={2} className="">
+                            <Col md={1} className="p-0">
                                 <div className="home-slider">
                                     <div className="d-flex align-items-center justify-content-center slider-arrows">
                                         <CustomLeftArrow onClick={previous} />
@@ -541,18 +507,19 @@ const Home = () => {
                             </h2>
                         </div>
                     </Col>
-                </Row>
+                </Row> 
                 <Row>
                    
-                    <Col md={3}>
+                    <Col lg={3} sm={12}>
 
                         <div className="finance-sidebar">
                             <div className="search-box">
-                                <img src={Search} />
+                                <img src={Search} className="home-search-img"/>
                                 <input
                                     type="input"
                                     placeholder="Search by the company "
                                     value={searchInput}
+                                    className="home-search"
                                     onChange={(e) => setSearchInput(e.target.value)} // Update searchInput as user types
                                 // onChange={(e) => setSearchInput(e.target.value)} // Update searchInput as user types
                                 // onFocus={() => setFilteredCompanies(companies)}  // Show suggestions on focus
@@ -567,8 +534,6 @@ const Home = () => {
                                     </ul>
                                 )}
                             </div>
-                           
-
 
 
                             <ul>
@@ -584,18 +549,21 @@ const Home = () => {
                             </ul>
                         </div>
                     </Col>
-                    <Col md={9}>
+                    <Col lg={9} sm={12}>
                         <Row>
 
                             {companies.length > 0 ?
                                 companies.map((item) => (
 
                                     <Col md={4} className="max-height-box" onClick={e => { openPdf(e, item.company_unique_id) }}>
-                                        <div className="company-box" style={{ background: `radial-gradient(54.02% 54.02% at 50% 50%, #FFFFFF 0%, ${item.first_color} 33.1%, ${item.second_color} 100%)` }}>
+                                        <div className="company-box" style={{ background: `radial-gradient(54.02% 54.02% at 50% 50%, ${item.first_color} 33.1%, ${item.second_color} 100%)` }}>
                                             <div className="date">
                                                 <span>23 July 24</span>
                                             </div>
-                                            <img src={`${config.apiUrl}companyLogoImage/${item.company_unique_id}`} />
+                                            <div className="company-img">
+                                                <img src={`${config.apiUrl}companyLogoImage/${item.company_unique_id}`} />
+                                                <div className="blur-box"></div>
+                                            </div>
                                             <button className="hover-btn">{item.category.categoryName}</button>
                                             <h3>{item.company_name}</h3>
                                         </div>

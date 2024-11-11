@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Header from '../header';
@@ -14,44 +14,45 @@ import Footer from '../Footer';
 import Accordion from 'react-bootstrap/Accordion';
 import Arrow from '../../components/img/icon/arrowRight.svg';
 import ArrowDown from '../../components/img/icon/downArrow.svg';
-
+import emailjs from 'emailjs-com'; // or the appropriate path
+import axios from 'axios';
+import config from '../../config';
 function Contact() {
     const [activeKey, setActiveKey] = useState(null);
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     const faqs = [
         {
-            question: "How can I become a member of Read Riches?",
-            answer: "To become a member, simply sign up on our website, start your free trial by accessing three company analysis, and then choose a membership plan that suits your needs to continue enjoying unlimited access.",
+            question: "How can Read Riches simplify my investment research?",
+            answer: "Read Riches consolidates essential company data and in-depth analysis all in one place, offering real-time metrics, qualitative insights, and detailed financial breakdowns to streamline your investment research process.",
         },
         {
-            question: "How does the free trial work?",
-            answer: "New users can access three company analysis for free to evaluate the quality and depth of our insights. After these initial reports, you will need to subscribe to our exclusive membership to continue accessing detailed analysis.",
+            question: "What makes Read Riches different from other financial analysis platforms?",
+            answer: "Read Riches stands out by providing a one-stop investment research platform, focusing on both the quantitative metrics and qualitative aspects of company performance on a real-time basis. From real-time stock prices and key ratios like PE, we offer a complete, holistic view of every company you care about. Additionally, you have a chance to be part of an exclusive community where members can engage in discussions, share insights, and learn from experienced investors.",
         },
         {
-            question: "Who should use Read Riches?",
-            answer: "Read Riches is ideal for value investors, financial enthusiasts, and anyone looking for in-depth and easy-to-understand analysis of listed companies. Our platform caters to both seasoned professionals and those new to financial markets, enhancing their understanding and engagement with financial data.",
+            question: "What details about the company does Read Riches offer in its analysis?",
+            answer: "Read Riches provides comprehensive analysis including Financial X-Ray of the three financial statements, detailed valuations via DCF and relative models, and competitor positioning through scatter plots. We gauge management sentiment with word clouds from concalls and offer an in-depth company profile detailing business models and revenue quality. Our reports also integrate Porter's 5 Forces and MOAT analysis for strategic insights, complemented by thorough industry analysis and market outlooks.",
         },
         {
-            question: "Is Read Riches suitable for new investors?",
-            answer: "Absolutely, Read Riches is designed to assist both new and experienced investors. We offer easy-to-understand explanations alongside comprehensive data, making it suitable for anyone interested in financial markets.",
+            question: "How often is company data updated on Read Riches?",
+            answer: "We strive to provide the most current and relevant financial data. The stock prices are live according to market fluctuations, and company analyses are updated regularly in response to new financial reports, market changes, and other relevant events to ensure our members have the latest information.",
         },
         {
-            question: "What payment methods are accepted for Read Riches memberships?",
-            answer: "Read Riches accepts a variety of payment methods including credit cards, debit cards, net-banking and UPI. All transactions are secured to ensure your payment data is protected.",
+            question: "What is the Read Riches community, and what can I expect?",
+            answer: "The Read Riches community is our dynamic WhatsApp group where financial enthusiasts, traders, and investors gather to discuss market trends, share insights, and explore potential opportunities. It's a collaborative hub that turns financial discussions into profitable insights.",
         },
         {
-            question: "Can I access Read Riches analysis from multiple devices?",
-            answer: "Yes, once you have a membership, you can access Read Riches from any device, including smartphones, tablets, and computers, ensuring you can stay informed on the go.",
+            question: "What does membership at Read Riches include?",
+            answer: "Membership provides unlimited access to our full range of company analyses, along with exclusive member benefits such as detailed financial reports, expert insights, and an invitation to join our vibrant community of investors. You will also gain access to events hosted by Read Riches that are exclusive for investors.",
         },
         {
-            question: "Does Read Riches offer any discounts or promotions for new members?",
-            answer: "From time to time, we offer promotional rates and discounts for new members. Please check our website or subscribe to our newsletter for the latest offers and updates.",
-        },
-        {
-            question: "Who can I contact if I have technical issues with the platform?",
-            answer: "If you encounter any technical issues, please contact our support team directly through the contact form on our website or by emailing readriches@gmail.com. We are committed to resolving your issues promptly and efficiently.",
+            question: "Can I cancel my Read Riches membership at any time?",
+            answer: "Yes, you can cancel your membership at any time through your account settings. Upon cancellation, you'll retain access to member benefits until the end of your current billing period.",
         },
     ];
+    
 
     const handleToggle = (key) => {
         setActiveKey(activeKey === key ? null : key);
@@ -74,45 +75,73 @@ function Contact() {
         }));
     };
 
-    // Handle form submission
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log('Form Data Submitted:', formData);
+
+    //     const { firstName, lastName, address, phone, message } = formData;
+    //     //Uncaught TypeError: Cannot read properties of undefined (reading 'send')
+    //     emailjs.send({
+    //       Host: "smtp.elasticemail.com",
+    //       Username: "contact@readriches.com",
+    //       Password: "D23315C3BE25047C1B710044DEF362A02DB91",
+    //       To: 'harsh.chouhan010@gmail.com',
+    //       From: 'contact@readriches.com',
+    //       Subject: "Contact Us", // Static subject
+    //       Body: `
+    //         Name: ${firstName} ${lastName} <br> 
+    //         Address: ${address} <br>
+    //         Phone no: ${phone} <br> 
+    //         Message: ${message}
+    //       `
+    //     }, 'YOUR_USER_ID').then(
+    //       message => {
+    //         // Redirect to thank you page after sending
+    //         window.location = 'thankyou.html';
+    //       }
+    //     ).catch(error => {
+    //       console.error("Error sending email:", error);
+    //       alert('Error sending email. Please try again later.');
+    //     });
+    // };
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Form Data Submitted:', formData);
 
-        // // const { firstName, lastName, address, phone, message } = formData;
+        const { firstName, lastName, address, phone, message } = formData;
 
-        // // // Send email using smtpjs
-        // // window.Email.send({
-        // //   Host: "smtp.elasticemail.com",
-        // //   Username: "developmentfolks@gmail.com",
-        // //   Password: "BD9538FCCDC2DD6C20CC23FC0E178F34E61B",
-        // //   To: 'developmentfolks@gmail.com',
-        // //   From: 'developmentfolks@gmail.com',
-        // //   Subject: "Contact Us", // Static subject
-        // //   Body: `
-        // //     Name: ${firstName} ${lastName} <br> 
-        // //     Address: ${address} <br>
-        // //     Phone no: ${phone} <br> 
-        // //     Message: ${message}
-        // //   `
-        // // }).then(
-        // //   message => {
-        // //     // Redirect to thank you page after sending
-        // //     window.location = 'thankyou.html';
-        // //   }
-        // // ).catch(error => {
-        // //   console.error("Error sending email:", error);
-        // //   alert('Error sending email. Please try again later.');
-        // // });
+        const emailData = {
+            from: 'contact@readriches.com',
+            to: 'harsh.chouhan010@gmail.com',
+            subject: "Contact Us",
+            body: `
+                Name: ${firstName} ${lastName} <br>
+                Address: ${address} <br>
+                Phone no: ${phone} <br>
+                Message: ${message}
+            `
+        };
+
+        try {
+            const response = await axios.post('https://api.elasticemail.com/v2/email/send', {
+                ...emailData,
+                // Include your API key here
+                apiKey: 'D23315C3BE25047C1B71004DEF362A02DB91'
+            });
+            console.log('Email sent successfully:', response.data);
+            // just referesh page 
+        } catch (error) {
+            console.error("Error sending email:", error);
+            alert('Error sending email. Please try again later.');
+        }
     };
-
     return (
         <div>
             <Header />
             <section>
                 <Container>
                     <Row>
-                        <Col md={6}>
+                        <Col md={7}>
                             <div className='position-relative contact-details'>
                                 <h2 className='home-heading pt-md-5'>Contact Us </h2>
                                 <p className='pe-5'>Fill out the form below if you have any questions for us. <br />We typically try to respond within 24 hours of the query </p>
@@ -144,11 +173,12 @@ function Contact() {
                                 <img src={Robot} className='robot' alt="Robot" />
                             </div>
                         </Col>
-                        <Col md={6}>
-                            <div className='position-relative'>
+                        <Col md={5} className='pe-0'>
+                            <div className='position-relative h-100'>
+                            <div className='inner-box'></div>
+
                                 <div className='form-data contact-form'>
-                                    <div className='inner-box'></div>
-                                    (
+
                                     <Form onSubmit={handleSubmit}>
                                         <h3 className='mb-4'>Get In Touch With Us</h3>
                                         <Row>
@@ -209,7 +239,7 @@ function Contact() {
                                         </div>
                                     </Form>
                                     <p className='mt-4' style={{ color: "#3A3A3C", fontWeight: "600" }}>
-                                        Need more help? Check out our <Link to="" style={{ color: "#1D666D" }}>Help and support</Link> for additional answers.
+                                        Need more help? Check out our <Link to="/help" style={{ color: "#1D666D" }}>Help and support</Link> for additional answers.
                                     </p>
                                 </div>
                             </div>
@@ -219,101 +249,29 @@ function Contact() {
             </section>
             <section className='m-bg'>
                 <div className='faq'>
-                    {/* <Container>
+
+                    <Container>
                         <Row>
                             <h2 className='home-heading mb-4'>Frequently <b>Asked Questions ?</b></h2>
                             <Accordion activeKey={activeKey}>
-                                <Accordion.Item eventKey="0">
-                                    <Accordion.Header onClick={() => handleToggle("0")}>
-                                        How do I buy and sell stocks on Read Riches?
-                                        {activeKey === "0" ? (
-                                            <img src={ArrowDown} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                        ) : (
-                                            <img src={Arrow} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                        )}
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                                <Accordion.Item eventKey="1">
-                                    <Accordion.Header onClick={() => handleToggle("1")}>
-                                        What tools does Read Riches offer for technical analysis?
-                                        {activeKey === "1" ? (
-                                            <img src={ArrowDown} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                        ) : (
-                                            <img src={Arrow} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                        )}
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        We prioritize security and privacy with top-notch encryption and access control features.
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                                <Accordion.Item eventKey="2">
-                                    <Accordion.Header onClick={() => handleToggle("2")}>
-                                        Can I trade international stocks on Read Riches?
-                                        {activeKey === "2" ? (
-                                            <img src={ArrowDown} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                        ) : (
-                                            <img src={Arrow} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                        )}
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        We prioritize security and privacy with top-notch encryption and access control features.
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                                <Accordion.Item eventKey="3">
-                                    <Accordion.Header onClick={() => handleToggle("3")}>
-                                        What tools does Read Riches offer for technical analysis?
-                                        {activeKey === "3" ? (
-                                            <img src={ArrowDown} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                        ) : (
-                                            <img src={Arrow} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                        )}
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        We prioritize security and privacy with top-notch encryption and access control features.
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                                <Accordion.Item eventKey="4">
-                                    <Accordion.Header onClick={() => handleToggle("4")}>
-                                        What tools does Read Riches offer for technical analysis?
-                                        {activeKey === "4" ? (
-                                            <img src={ArrowDown} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                        ) : (
-                                            <img src={Arrow} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                        )}
-                                    </Accordion.Header>
-                                    <Accordion.Body>
-                                        We prioritize security and privacy with top-notch encryption and access control features.
-                                    </Accordion.Body>
-                                </Accordion.Item>
+                                {faqs.map((faq, index) => (
+                                    <Accordion.Item eventKey={String(index)} key={index}>
+                                        <Accordion.Header onClick={() => handleToggle(String(index))}>
+                                            {faq.question}
+                                            {activeKey === String(index) ? (
+                                                <img src={Arrow} className="ms-auto" alt="Open Icon" width="12" height="12" />
+                                            ) : (
+                                                <img src={ArrowDown} className="ms-auto" alt="Closed Icon" width="12" height="12" />
+                                            )}
+                                        </Accordion.Header>
+                                        <Accordion.Body>
+                                            {faq.answer}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                ))}
                             </Accordion>
                         </Row>
-                    </Container> */}
-
-<Container>
-            <Row>
-                <h2 className='home-heading mb-4'>Frequently <b>Asked Questions ?</b></h2>
-                <Accordion activeKey={activeKey}>
-                    {faqs.map((faq, index) => (
-                        <Accordion.Item eventKey={String(index)} key={index}>
-                            <Accordion.Header onClick={() => handleToggle(String(index))}>
-                                {faq.question}
-                                {activeKey === String(index) ? (
-                                    <img src={Arrow} className="ms-auto" alt="Open Icon" width="12" height="12" />
-                                ) : (
-                                    <img src={ArrowDown} className="ms-auto" alt="Closed Icon" width="12" height="12" />
-                                )}
-                            </Accordion.Header>
-                            <Accordion.Body>
-                                {faq.answer}
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    ))}
-                </Accordion>
-            </Row>
-        </Container>
+                    </Container>
                 </div>
             </section>
             <Footer />

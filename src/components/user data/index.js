@@ -249,8 +249,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '../../components/css/UserData.css'
 import OverView from './overView';
 import PriceChart from './priceChart';
@@ -263,7 +261,7 @@ import Financial from './financial';
 import Valuation from './valuation';
 import Competitor from './competitor';
 import ScrollProgressBar from './scrollbar';
-import Header from "../../components/header"
+import Header from "../header"
 import config from '../../config';
 import HomeIcon from "../../components/img/icon/home.svg"
 import PriceIcon from "../../components/img/icon/price.svg"
@@ -278,6 +276,336 @@ import TrophyIcon from "../../components/img/icon/trophy.svg"
 import Footer from '../Footer';
 import { useParams } from 'react-router-dom'; // Import useParams
 import { useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// const UserData = () => {
+//   const { compId } = useParams(); // Extract compId from URL parameters
+//   const checkToken = localStorage.getItem("token");
+
+//   if (!checkToken) {
+//     const checkRole = localStorage.getItem("role");
+//   }
+//   const location = useLocation();
+
+//   // const { companyName,
+//   //   overviewData,
+//   //   companyProfileData,
+//   //   industryInsideData,
+//   //   HEADWINDS_TAILWINDSData,
+//   //   managementMattersData,
+//   //   financialXrayData,
+//   //   valuationData,
+//   //   competitorCheckData } = location.state || {};
+
+// const [companyName, setCompanyName] = useState('zz');
+// const [overviewData, setOverviewData] = useState([]);
+// const [companyProfileData, setCompanyProfileData] = useState([]);
+// const [industryInsideData, setIndustryInsideData] = useState([]);
+// const [HEADWINDS_TAILWINDSData, setHEADWINDS_TAILWINDSData] = useState([]);
+// const [managementMattersData, setManagementMattersData] = useState([]);
+// const [financialXrayData, setFinancialXrayData] = useState([]);
+// const [valuationData, setValuationData] = useState([]);
+// const [competitorCheckData, setCompetitorCheckData] = useState([]);
+
+//   const [activeSection, setActiveSection] = useState('list-item-1'); // Track active section
+//   const componentRefs = {
+//     overview: useRef(null),
+//     priceChart: useRef(null),
+//     companyProfile: useRef(null),
+//     insight: useRef(null),
+//     headwinds: useRef(null),
+//     management: useRef(null),
+//     financial: useRef(null),
+//     valuation: useRef(null),
+//     competitor: useRef(null),
+//   };
+
+//   const yy=async()=>{
+
+//     const response = await fetch('http://localhost:3001/stock/1727841053670', {
+//       method: 'GET',
+//       headers: {
+//           'Authorization': `Bearer ${checkToken}` // Replace with actual token
+//       }
+//   });
+//     const result = await response.json();
+//     let res = result.data[0]
+//       setHEADWINDS_TAILWINDSData(res?.HEADWINDS_TAILWINDS)
+//       setCompanyProfileData(res?.companyProfile)
+//       setCompetitorCheckData(res?.competitorCheck)
+//       setFinancialXrayData(res?.financialXray)
+//       setIndustryInsideData(res?.industryInside)
+//       setManagementMattersData(res?.managementMatters)
+//       setOverviewData(res?.overview)
+//       setValuationData(res?.valuation)
+//   }
+//   useEffect(() => {
+//     yy()
+//   },[])
+
+//   useEffect(() => {
+//     const options = {
+//       root: null, // Use the viewport
+//       rootMargin: '0px',
+//       threshold: 0.2, // Change this to 0 for testing, see if it improves detection
+//     };
+
+//     const observer = new IntersectionObserver((entries) => {
+//       entries.forEach((entry) => {
+//         if (entry.isIntersecting) {
+//           console.log(entry.target.id)
+//           setActiveSection(entry.target.id); // Set active section when it comes into view
+//           if (entry.target.id == 'list-item-1') {
+//             setWatchlist(10)
+//           }
+//           if (entry.target.id == 'list-item-2') {
+//             setWatchlist(20)
+//           }
+//           if (entry.target.id == 'list-item-3') {
+//             setWatchlist(30)
+//           }
+//           if (entry.target.id == 'list-item-4') {
+//             setWatchlist(40)
+//           }
+//           if (entry.target.id == 'list-item-5') {
+//             setWatchlist(50)
+
+//           }
+//           if (entry.target.id == 'list-item-6') {
+//             setWatchlist(60)
+
+//           }
+//           if (entry.target.id == 'list-item-7') {
+//             setWatchlist(70)
+
+//           }
+//           if (entry.target.id == 'list-item-8') {
+//             setWatchlist(80)
+
+//           }
+//           if (entry.target.id == 'list-item-9') {
+//             setWatchlist(100)
+
+//           }
+//         }
+//       });
+//     }, options);
+
+//     // Observe the sections using refs
+//     Object.values(componentRefs).forEach(ref => {
+//       if (ref.current) observer.observe(ref.current);
+//     });
+
+//     return () => {
+//       // Cleanup the observer
+//       Object.values(componentRefs).forEach(ref => {
+//         if (ref.current) observer.unobserve(ref.current);
+//       });
+//     };
+//   }, [componentRefs]); // Ensure componentRefs is included in the dependency array
+
+//   const setWatchlist = async (pros) => {
+//     try {
+//       const payload = { companyId: compId, progress: pros }
+//       const response = await fetch(`${config.apiUrl}watchlist`, {
+//         method: 'POST',
+//         body: JSON.stringify(payload), // Convert payload to JSON string
+//         headers: {
+//           'Authorization': `Bearer ${checkToken}`, // Replace with actual token
+//           'Content-Type': 'application/json', // Set the Content-Type to JSON
+//         },
+//       });
+
+//       const result = await response.json();
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+
+
+//   const handleScroll = () => {
+//     const sections = document.querySelectorAll('[id^="list-item"]');
+//     let activeId = 'list-item-1';
+
+//     sections.forEach((section) => {
+//       const sectionTop = section.getBoundingClientRect().top;
+//       if (sectionTop <= 100 && sectionTop >= -100) {
+//         activeId = section.id;
+//       }
+//     });
+
+//     setActiveSection(activeId);
+//   };
+
+//   const handleSidebarClick = (id) => {
+
+//     const section = document.getElementById(id);
+
+//     // if (section) {
+//     //   // Scroll smoothly to the section
+//     //   window.scrollTo({
+//     //     top: section.offsetTop,
+//     //     behavior: 'smooth',
+//     //   });
+//        setActiveSection(id); // Update active section on click
+//     // }
+//   };
+
+//   // useEffect(() => {
+//   //   window.addEventListener('scroll', handleScroll);
+//   //   return () => {
+//   //     window.removeEventListener('scroll', handleScroll);
+//   //   };
+//   // }, []);
+
+
+//   return (
+//     <>
+//       <Header />
+
+//       <div className='user-data'>
+//         {/* <ScrollProgressBar/> */}
+//         <Container fluid className='my-3 pt-md-2 px-0'>
+//           <Row>
+//             <Col lg={3} style={{ position: "relative" }} className='p-0'>
+//               <div id="list-example" className="list-group list-group-sidebar" >
+//                 {/* <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-1' ? 'active' : ''}`} href="#list-item-1" ><img src={HomeIcon} className='me-3' />Overview</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-2' ? 'active' : ''}`} href="#list-item-2"><img src={PriceIcon} className='me-3' />Price Chart</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-3' ? 'active' : ''}`} href="#list-item-3"><img src={CompanyIcon} className='me-3' />Company profile</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-4' ? 'active' : ''}`} href="#list-item-4"><img src={InsightIcon} className='me-3' />Industry insights </a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-5' ? 'active' : ''}`} href="#list-item-5"><img src={TailwindsIcon} className='me-3' />Headwinds & Tailwinds </a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-6' ? 'active' : ''}`} href="#list-item-6"><img src={MessageIcon} className='me-3' />Management matters</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-7' ? 'active' : ''}`} href="#list-item-7"><img src={FinanceIcon} className='me-3' />Financial X-ray</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-8' ? 'active' : ''}`} href="#list-item-8"><img src={ValuationIcon} className='me-3' />Valuation</a>
+//                 <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-9' ? 'active' : ''}`} href="#list-item-9"><img src={TrophyIcon} className='me-3' />Competitor check </a> */}
+
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-1' ? 'active' : ''}`}
+//                   //href="#list-item-1"
+//                   onClick={() => handleSidebarClick('list-item-1')}
+//                 >
+//                   <img src={HomeIcon} className="me-3" alt="Home" />
+//                   Overview
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-2' ? 'active' : ''}`}
+//                   //href="#list-item-2"
+//                   onClick={() => handleSidebarClick('list-item-2')}
+//                 >
+//                   <img src={PriceIcon} className="me-3" alt="Price Chart" />
+//                   Price Chart
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-3' ? 'active' : ''}`}
+//                   //href="#list-item-3"
+//                   onClick={() => handleSidebarClick('list-item-3')}
+//                 >
+//                   <img src={CompanyIcon} className="me-3" alt="Company Profile" />
+//                   Company Profile
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-4' ? 'active' : ''}`}
+//                   //href="#list-item-4"
+//                   onClick={() => handleSidebarClick('list-item-4')}
+//                 >
+//                   <img src={InsightIcon} className="me-3" alt="Industry Insights" />
+//                   Industry Insights
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-5' ? 'active' : ''}`}
+//                   //href="#list-item-5"
+//                   onClick={() => handleSidebarClick('list-item-5')}
+//                 >
+//                   <img src={TailwindsIcon} className="me-3" alt="Headwinds & Tailwinds" />
+//                   Headwinds & Tailwinds
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-6' ? 'active' : ''}`}
+//                   //href="#list-item-6"
+//                   onClick={() => handleSidebarClick('list-item-6')}
+//                 >
+//                   <img src={MessageIcon} className="me-3" alt="Management Matters" />
+//                   Management Matters
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-7' ? 'active' : ''}`}
+//                   //href="#list-item-7"
+//                   onClick={() => handleSidebarClick('list-item-7')}
+//                 >
+//                   <img src={FinanceIcon} className="me-3" alt="Financial X-ray" />
+//                   Financial X-ray
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-8' ? 'active' : ''}`}
+//                   //href="#list-item-8"
+//                   onClick={() => handleSidebarClick('list-item-8')}
+//                 >
+//                   <img src={ValuationIcon} className="me-3" alt="Valuation" />
+//                   Valuation
+//                 </a>
+//                 <a
+//                   className={`list-group-item list-group-item-action ${activeSection === 'list-item-9' ? 'active' : ''}`}
+//                   //href="#list-item-9"
+//                   onClick={() => handleSidebarClick('list-item-9')}
+//                 >
+//                   <img src={TrophyIcon} className="me-3" alt="Competitor Check" />
+//                   Competitor Check
+//                 </a>
+//               </div>
+//             </Col>
+
+//             <Col lg={9} className='p-0'>
+
+//               <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" className="scrollspy-example all-menus" tabIndex="0">
+//                 <div id="list-item-1" ref={componentRefs.overview}>
+//                   {overviewData.length > 0 && <OverView comname={companyName} data={overviewData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-2" ref={componentRefs.priceChart}>
+//                   <PriceChart />
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-3" ref={componentRefs.companyProfile}>
+//                   {companyProfileData.length > 0 && <CompanyProfile comname={companyName} data={companyProfileData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-4" ref={componentRefs.insight}>
+//                   {industryInsideData.length > 0 && <Insight comname={companyName} data={industryInsideData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-5" ref={componentRefs.headwinds}>
+//                   {HEADWINDS_TAILWINDSData.length > 0 && <Headwinds comname={companyName} data={HEADWINDS_TAILWINDSData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-6" ref={componentRefs.management}>
+//                   {managementMattersData.length > 0 && <Managment comname={companyName} data={managementMattersData} compId={compId} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-7" ref={componentRefs.financial}>
+//                   {financialXrayData.length > 0 && <Financial comname={companyName} data={financialXrayData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-8" ref={componentRefs.valuation}>
+//                   {valuationData.length > 0 && <Valuation comname={companyName} data={valuationData} />}
+//                 </div>
+//                 <hr className='w-100 my-5' />
+//                 <div id="list-item-9" ref={componentRefs.competitor}>
+//                   {competitorCheckData.length > 0 && <Competitor comname={companyName} data={competitorCheckData} />}
+//                 </div>
+//               </div>
+
+
+
+//             </Col>
+//           </Row>
+//         </Container>
+//       </div>
+//       <Footer />
+//     </>
+//   );
+
+// };
+
 const UserData = () => {
   const { compId } = useParams(); // Extract compId from URL parameters
   const checkToken = localStorage.getItem("token");
@@ -285,253 +613,139 @@ const UserData = () => {
   if (!checkToken) {
     const checkRole = localStorage.getItem("role");
   }
-  const location = useLocation();
-  const { companyName,
-    overviewData,
-    companyProfileData,
-    industryInsideData,
-    HEADWINDS_TAILWINDSData,
-    managementMattersData,
-    financialXrayData,
-    valuationData,
-    competitorCheckData } = location.state || {};
-
-  const [activeSection, setActiveSection] = useState('list-item-1'); // Track active section
-  const componentRefs = {
-    overview: useRef(null),
-    priceChart: useRef(null),
-    companyProfile: useRef(null),
-    insight: useRef(null),
-    headwinds: useRef(null),
-    management: useRef(null),
-    financial: useRef(null),
-    valuation: useRef(null),
-    competitor: useRef(null),
-  };
+  const [loading, setLoading] = useState(true);
+  const [companyName, setCompanyName] = useState('');
+  const [overviewData, setOverviewData] = useState([]);
+  const [companyProfileData, setCompanyProfileData] = useState([]);
+  const [industryInsideData, setIndustryInsideData] = useState([]);
+  const [HEADWINDS_TAILWINDSData, setHEADWINDS_TAILWINDSData] = useState([]);
+  const [managementMattersData, setManagementMattersData] = useState([]);
+  const [financialXrayData, setFinancialXrayData] = useState([]);
+  const [valuationData, setValuationData] = useState([]);
+  const [competitorCheckData, setCompetitorCheckData] = useState([]);
 
   useEffect(() => {
-    const options = {
-      root: null, // Use the viewport
-      rootMargin: '0px',
-      threshold: 0.2, // Change this to 0 for testing, see if it improves detection
+    // Check if the page has already been refreshed in this session
+    const hasRefreshed = sessionStorage.getItem("hasRefreshed");
+
+    if (!hasRefreshed) {
+      sessionStorage.setItem("hasRefreshed", "true");
+      window.location.reload(); // Reload the page once
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const fetchData = async () => {
+      try {
+        // Replace this with your actual data fetch
+        const response = await fetch(`${config.apiUrl}stock/${compId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${checkToken}` // Replace with actual token
+          }
+        });
+        const result = await response.json();
+        let res = result.data[0]
+
+        setHEADWINDS_TAILWINDSData(res?.HEADWINDS_TAILWINDS)
+        setCompanyProfileData(res?.companyProfile)
+        setCompetitorCheckData(res?.competitorCheck)
+        setFinancialXrayData(res?.financialXray)
+        setIndustryInsideData(res?.industryInside)
+        setManagementMattersData(res?.managementMatters)
+        setOverviewData(res?.overview)
+        setValuationData(res?.valuation)
+
+        setCompanyName(res?.overview[0].company_name)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+
+      }
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          console.log(entry.target.id)
-          setActiveSection(entry.target.id); // Set active section when it comes into view
-          if(entry.target.id=='list-item-1'){
-            setWatchlist(10)
-          }
-          if(entry.target.id=='list-item-2'){
-            setWatchlist(20)
-          }
-          if(entry.target.id=='list-item-3'){
-            setWatchlist(30)
-          }
-          if(entry.target.id=='list-item-4'){
-            setWatchlist(40)
-          }
-          if(entry.target.id=='list-item-5'){
-            setWatchlist(50)
+    fetchData();
+  }, [])
 
-          }
-          if(entry.target.id=='list-item-6'){
-            setWatchlist(60)
+  useEffect(() => {
 
-          }
-          if(entry.target.id=='list-item-7'){
-            setWatchlist(70)
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPosition = window.scrollY;
+      const scrolledPercent = (scrollPosition / totalHeight) * 100;
 
-          }
-          if(entry.target.id=='list-item-8'){
-            setWatchlist(80)
+      console.log(scrolledPercent >= 100 ? 100 : Math.floor(scrolledPercent)); // here I want record of page scrolled
+    };
 
-          }
-          if(entry.target.id=='list-item-9'){
-            setWatchlist(100)
-
-          }
-        }
-      });
-    }, options);
-
-    // Observe the sections using refs
-    Object.values(componentRefs).forEach(ref => {
-      if (ref.current) observer.observe(ref.current);
-    });
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      // Cleanup the observer
-      Object.values(componentRefs).forEach(ref => {
-        if (ref.current) observer.unobserve(ref.current);
-      });
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [componentRefs]); // Ensure componentRefs is included in the dependency array
+  }, []);
 
-  const setWatchlist = async (pros) => {
-    try {
-      const payload = { companyId: compId, progress: pros }
-      const response = await fetch(`${config.apiUrl}watchlist`, {
-        method: 'POST',
-        body: JSON.stringify(payload), // Convert payload to JSON string
-        headers: {
-          'Authorization': `Bearer ${checkToken}`, // Replace with actual token
-          'Content-Type': 'application/json', // Set the Content-Type to JSON
-        },
-      });
-
-      const result = await response.json();
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  // return (
-  //   <>
-  //     <Header />
-
-  //     <div className='user-data'>
-  //       {/* <ScrollProgressBar/> */}
-  //       <Container fluid className='my-3 pt-md-2 px-0'>
-  //         <Row>
-  //           <Col lg={3} style={{ position: "relative" }} className='p-0'>
-  //             <div id="list-example" className="list-group list-group-sidebar" >
-  //               <a className="list-group-item list-group-item-action" href="#list-item-1"><img src={HomeIcon} className='me-3' />Overview</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-2"><img src={PriceIcon} className='me-3' />Price Chart</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-3"><img src={CompanyIcon} className='me-3' />Company profile</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-4"><img src={InsightIcon} className='me-3' />Industry insights </a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-5"><img src={TailwindsIcon} className='me-3' />Headwinds & Tailwinds </a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-6"><img src={MessageIcon} className='me-3' />Management matters</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-7"><img src={FinanceIcon} className='me-3' />Financial X-ray</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-8"><img src={ValuationIcon} className='me-3' />Valuation</a>
-  //               <a className="list-group-item list-group-item-action" href="#list-item-9"><img src={TrophyIcon} className='me-3' />Competitor check </a>
-  //             </div>
-  //           </Col>
-
-  //           <Col lg={9} className='p-0'>
-
-  //               <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" className="scrollspy-example all-menus" tabIndex="0">
-  //                 <div>
-  //                  <OverView comname={companyName} data={overviewData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                   <PriceChart />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                   <CompanyProfile comname={companyName} data={companyProfileData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                  <Insight comname={companyName} data={industryInsideData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                  <Headwinds comname={companyName} data={HEADWINDS_TAILWINDSData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                  <Managment comname={companyName} data={managementMattersData} compId={compId} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                   <Financial comname={companyName} data={financialXrayData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                   <Valuation comname={companyName} data={valuationData} />
-  //                 </div>
-  //                 <hr className='w-100 my-5' />
-  //                 <div>
-  //                   <Competitor comname={companyName} data={competitorCheckData} />
-  //                 </div>
-  //               </div>
-
-
-
-  //           </Col>
-  //         </Row>
-  //       </Container>
-  //       <Footer />
-  //     </div>
-
-  //   </>
-  // );
   return (
     <>
+    
+      {loading && <div className="spinner-container">
+        <Spinner animation="border" variant="primary" className="spinner" />
+      </div>}
       <Header />
-
-      <div className='user-data'>
-        {/* <ScrollProgressBar/> */}
+      <div className='user-data' >
         <Container fluid className='my-3 pt-md-2 px-0'>
           <Row>
             <Col lg={3} style={{ position: "relative" }} className='p-0'>
               <div id="list-example" className="list-group list-group-sidebar" >
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-1' ? 'active' : ''}`} href="#list-item-1"><img src={HomeIcon} className='me-3' />Overview</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-2' ? 'active' : ''}`} href="#list-item-2"><img src={PriceIcon} className='me-3' />Price Chart</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-3' ? 'active' : ''}`} href="#list-item-3"><img src={CompanyIcon} className='me-3' />Company profile</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-4' ? 'active' : ''}`} href="#list-item-4"><img src={InsightIcon} className='me-3' />Industry insights </a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-5' ? 'active' : ''}`} href="#list-item-5"><img src={TailwindsIcon} className='me-3' />Headwinds & Tailwinds </a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-6' ? 'active' : ''}`} href="#list-item-6"><img src={MessageIcon} className='me-3' />Management matters</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-7' ? 'active' : ''}`} href="#list-item-7"><img src={FinanceIcon} className='me-3' />Financial X-ray</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-8' ? 'active' : ''}`} href="#list-item-8"><img src={ValuationIcon} className='me-3' />Valuation</a>
-                <a className={`list-group-item list-group-item-action ${activeSection === 'list-item-9' ? 'active' : ''}`} href="#list-item-9"><img src={TrophyIcon} className='me-3' />Competitor check </a>
+                <a className="list-group-item list-group-item-action" href="#list-item-1"><img src={HomeIcon} className='me-3' />Overview</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-2"><img src={PriceIcon} className='me-3' />Price Chart</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-3"><img src={CompanyIcon} className='me-3' />Company profile</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-4"><img src={InsightIcon} className='me-3' />Industry insights </a>
+                <a className="list-group-item list-group-item-action" href="#list-item-5"><img src={TailwindsIcon} className='me-3' />Headwinds & Tailwinds </a>
+                <a className="list-group-item list-group-item-action" href="#list-item-6"><img src={MessageIcon} className='me-3' />Management matters</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-7"><img src={FinanceIcon} className='me-3' />Financial X-ray</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-8"><img src={ValuationIcon} className='me-3' />Valuation</a>
+                <a className="list-group-item list-group-item-action" href="#list-item-9"><img src={TrophyIcon} className='me-3' />Competitor check </a>
               </div>
             </Col>
-
             <Col lg={9} className='p-0'>
-
               <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" className="scrollspy-example all-menus" tabIndex="0">
-                <div id="list-item-1" ref={componentRefs.overview}>
-                  {overviewData.length > 0 && <OverView comname={companyName} data={overviewData} />}
-                </div>
+                <div id="list-item-1"><OverView loading={loading} comname={companyName} data={overviewData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-2" ref={componentRefs.priceChart}>
-                  <PriceChart />
-                </div>
+                <div id="list-item-2"><PriceChart loading={loading} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-3" ref={componentRefs.companyProfile}>
-                  {companyProfileData.length > 0 && <CompanyProfile comname={companyName} data={companyProfileData} />}
-                </div>
+                <div id="list-item-3"><CompanyProfile loading={loading} comname={companyName} data={companyProfileData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-4" ref={componentRefs.insight}>
-                  {industryInsideData.length > 0 && <Insight comname={companyName} data={industryInsideData} />}
-                </div>
+                <div id="list-item-4"><Insight loading={loading} comname={companyName} data={industryInsideData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-5" ref={componentRefs.headwinds}>
-                  {HEADWINDS_TAILWINDSData.length > 0 && <Headwinds comname={companyName} data={HEADWINDS_TAILWINDSData} />}
-                </div>
+                <div id="list-item-5"><Headwinds loading={loading} comname={companyName} data={HEADWINDS_TAILWINDSData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-6" ref={componentRefs.management}>
-                  {managementMattersData.length > 0 && <Managment comname={companyName} data={managementMattersData} compId={compId} />}
-                </div>
+                <div id="list-item-6"><Managment loading={loading} comname={companyName} data={managementMattersData} compId={compId} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-7" ref={componentRefs.financial}>
-                  {financialXrayData.length > 0 && <Financial comname={companyName} data={financialXrayData} />}
-                </div>
+                <div id="list-item-7"><Financial loading={loading} comname={companyName} data={financialXrayData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-8" ref={componentRefs.valuation}>
-                  {valuationData.length > 0 && <Valuation comname={companyName} data={valuationData} />}
-                </div>
+                <div id="list-item-8"><Valuation loading={loading} comname={companyName} data={valuationData} /></div>
+
                 <hr className='w-100 my-5' />
-                <div id="list-item-9" ref={componentRefs.competitor}>
-                  {competitorCheckData.length > 0 && <Competitor comname={companyName} data={competitorCheckData} />}
-                </div>
+                <div id="list-item-9"><Competitor loading={loading} comname={companyName} data={competitorCheckData} /></div>
+
               </div>
-
-
-
             </Col>
           </Row>
         </Container>
+        <Footer />
       </div>
-      <Footer />
+      
     </>
   );
-
 };
 
 export default UserData;

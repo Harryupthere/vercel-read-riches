@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "./sidebar";
-import UserHeader from "./header";
+//import UserHeader from "./header";
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from "react-bootstrap";
 import ManImg from "../../components/img/man.png"
@@ -18,7 +18,7 @@ const CardDetails = () => {
         <>
             <Sidebar />
             <div className="content">
-                <UserHeader />
+                {/* <UserHeader /> */}
                 <div className="p-3">
                     <h2 className="heading2">Card Details</h2>
                     <div className="white-box mb-3">

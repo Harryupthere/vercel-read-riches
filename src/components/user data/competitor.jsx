@@ -1,93 +1,52 @@
 import React, { useState, useEffect } from "react";
 import Info from "../../components/img/info.svg"
-import { Col, Row } from "react-bootstrap";
-import { Link } from "react-scroll";
 import SearchImg from "../../components/img/search.svg"
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
-import {
-    ComposedChart,
-    Line,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer,
-    ScatterChart,
-    Scatter,
-    ZAxis
-} from "recharts";
+import { Chart } from "react-google-charts";
 
-const data1 = [
-    {
-        name: "Page A",
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: "Page B",
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: "Page C",
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: "Page D",
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: "Page E",
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: "Page F",
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: "Page G",
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
 
-const Competitor = ({ comname, data }) => {
-    // const [data12,setDatass]=useState([])
+const Competitor = ({ loading,comname, data }) => {
+       const [expandedWhy, setExpandedWhy] = useState(false); // For 'why' section
 
-    //     useEffect(() => {
-    //     let apiData=data[1].barbar
-
-    //         const formattedData = apiData.map(item => ({
-    //         ...item,
-    //         'Operating Profit Margin %': parseFloat(item['Operating Profit Margin %']),
-    //       }));
-
-    //       setDatass(formattedData);
-    //     }, []);
-    let data12 = data[1].barbar
-
-    const [expandedWhy, setExpandedWhy] = useState(false); // For 'why' section
-
+       if (loading) {
+        return <div>Loading...</div>;
+    }
+  
+    // Check if data has content
+    if (!data || data.length === 0) {
+        return <div>No data available.</div>;
+    }
     const truncateText = (text, wordLimit) => {
         const words = text.split(" ");
         return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
     };
 
     let texti = "It involves analyzing and comparing a company’s performance, strategies, and market position against its competitors to identify strengths and weaknesses."
+    const options1 = {
+        hAxis: { title: "Operating Profit Margin %" , gridlines: {
+            color: 'none' 
+          }},  
+        vAxis: { title: "PE Ratio", gridlines: {
+            color: 'none' 
+          } },                 
+        bubble: {
+            textStyle: {
+                opacity: 0 
+                //fontSize: 0,
+               // fontName: "Arial",
+               // bold: true
+            }
+        },
+        tooltip: {
+            isHtml: true, // Enables HTML tooltips
+            textStyle: {
+              color: '#000000', // Tooltip text color
+            },
+            showColorCode: true, // Displays the color of the series in the tooltip
+          },
+    };
+
 
     return (
         <>
@@ -97,50 +56,21 @@ const Competitor = ({ comname, data }) => {
                         id="quality-texti"
                         place="bottom"
                         content={texti}
-                        style={{ fontSize: "12px" }}
-                    />
+                        style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}                    />
                     </h2>
                     <div className="rule" style={{ width: "300px" }}></div>
                 </div>
                 <div className="my-4">
 
+                    <Chart
+                        chartType="BubbleChart"
+                        width="105%"
+                        height="450px"
+                        data={data[3]}
+                        options={options1}
+                    />
 
-                    <ResponsiveContainer width="100%" height={400}>
-                        <ScatterChart
-                            margin={{
-                                top: 20,
-                                right: 20,
-                                bottom: 20,
-                                left: 20,
-                            }}
-                        >
-                            <CartesianGrid />
-                            <XAxis dataKey="Operating Profit Margin" name="Operating Profit Margin" />
-                            <YAxis dataKey="PE Ratio" name="PE Ratio" />
-                            <ZAxis dataKey="Revenue (₹ Crs)" range={[60, 400]} name="Revenue (₹ Crs)" />
-                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                            <Legend />
-                            <Scatter name="Company Name" data={data12} fill="#15464a" shape="circle" />
-                        </ScatterChart>
-                    </ResponsiveContainer>
-
-                    {/* <ResponsiveContainer width="100%" height={400}>
-                        <ScatterChart
-                            margin={{
-                                top: 20,
-                                right: 20,
-                                bottom: 20,
-                                left: 20,
-                            }}
-                        >
-                            <CartesianGrid />
-                            <XAxis type="number" dataKey="x" name="stature" unit="cm" />
-                            <YAxis type="number" dataKey="y" name="weight" unit="kg" />
-                            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                            <Scatter name="A school" data={data} fill="#8884d8" shape="circle" size="z" />
-                        </ScatterChart>
-                    </ResponsiveContainer> */}
-                    <span style={{ fontSize: "12px" }} className="d-block text-end mt-2">Source - Annual Report</span>
+                    <span style={{ fontSize: "12px" }} className="d-block text-end mt-2">{data[2].Source18}??</span>
                 </div>
             </div>
             <section>
@@ -151,7 +81,6 @@ const Competitor = ({ comname, data }) => {
                                 <div className="d-flex align-items-center mb-3">  <img src={SearchImg} alt="search" /><h2>WHY?</h2></div>
                                 <h3>{comname} lost its shares</h3>
                                 <p>
-                                    {/* {data[0].why} */}
 
                                     {expandedWhy ? data[0].why : truncateText(data[0].why, 48)}
                                     {data[0].why.split(" ").length > 48 && (

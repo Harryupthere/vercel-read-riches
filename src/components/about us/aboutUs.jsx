@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef,useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AboutImg from '../../components/img/aboutImg.png'
 import VisionIMg from '../../components/img/vision.png'
@@ -13,11 +13,16 @@ import Slider from "react-slick";
 import Cube from "../../components/img/icon/cube.svg"
 import Users from "../../components/img/users.png"
 import Stars from "../../components/img/fiveStar.svg"
+import { useNavigate } from 'react-router-dom';
 
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'; // Importing icons for custom arrows
 
 
 function AboutUs() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
     const [read, setRead] = useState();
     const handleRead = () => {
         setRead(!read)
@@ -130,6 +135,22 @@ function AboutUs() {
             </button>
         );
     };
+
+    const [expandedDetails, setExpandedDetails] = useState(false); // For details section
+    const textForAbout = `Read Riches is a curated investment research platform for investors, who want to do their own research without searching for half-and-half information all over the internet. It is founded with a vision to minimize the time and effort financial research takes by providing a one-stop solution for all your research needs.
+  
+    What sets us apart is the depth and quality of the research provided to you.
+      
+    The platform gives a bird’s-eye view of the company’s overall performance with all the smaller details that make a difference in the market.
+    
+    The neatly categorized bulk information under various sections makes it simple to locate and follow while providing substantive explanations wherever necessary.`;
+    const truncateText = (text, wordLimit) => {
+        const words = text.split(" ");
+        return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
+    };
+    const handleNavigateAndScroll = () => {
+        navigate('/join-membership', { state: { scrollTo: true } });
+      };
     return (
         <>
             <div className='light-footer about-page'>
@@ -141,14 +162,17 @@ function AboutUs() {
                                 <div className='position-relative'>
                                     <div className=' about-read'>
                                         <Row className='d-flex align-items-start'>
-                                            <Col md={2} className='pe-0'><h3 className='ms-5'>Read</h3></Col>
+                                            <Col md={2} className='pe-0'><h3 className='ms-4'>Read</h3></Col>
                                             <Col md={8} className='position-relative p-md-0 p-3'> <img src={AboutImg} alt='about' />
                                             </Col>
                                             <Col md={2} className='ps-0'><h3 className='me-5'>Riches</h3></Col>
                                         </Row>
                                     </div>
                                     <div className='why-us'>
+                                    <div className='why-us-bg'></div>
                                         <h2>What is <b>Read Riches? </b></h2>
+                                        {/* {expandedDetails ? <p>{textForAbout}</p> : <p>{truncateText(textForAbout, 51)}</p>} */}
+                                        
                                         {!read ?
                                             <p>
                                                 Read Riches is a curated investment research platform for investors, who want to do their own research without searching for half-and-half information all
@@ -165,7 +189,11 @@ function AboutUs() {
                                             </p>
                                         }
                                         <Link to="" onClick={handleRead}>Read More</Link>
-
+                                       
+                                        {/* {textForAbout.split(" ").length > 51 && (
+                                             <Link to="" onClick={() => setExpandedDetails(!expandedDetails)}>{expandedDetails ? "Show Less" : "Read more"}</Link>
+                                        )} */}
+                                    
                                     </div>
                                 </div>
                             </Col>
@@ -185,12 +213,12 @@ function AboutUs() {
                                     </div>
                                 </Col>
                                 <Col md={7}>
-                                    <div className='py-md-5 vision'>
+                                    <div className='py-md-5 vision ps-md-5'>
                                         <h2 className='home-heading text-white'>Our Vision</h2>
                                         <p>Read Riches envisions speeding up the process of financial research to simply the mountainous task of financial research by integrating all the important research parameters into a single platform offering a quick one-stop solution for whatever data you’re looking for.</p>
                                         <p>Read Riches is backed by the narrative behind the numbers taking into account the qualitative aspects that further ease up the process and an exclusive community of finance enthusiasts who collaborate to learn from the experiences of our members, creating a space for dialogue about finance-related topics.</p>
                                         <h3>Come, Be a Part of our Vision!</h3>
-                                        <button type='button' className='view'>Join us </button>
+                                        <button type='button' className='view' onClick={handleNavigateAndScroll}>Join us </button>
                                     </div>
                                 </Col>
                             </Row>
@@ -214,8 +242,11 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>1. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <h3>1. One-Stop Company Analysis</h3>
+                                    <p>One-Stop Company Analysis/
+                                        Save yourself hours of sifting through scattered information by accessing all important
+                                        information in one centralised platform making it easier than ever to access the insights you
+                                        need, when you need them.</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -224,7 +255,10 @@ function AboutUs() {
                                         <img src={Cube} />
                                     </div>
                                     <h3>2. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left
+                                        unturned, from introducing word cloud analysis to cover concalls and Management discussions
+                                        to ROE breakdown through Dupont Analysis offering insights into market trends and company
+                                        fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -232,8 +266,10 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>3. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <h3>3. Narrating Numbers</h3>
+                                    <p>Read Riches delves deeper than basic data by providing insights into business performance
+                                        beyond numerical values. We integrate qualitative factors equally to ensure you grasp the full
+                                        scenario—numbers and narratives alike.</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -241,8 +277,11 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>4. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <h3>1. One-Stop Company Analysis</h3>
+                                    <p>One-Stop Company Analysis/
+                                        Save yourself hours of sifting through scattered information by accessing all important
+                                        information in one centralised platform making it easier than ever to access the insights you
+                                        need, when you need them.</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -250,8 +289,11 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>5. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <h3>2. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left
+                                        unturned, from introducing word cloud analysis to cover concalls and Management discussions
+                                        to ROE breakdown through Dupont Analysis offering insights into market trends and company
+                                        fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -259,8 +301,10 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>6. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
+                                    <h3>3. Narrating Numbers</h3>
+                                    <p>Read Riches delves deeper than basic data by providing insights into business performance
+                                        beyond numerical values. We integrate qualitative factors equally to ensure you grasp the full
+                                        scenario—numbers and narratives alike.</p>
                                 </div>
                             </div>
                         </Slider>
@@ -286,7 +330,7 @@ function AboutUs() {
                     <Row className='slider2 '>
                         <Col lg={1} md={0}></Col>
                         <Col lg={3} md={4} className="what-p px-md-4 py-md-2">
-                            <div className='py-md-3'>
+                            <div className='py-md-3 mt-0 mt-5'>
                                 <h2 className='home-heading pt-md-4'>What people say <b>About us</b></h2>
                                 <p style={{ fontSize: "16px", color: "#3A3A3C" }}>Discover the impact we've made through the voices of our Memeber</p>
                             </div>
@@ -341,7 +385,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Rudransh Singhal</h3>
                                         <h4>Co-founder</h4>
-                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
+                                        <p>A diligent person who is highly inquisitive and believes in focus and efficiency. Finance enthusiast who is excited about the equity research.</p>
                                     </div>
                                 </div>
                             </Col>
@@ -353,7 +397,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Pranay Agarwal</h3>
                                         <h4>Co-founder</h4>
-                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
+                                        <p>He is diving deep into finance and buzzing with excitement for startups. From pioneering a Web3 startup to shaping strategies in finance, he is now channeling his energy into developing exciting new financial solutions.</p>
                                     </div>
                                 </div>
                             </Col>
@@ -365,7 +409,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Sanchi Sikka</h3>
                                         <h4>Co-founder</h4>
-                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
+                                        <p>She is a passionate UI/UX designer with a knack for creating delightful experiences that make a positive impact. Creative mind with diverse background is her strength</p>
                                     </div>
                                 </div>
                             </Col>

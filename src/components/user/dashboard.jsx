@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
-import UserHeader from "./header";
+//import UserHeader from "./header";
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from "react-bootstrap";
 import ManImg from "../../components/img/man.png"
@@ -144,7 +144,7 @@ const UserDashboard = () => {
         <>
             <Sidebar />
             <div className="content">
-                <UserHeader />
+                {/* <UserHeader /> */}
                 <div className="p-3">
                     <Row>
                         <Col lg={8}>

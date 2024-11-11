@@ -3,62 +3,26 @@ import { Col, Row } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import Info from "../../components/img/info.svg"
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Cell,
-  PieChart, Pie, Label
-} from "recharts";
 import Icon1 from "../../components/img/hotspot.svg"
 import Icon2 from "../../components/img/doller.svg"
 import Icon3 from "../../components/img/polymer.svg"
 import { Chart } from "react-google-charts";
-const data1 = [
 
-  {
-    name: "May",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
-  },
-  {
-    name: "June",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
-  },
-  {
-    name: "July",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
-  }
-];
 
-const CompanyProfile = ({ comname, data }) => {
+const CompanyProfile = ({ loading, comname, data }) => {
 
-  console.log(data, "//")
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const [show1, setShow1] = useState(false);
   const handleClose1 = () => setShow1(false);
-  const handleShow1 = () => setShow1(true);
 
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
 
   const [show3, setShow3] = useState(false);
   const handleClose3 = () => setShow3(false);
-  const handleShow3 = () => setShow3(true);
 
   const [show4, setShow4] = useState(false);
   const handleClose4 = () => setShow4(false);
@@ -69,29 +33,25 @@ const CompanyProfile = ({ comname, data }) => {
   const handleCloseAll = () => setShowAll(false);
   const handleShowAll = () => setShowAll(true);
 
-  const getRandomColor = (index) => {
-    const colors = ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'];
-    return colors[index % colors.length]; // Loop through the colors array
-  };
-  const COLORS = ["#9787FF", "#FFA5DA", "#0096FF", "#1d666d", '#FF6384'];
-  let dataWithNumberValues = data[0].companyProfileGraph.graph6
-
 
   const [expandedDetails, setExpandedDetails] = useState(false); // For details section
   const [expandedWhy1, setExpandedWhy1] = useState(false); // For 'why' section
   const [expandedWhy2, setExpandedWhy2] = useState(false); // For 'why' section
   const [expandedWhy3, setExpandedWhy3] = useState(false); // For 'why' section
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
+  // Check if data has content
+  if (!data || data.length === 0) {
+    return <div>No data available.</div>;
+  }
   // Helper function to truncate text
   const truncateText = (text, wordLimit) => {
     const words = text.split(" ");
     return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
   };
 
-
-
-
-  const [showTooltip, setShowTooltip] = useState(false);
 
   // Example data from state
   const tooltipData11 = "determining the sustainability of revenue using three factors which are Predictability, Profitability and Plurality.";
@@ -101,8 +61,8 @@ const CompanyProfile = ({ comname, data }) => {
 
 
   const optionsG1 = {
-    //title: "Revenue Distribution  - Business Divisions",
-    chartArea: { width: "50%" },
+    title: "Business Divisions",
+    chartArea: { top: '13%', width: "50%" },
     isStacked: true,
     titleTextStyle: {
       fontSize: 16, // Increase title font size
@@ -116,21 +76,34 @@ const CompanyProfile = ({ comname, data }) => {
       textStyle: {
         fontSize: 14, // Increase horizontal axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     hAxis: {
-      title: "Segment",
+      title: "Years",
       titleTextStyle: {
         fontSize: 18, // Increase vertical axis title font size
       },
       textStyle: {
         fontSize: 14, // Increase vertical axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    tooltip: {
+      isHtml: true, // Enables HTML tooltips
+      textStyle: {
+        color: '#000000', // Tooltip text color
+      },
+      showColorCode: true, // Displays the color of the series in the tooltip
+    },
   };
   const optionsG2 = {
     //title: "Revenue Distribution  - Geographical",
-    chartArea: { width: "50%" },
+    chartArea: { top: '13%', width: "50%" },
     isStacked: true,
     titleTextStyle: {
       fontSize: 16, // Increase title font size
@@ -144,24 +117,34 @@ const CompanyProfile = ({ comname, data }) => {
       textStyle: {
         fontSize: 14, // Increase horizontal axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     hAxis: {
-      title: "Segment",
+      title: "Years",
       titleTextStyle: {
         fontSize: 18, // Increase vertical axis title font size
       },
       textStyle: {
         fontSize: 14, // Increase vertical axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    tooltip: {
+      isHtml: true, // Enables HTML tooltips
+      textStyle: {
+        color: '#000000', // Tooltip text color
+      },
+      showColorCode: true, // Displays the color of the series in the tooltip
+    },
   };
-
-
-
   const optionsG3 = {
     //title: "Revenue Distribution  - Business Divisions",
-    chartArea: { width: "50%" },
+    chartArea: { top: '13%', width: "50%" },
     isStacked: true,
     titleTextStyle: {
       fontSize: 16, // Increase title font size
@@ -175,21 +158,36 @@ const CompanyProfile = ({ comname, data }) => {
       textStyle: {
         fontSize: 14, // Increase horizontal axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     hAxis: {
-      title: "Segment",
+      title: "Years",
       titleTextStyle: {
         fontSize: 18, // Increase vertical axis title font size
       },
       textStyle: {
         fontSize: 14, // Increase vertical axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
+      slantedText: true, // Enable slanted text
+      slantedTextAngle: 45, // Adjust the angle (45 degrees is a common value)
     },
     colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    tooltip: {
+      isHtml: true, // Enables HTML tooltips
+      textStyle: {
+        color: '#000000', // Tooltip text color
+      },
+      showColorCode: true, // Displays the color of the series in the tooltip
+    },
   };
   const optionsG4 = {
     //title: "Revenue Distribution  - Geographical",
-    chartArea: { width: "50%" },
+    chartArea: { top: '13%', width: "50%" },
     isStacked: true,
     titleTextStyle: {
       fontSize: 16, // Increase title font size
@@ -203,21 +201,36 @@ const CompanyProfile = ({ comname, data }) => {
       textStyle: {
         fontSize: 14, // Increase horizontal axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
     },
     hAxis: {
-      title: "Segment",
+      title: "Years",
       titleTextStyle: {
         fontSize: 18, // Increase vertical axis title font size
       },
       textStyle: {
         fontSize: 14, // Increase vertical axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
+      slantedText: true, // Enable slanted text
+      slantedTextAngle: 45, // Adjust the angle (45 degrees is a common value)
     },
     colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    tooltip: {
+      isHtml: true, // Enables HTML tooltips
+      textStyle: {
+        color: '#000000', // Tooltip text color
+      },
+      showColorCode: true, // Displays the color of the series in the tooltip
+    },
   };
   const optionsG5 = {
     //title: "Revenue Distribution  - Business Divisions",
-    chartArea: { width: "50%" },
+    chartArea: { top: '13%', width: "50%" },
     isStacked: true,
     titleTextStyle: {
       fontSize: 16, // Increase title font size
@@ -231,20 +244,33 @@ const CompanyProfile = ({ comname, data }) => {
       textStyle: {
         fontSize: 14, // Increase horizontal axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      }
     },
     hAxis: {
-      title: "Segment",
+      title: "Years",
       titleTextStyle: {
         fontSize: 18, // Increase vertical axis title font size
       },
       textStyle: {
         fontSize: 14, // Increase vertical axis labels font size
       },
+      gridlines: {
+        color: 'none' // Remove vertical gridlines
+      },
+      slantedText: true, // Enable slanted text
+      slantedTextAngle: 45, // Adjust the angle (45 degrees is a common value)
     },
     colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    tooltip: {
+      isHtml: true, // Enables HTML tooltips
+      textStyle: {
+        color: '#000000', // Tooltip text color
+      },
+      showColorCode: true, // Displays the color of the series in the tooltip
+    },
   };
-
-
   const optionsG7 = {
     //title: "Revenue Distribution  - Business Divisions",
     chartArea: { width: "50%" },
@@ -273,9 +299,28 @@ const CompanyProfile = ({ comname, data }) => {
     },
     colors: ['#15464a', '#1d666d', '#2f878d'],
   };
+  const optionsF = {
+    // title: "OWNERSHIP BREAKDOWN",
+    colors: ['#15464a', '#1d666d', '#2f878d', '#3a9aa1', '#44b3bb', '#69ccd3'],
+    chartArea: {
+      left: "10%",
+      top: "10%",
+      width: "80%",
+      height: "80%" // Adjust the chart area to give more space around the pie
+    },
+    legend: {
+      position: 'right', // Position the legend to the right of the chart
+      alignment: 'top', // Align legend in the center
+      textStyle: { fontSize: 14 }, // Adjust legend text size
+    },
+    pieSliceText: 'percentage', // Display percentage on the slices
+  };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
-      <div id="list-item-3">
+      <div>
         <div className="data-heading d-flex justify-content-between mb-4 mt-5">
           <div>
             <h2>Company profile </h2>
@@ -290,7 +335,7 @@ const CompanyProfile = ({ comname, data }) => {
           {/* <p className="content2 mt-3">Tata Motors is a major Indian automaker, part of the Tata Group conglomerate. They produce cars, trucks, buses, and even electric vehicles.  They're the leader in commercial vehicles in Tata Motors is a major Indian automaker, part of the Tata Group conglomerate. They produce cars, trucks, buses, and even electric vehicles.  They're the leader in commercial vehicles in </p> */}
           {/* <p className="content2 mt-3">{data[0].companyProfile.details}</p> */}
 
-          <p className="content2 mt-3">{expandedDetails ? data[0].companyProfile.details : truncateText(data[0].companyProfile.details, 48)}
+          <p className="content2 mt-2">{expandedDetails ? data[0].companyProfile.details : truncateText(data[0].companyProfile.details, 48)}
 
             {data[0].companyProfile.details.split(" ").length > 48 && (
               <button onClick={() => setExpandedDetails(!expandedDetails)} className="btn btn-link p-0 readmore">
@@ -301,44 +346,11 @@ const CompanyProfile = ({ comname, data }) => {
 
 
         </div>
-        <h3 className="heading2 ">Revenue mix</h3>
+        <h3 className="heading2 mt-md-4">Revenue mix</h3>
         <Row>
-          {/* <Col md={6}>
-            <div className="mt-2 graph-box">
-              <p className="text-center">Revenue Distribution  - Business Divisions</p>
-              <BarChart
-                width={500}
-                height={300}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph1}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-                <Tooltip cursor={{ fill: 'transparent' }} /> 
-                {Object.keys(data[0].companyProfileGraph.graph1[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
-
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                      isAnimationActive={false} 
-                    />
-                  ))}
-              </BarChart>
-            </div>
-          </Col> */}
-
           <Col md={6}>
+            {/* <h5 className="text-center">{data[0].companyProfileHeadings.compHeading1}</h5> */}
             <div className="mt-2 graph-box">
-              <p className="text-center">Revenue Distribution  - Business Divisions</p>
               <Chart
                 chartType="ColumnChart" // Change from BarChart to ColumnChart
                 width="100%"
@@ -347,55 +359,24 @@ const CompanyProfile = ({ comname, data }) => {
                 options={optionsG1}
               />
             </div>
-            <span style={{ fontSize: "12px" }} className="d-block text-end">Source - Annual Report</span>
+            <span style={{ fontSize: "12px" }} className="d-block text-end">{data[0].companyProfileSource.Source1}</span>
           </Col>
           <Col md={6}>
+            {/* <h5 className="text-center">{data[0].companyProfileHeadings.compHeading2}</h5> */}
             <div className="mt-2 graph-box">
-              {/* <p className="text-center">Revenue Distribution  - Geographical
-              </p>
-              <BarChart
-                width={500}
-                height={300}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph2}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-                <Tooltip cursor={{ fill: 'transparent' }} /> 
-                {Object.keys(data[0].companyProfileGraph.graph2[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
-
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                      isAnimationActive={false} 
-
-                    />
-                  ))}
-              </BarChart> */}
-              <p className="text-center">Revenue Distribution  - Geographical
-              </p>
               <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
+                chartType="ColumnChart"
                 width="100%"
                 height="400px"
                 data={data[0].companyProfileGraph.graph2}
                 options={optionsG2}
               />
             </div>
-            <span style={{ fontSize: "12px" }} className="d-block text-end">Source</span>
+            <span style={{ fontSize: "12px" }} className="d-block text-end">{data[0].companyProfileSource.Source2}</span>
           </Col>
         </Row>
-        <section>
-          <div className="data-heading d-flex justify-content-between mt-5 mb-2">
+        {/* <section> */}
+          <div className="data-heading d-flex justify-content-between mb-3 mt-3">
             <h3 className="heading2">
               Quality of Revenue
               <div className=" d-inline">
@@ -410,28 +391,23 @@ const CompanyProfile = ({ comname, data }) => {
                   id="quality-content11"
                   place="bottom"
                   content={tooltipData11}
-                  style={{ fontSize: "12px" }}
-                />
+                  style={{ fontSize: "12px", width: "200px", zIndex: '1200' }} />
 
                 <ReactTooltip
                   id="quality-content22"
                   place="bottom"
                   content={tooltipData22}
-                  //  className="custom-tooltip"
-                  style={{ fontSize: "12px" }}
-                /> <ReactTooltip
+                  style={{ fontSize: "12px", width: "200px", zIndex: '1200' }} />
+                <ReactTooltip
                   id="quality-content33"
                   place="bottom"
                   content={tooltipData33}
-                  //  className="custom-tooltip"
-                  style={{ fontSize: "12px" }}
-                /> <ReactTooltip
+                  style={{ fontSize: "12px", width: "200px", zIndex: '1200' }} />
+                <ReactTooltip
                   id="quality-content44"
                   place="bottom"
                   content={tooltipData44}
-                  //  className="custom-tooltip"
-                  style={{ fontSize: "12px" }}
-                />
+                  style={{ fontSize: "12px", width: "200px", zIndex: '1200' }} />
 
 
               </div>
@@ -446,8 +422,7 @@ const CompanyProfile = ({ comname, data }) => {
                     <img src={Icon1} />
                   </div>
                   <h3 className="mb-0">Predictability <img src={Info} alt="info" className="ms-2" data-tooltip-id="quality-content22" /></h3></div>
-                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p> */}
-                {/* <p>{data[0].companyProfile.Predictability}</p> */}
+
 
                 <p>{expandedWhy1 ? data[0].companyProfile.Predictability : truncateText(data[0].companyProfile.Predictability, 48)}
 
@@ -466,8 +441,7 @@ const CompanyProfile = ({ comname, data }) => {
                     <img src={Icon2} />
                   </div>
                   <h3 className="mb-0">Profitability <img src={Info} alt="info" className="ms-2" data-tooltip-id="quality-content33" /></h3></div>
-                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p> */}
-                {/* <p>{data[0].companyProfile.Profitability}</p> */}
+
 
                 <p>{expandedWhy2 ? data[0].companyProfile.Profitability : truncateText(data[0].companyProfile.Profitability, 48)}
 
@@ -486,8 +460,6 @@ const CompanyProfile = ({ comname, data }) => {
                     <img src={Icon3} />
                   </div>
                   <h3 className="mb-0">Plurality <img src={Info} alt="info" className="ms-2" data-tooltip-id="quality-content44" /></h3></div>
-                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p> */}
-                {/* <p>{data[0].companyProfile.Diversity}</p> */}
 
                 <p>{expandedWhy3 ? data[0].companyProfile.Diversity : truncateText(data[0].companyProfile.Diversity, 48)}
 
@@ -500,7 +472,7 @@ const CompanyProfile = ({ comname, data }) => {
               </div>
             </Col>
           </Row>
-        </section>
+        {/* </section> */}
       </div>
       <Modal
         size="lg"
@@ -508,7 +480,6 @@ const CompanyProfile = ({ comname, data }) => {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        ///dialogClassName="right-corner-modal"
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -548,34 +519,9 @@ const CompanyProfile = ({ comname, data }) => {
           <div className="insight-list mt-3">
             <div className="mt-2 graph-box">
               <p className="text-center">Business Segments</p>
-              {/* <BarChart
-                width={500}
-                height={300}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph3}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-                <Tooltip />
-                {Object.keys(data[0].companyProfileGraph.graph3[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
 
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                    />
-                  ))}
-              </BarChart> */}
               <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
+                chartType="ColumnChart"
                 width="100%"
                 height="400px"
                 data={data[0].companyProfileGraph.graph3}
@@ -593,7 +539,6 @@ const CompanyProfile = ({ comname, data }) => {
         onHide={handleClose2}
         backdrop="static"
         keyboard={false}
-        ///dialogClassName="right-corner-modal"
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -605,34 +550,9 @@ const CompanyProfile = ({ comname, data }) => {
           <div className="insight-list mt-3">
             <div className="mt-2 graph-box">
               <p className="text-center">Business Segments</p>
-              {/* <BarChart
-                width={500}
-                height={300}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph4}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-                <Tooltip />
-                {Object.keys(data[0].companyProfileGraph.graph4[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
 
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                    />
-                  ))}
-              </BarChart> */}
               <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
+                chartType="ColumnChart"
                 width="100%"
                 height="400px"
                 data={data[0].companyProfileGraph.graph4}
@@ -652,7 +572,6 @@ const CompanyProfile = ({ comname, data }) => {
         backdrop="static"
         keyboard={false}
         centered
-        // ///dialogClassName="right-corner-modal"
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -664,34 +583,9 @@ const CompanyProfile = ({ comname, data }) => {
           <div className="insight-list mt-3">
             <div className="mt-2 graph-box">
               <p className="text-center">Business Segments</p>
-              {/* <BarChart
-                width={500}
-                height={300}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph5}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-                <Tooltip />
-                {Object.keys(data[0].companyProfileGraph.graph5[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
 
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                    />
-                  ))}
-              </BarChart> */}
               <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
+                chartType="ColumnChart"
                 width="100%"
                 height="400px"
                 data={data[0].companyProfileGraph.graph5}
@@ -706,13 +600,10 @@ const CompanyProfile = ({ comname, data }) => {
 
 
       <Modal
-        // size="lg"
         show={show4}
         onHide={handleClose4}
         backdrop="static"
         keyboard={false}
-        // ///dialogClassName="right-corner-modal"
-        // centered
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
@@ -722,55 +613,19 @@ const CompanyProfile = ({ comname, data }) => {
         </Modal.Header>
         <Modal.Body>
           {!data[0].companyProfileGraph.appendixstatus ? (
-            <Col md={6}>
-              <PieChart width={700} height={300} >
-                <Pie
-                  data={dataWithNumberValues}
-                  innerRadius={90}
-                  outerRadius={110}
-                  fill="#8884d8"
-                  paddingAngle={0}
-                  dataKey="value"
-                  style={{ width: "100%" }}
-                >
-
-                  {data1.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Legend />
-              </PieChart>
-            </Col>) : (
+            <Chart
+              chartType="PieChart"
+              data={data[0].companyProfileGraph.pieData}
+              options={optionsF}
+              width={"100%"}
+              height={"400px"}
+            />
+          ) : (
             <div className="insight-list mt-3">
               <div className="mt-2 graph-box">
-                {/* <BarChart
-              width={800}
-              height={500}
-              style={{ height: "70%", width: "100%" }}
-              data={data[0].companyProfileGraph.graph7}
-              barSize={20}
-              barCategoryGap={10}
-              barGap={5}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" style={{ fontSize: "12px", fontWeight: "500" }} />
-              <YAxis style={{ fontSize: "12px", fontWeight: "500" }} />
-              <Tooltip />
-              {Object.keys(data[0].companyProfileGraph.graph7[0])
-                .filter(key => key !== 'name')
-                .map((key, index, arr) => (
 
-                  <Bar
-                    key={key}
-                    dataKey={key}
-                    stackId="a"
-                    fill={getRandomColor(index)}
-                    radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                  />
-                ))}
-            </BarChart> */}
                 <Chart
-                  chartType="ColumnChart" // Change from BarChart to ColumnChart
+                  chartType="ColumnChart"
                   width="400px"
                   height="400px"
                   data={data[0].companyProfileGraph.graph7}
@@ -780,7 +635,8 @@ const CompanyProfile = ({ comname, data }) => {
 
           }
 
-          <span style={{ fontSize: "12px" }} className="d-block text-end">Source - Annual Report</span>
+          <span style={{ fontSize: "12px" }} className="d-block text-end">{!data[0].companyProfileGraph.appendixstatus ? data[0].companyProfileSource.pieSource : data[0].companyProfileSource.Source3
+          }</span>
 
         </Modal.Body>
 
@@ -795,138 +651,55 @@ const CompanyProfile = ({ comname, data }) => {
         onHide={handleCloseAll}
         backdrop="static"
         keyboard={false}
-      // ///dialogClassName="right-corner-modal"
       >
         <Modal.Header closeButton>
           <div className="data-heading ">
-            <h2 style={{ fontSize: "32px" }}>Quality Revenue</h2>
+            <h2 style={{ fontSize: "32px" }}>Quality Of Revenue</h2>
           </div>
         </Modal.Header>
         <Modal.Body>
-          <div className="insight-list my-3 d-md-flex gap-3">
-          <div>
-            <div className="mt-2 graph-box ">
-              <p className="text-center">Predictability</p>
-              {/* <BarChart
-                width={800}
-                height={600}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph3}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "16px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "16px", fontWeight: "500" }} />
-                <Tooltip cursor={{ fill: 'transparent' }} /> 
-                {Object.keys(data[0].companyProfileGraph.graph3[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
-
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                      isAnimationActive={false}
-
-                    />
-                  ))}
-              </BarChart> */}
-
-              <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
-                width="350px"
-                height="400px"
-                data={data[0].companyProfileGraph.graph3}
-                options={optionsG3}
-              />
-            </div>
-            <span style={{ fontSize: "12px" }} className="d-block text-end">Source - Annual Report</span>
-          </div>
-          <div>
-            <div className="mt-2 graph-box">
-              <p className="text-center">Profitability</p>
-              {/* <BarChart
-                width={800}
-                height={600}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph4}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "16px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "16px", fontWeight: "500" }} />
-                <Tooltip cursor={{ fill: 'transparent' }} /> 
-                {Object.keys(data[0].companyProfileGraph.graph4[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
-
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                      isAnimationActive={false} 
-                    />
-                  ))}
-              </BarChart> */}
-              <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
-                width="350px"
-                height="400px"
-                data={data[0].companyProfileGraph.graph4}
-                options={optionsG4}
-              />
-            </div>
-            <span style={{ fontSize: "12px" }} className="d-block text-end">Source - Annual Report</span>
+          <div className="insight-list my-3 d-md-flex gap-3 justify-content-center">
+            <div>
+              <div className="mt-2 graph-box scroll-mob">
+                <p className="text-center">{data[0].companyProfileHeadings.compHeading3}</p>
+                <Chart
+                  chartType="ColumnChart"
+                  width="350px"
+                  height="400px"
+                  data={data[0].companyProfileGraph.graph3}
+                  options={optionsG3}
+                />
+              </div>
+              <span style={{ fontSize: "12px" }} className="d-block text-end">{data[0].companyProfileSource.Source4}</span>
             </div>
             <div>
-            <div className="mt-2 graph-box">
-              <p className="text-center">Plurality</p>
-              {/* <BarChart
-                width={800}
-                height={600}
-                style={{ height: "100%", width: "100%" }}
-                data={data[0].companyProfileGraph.graph5}
-                barSize={20}
-                barCategoryGap={10}
-                barGap={5}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" style={{ fontSize: "16px", fontWeight: "500" }} />
-                <YAxis style={{ fontSize: "16px", fontWeight: "500" }} />
-                <Tooltip cursor={{ fill: 'transparent' }} /> 
-                {Object.keys(data[0].companyProfileGraph.graph5[0])
-                  .filter(key => key !== 'name')
-                  .map((key, index, arr) => (
+              <div className="mt-2 graph-box scroll-mob">
+                <p className="text-center">{data[0].companyProfileHeadings.compHeading4}</p>
 
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={getRandomColor(index)}
-                      radius={index === arr.length - 1 ? [10, 10, 0, 0] : [0, 0, 0, 0]}
-                      isAnimationActive={false} 
-
-                    />
-                  ))}
-              </BarChart> */}
-
-              <Chart
-                chartType="ColumnChart" // Change from BarChart to ColumnChart
-                width="350px"
-                height="400px"
-                data={data[0].companyProfileGraph.graph5}
-                options={optionsG5}
-              />
+                <Chart
+                  chartType="ColumnChart"
+                  width="350px"
+                  height="400px"
+                  data={data[0].companyProfileGraph.graph4}
+                  options={optionsG4}
+                />
+              </div>
+              <span style={{ fontSize: "12px" }} className="d-block text-end">{data[0].companyProfileSource.Source5}</span>
             </div>
-            <span style={{ fontSize: "12px" }} className="d-block text-end">Source - Annual Report</span>
+            <div>
+              <div className="mt-2 graph-box scroll-mob">
+                <p className="text-center">{data[0].companyProfileHeadings.compHeading5}</p>
+
+
+                <Chart
+                  chartType="ColumnChart"
+                  width="350px"
+                  height="400px"
+                  data={data[0].companyProfileGraph.graph5}
+                  options={optionsG5}
+                />
+              </div>
+              <span style={{ fontSize: "12px" }} className="d-block text-end">{data[0].companyProfileSource.Source6}</span>
             </div>
           </div>
         </Modal.Body>

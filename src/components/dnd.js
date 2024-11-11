@@ -6,7 +6,9 @@ import Read from "../components/img/readCompany.svg";
 import Footer from './Footer';
 
 export default function Dnd() {
-  
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top
+  }, []);
   return (
     <>
       <Header />

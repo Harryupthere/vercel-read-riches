@@ -7,6 +7,7 @@ import LoginMobile from '../components/img/loginMobile.png';
 import toast, { Toaster } from "react-hot-toast";
 import config from '../config';
 import { Col, Container, Row } from 'react-bootstrap';
+import "../components/css/style.css"
 import { FiChevronLeft } from 'react-icons/fi';
 
 

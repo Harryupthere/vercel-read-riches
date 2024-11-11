@@ -20,6 +20,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Form from 'react-bootstrap/Form';
 import Clip from "../components/img/icon/clip.svg"
 
+import { useLocation } from 'react-router-dom';
 
 
 export default function JoinMemberShip() {
@@ -40,6 +41,8 @@ export default function JoinMemberShip() {
     const purchasePlan = async (e, planId) => {
         e.preventDefault();
         try {
+            alert("Plan purchased")
+            return
             console.log(isLoggedIn && token != '')
 
             if (isLoggedIn && token != '') {
@@ -98,6 +101,29 @@ export default function JoinMemberShip() {
         }
     }
 
+    const handleScrollToSection = () => {
+        const scrollPercentage = 1.9; // Adjust the scroll percentage here
+        const scrollY = window.innerHeight * scrollPercentage; // Calculate the Y position to scroll to
+        window.scrollTo({
+          top: scrollY,
+          behavior: 'smooth' // Smooth scrolling
+        });
+      };
+      
+
+      const location = useLocation();
+
+      useEffect(() => {
+        // Check if scrollTo is passed in the location state
+        if (location.state?.scrollTo) {
+          const scrollPercentage = 1.9; // Adjust the scroll percentage here
+          const scrollY = window.innerHeight * scrollPercentage;
+          window.scrollTo({
+            top: scrollY,
+            behavior: 'smooth',
+          });
+        }
+      }, [location]);
     return (
         <>
             <div className='line-bg'>
@@ -114,7 +140,7 @@ export default function JoinMemberShip() {
                                             <br /> <b> Join Us!</b>
                                         </h1>
                                         <p >Unlock exclusive access to comprehensive company analysis, stay updated with the latest insights, and enjoy a seamless experience with our premium features. Join us today and take your research to the next level.</p>
-                                        <button type='button' className='logoutbtn mt-md-4'>Join now</button>
+                                        <button type='button' className='logoutbtn mt-md-4'  onClick={handleScrollToSection}>Join now</button>
                                     </div>
                                 </div>
                             </Col>
@@ -212,10 +238,9 @@ export default function JoinMemberShip() {
                                 </div>
                                 <Row className='d-flex align-items-center'>
                                     <Col md={4}>
-                                        <div className='plan-card light-bg'>
+                                        {/* <div className='plan-card light-bg'>
                                             <h3>Value report</h3>
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
-                                            {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
                                                 <h2 className='price'>₹1500</h2>
                                                 <span>per year</span>
@@ -229,7 +254,7 @@ export default function JoinMemberShip() {
                                                 <li><img src={Check} />Access to financial tools</li>
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
-                                        </div>
+                                        </div> */}
                                     </Col>
                                     <Col md={4}>
                                         <div className='plan-card light-bg'>
@@ -237,8 +262,8 @@ export default function JoinMemberShip() {
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
                                             {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
-                                                <h2 className='price'>₹1500</h2>
-                                                <span>per year</span>
+                                                <h2 className='price'>₹999</h2>
+                                                <span>per quarter</span>
                                             </div>
                                             <hr className='w-100' />
                                             <p>The free plan gives you a taste, but the membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
@@ -252,13 +277,12 @@ export default function JoinMemberShip() {
                                         </div>
                                     </Col>
                                     <Col md={4}>
-                                        <div className='plan-card light-bg theme-bg'>
+                                        {/* <div className='plan-card light-bg theme-bg'>
                                             <div className='pop-plan'>
                                                 Most Popular
                                             </div>
                                             <h3>Value report</h3>
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
-                                            {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
                                                 <h2 className='price'>₹1500</h2>
                                                 <span>per year</span>
@@ -272,7 +296,7 @@ export default function JoinMemberShip() {
                                                 <li><img src={Check} />Access to financial tools</li>
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
-                                        </div>
+                                        </div> */}
                                     </Col>
                                 </Row>
 

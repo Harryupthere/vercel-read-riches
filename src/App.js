@@ -27,15 +27,15 @@ import AddCompany from './components/admin/addCompanies';
 import VerifyEmail from './components/verifyEmail';
 import Profile from './components/user/profile';
 import "./components/css/responsive.css"
-import UserDashboard from './components/user/dashboard';
-import CardDetails from './components/user/cardDetail';
+// import UserDashboard from './components/user/dashboard';
+// import CardDetails from './components/user/cardDetail';
 import Cards from './components/admin/cards';
 import AddCard from './components/admin/addCard';
 import UpdateCard from './components/admin/updateCard';
 import UpdateCompany from './components/admin/updateCompanies';
 import Category from './components/admin/category';
 import AddCategory from './components/admin/addCategory';
-import MembershipCard from './components/user/membershipCard';
+// import MembershipCard from './components/user/membershipCard';
 import JoinMemberShip from './components/joinMembership';
 import AboutUs from './components/about us/aboutUs';
 import Contact from './components/contact/contact';
@@ -44,6 +44,11 @@ import Pnp from './components/pnp';
 import Dnd from './components/dnd';
 import TickerData from './components/admin/tickerData';
 import Help from './components/help/help';
+import TickerTap from './components/ticker';
+
+
+
+
 // index.js or App.js
 
 // Create a context
@@ -254,9 +259,9 @@ const App = () => {
           <Route path="/admin/tickerData" element={<TickerData />} />
 
           <Route path="/user/profile" element={<Profile />} />
-          <Route path="/user/dashboard" element={<UserDashboard />} />
-          <Route path="/user/card-detail" element={<CardDetails />} />
-          <Route path="/user/membership-card" element={<MembershipCard />} />
+          {/* <Route path="/user/dashboard" element={<UserDashboard />} /> */}
+          {/* <Route path="/user/card-detail" element={<CardDetails />} /> */}
+          {/* <Route path="/user/membership-card" element={<MembershipCard />} /> */}
           <Route path="/join-membership" element={<JoinMemberShip />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/help" element={<Help />} />
@@ -265,7 +270,9 @@ const App = () => {
           <Route path="/tearms-and-conditions" element={<Tnc />} />
           <Route path="/privacy-policy" element={<Pnp />} />
           <Route path="/disclaimer-disclosures" element={<Dnd />} />
+          <Route path="/TickerTap" element={<TickerTap />} />
 
+          
         
           {/* wrong path 404 */}
           <Route path="*" element={<h1 style={{

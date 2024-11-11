@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./sidebar";
-import UserHeader from "./header";
+//import UserHeader from "./header";
 import { Row, Col } from "react-bootstrap";
 import ManImg from "../../components/img/man.png";
 import Bull from "../../components/img/bullCard.png";
@@ -59,7 +59,7 @@ const MembershipCard = () => {
         <>
             <Sidebar />
             <div className="content">
-                <UserHeader />
+                {/* <UserHeader /> */}
                 <div className="p-3">
                     <h2 className="heading2">Your Membership Card</h2>
                     <Row>
