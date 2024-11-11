@@ -268,10 +268,10 @@ export default function JoinMemberShip() {
                                             <hr className='w-100' />
                                             {/* <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p> */}
                                             <ul>
-                                                <li><img src={Check} />Access to all Companies Synopsis</li>
-                                                <li><img src={Check} />Exclusive community</li>
-                                                <li><img src={Check} />Events and Workshops</li>
-                                                <li><img src={Check} />Access to financial tools</li>
+                                                <li><img src={Check} />Access to Detailed Research: Get an in-depth analysis of a specific company of interest.</li>
+                                                <li><img src={Check} />Comprehensive Insights: Dive into key metrics, industry positioning, and financial health.</li>
+                                                <li><img src={Check} />No Long-Term Commitment: Purchase only the reports you need, as you need them.</li>
+                                                {/* <li><img src={Check} />Access to financial tools</li> */}
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
                                         </div>
