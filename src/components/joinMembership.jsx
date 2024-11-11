@@ -240,13 +240,13 @@ export default function JoinMemberShip() {
                                     <Col md={4}>
                                         <div className='plan-card light-bg'>
                                             <h3>Value report</h3>
-                                            <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
+                                            {/* <p>Unlock exclusive insights, community access, and financial tools with one report.</p> */}
                                             <div className='d-flex align-items-center'>
                                                 <h2 className='price'>₹199</h2>
-                                                <span>per year</span>
+                                                <span>per report</span>
                                             </div>
                                             <hr className='w-100' />
-                                            <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
+                                            {/* <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p> */}
                                             <ul>
                                                 <li><img src={Check} />Access to Detailed Research: Get an in-depth analysis of a specific company of interest.</li>
                                                 <li><img src={Check} />Comprehensive Insights: Dive into key metrics, industry positioning, and financial health.</li>
