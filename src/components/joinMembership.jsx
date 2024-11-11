@@ -238,15 +238,15 @@ export default function JoinMemberShip() {
                                 </div>
                                 <Row className='d-flex align-items-center'>
                                     <Col md={4}>
-                                        {/* <div className='plan-card light-bg'>
+                                        <div className='plan-card light-bg'>
                                             <h3>Value report</h3>
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
                                             <div className='d-flex align-items-center'>
-                                                <h2 className='price'>₹1500</h2>
+                                                <h2 className='price'>₹199</h2>
                                                 <span>per year</span>
                                             </div>
                                             <hr className='w-100' />
-                                            <p>The free plan gives you a taste, but the membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
+                                            <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
                                             <ul>
                                                 <li><img src={Check} />Access to all Companies Synopsis</li>
                                                 <li><img src={Check} />Exclusive community</li>
@@ -254,11 +254,11 @@ export default function JoinMemberShip() {
                                                 <li><img src={Check} />Access to financial tools</li>
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
-                                        </div> */}
+                                        </div>
                                     </Col>
                                     <Col md={4}>
                                         <div className='plan-card light-bg'>
-                                            <h3>Value report</h3>
+                                            <h3>Quarter Plan</h3>
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
                                             {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
