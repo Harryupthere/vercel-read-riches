@@ -49,7 +49,7 @@ function Users() {
     return (
         <>
             <Sidebar />
-            <div style={{ backgroundColor: "#FAFAFA" }} className='p-lg-5 p-2 content'>
+            <div style={{ backgroundColor: "#FAFAFA"}} className='p-lg-5 p-2 content'>
                 <h2 className='dash-heading'>
                     Users
                 </h2>

@@ -23,78 +23,7 @@
     align-items: center;
 }
 
-/* .stockLine-data {
-    height: 77px;
-    background: #1E6E76;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0;
-    width: 100%;
-    overflow: hidden; 
-}
 
-.stockLine-data p {
-    color: #fff;
-    margin-bottom: 0;
-    white-space: nowrap;
-}
-
-.stock-line {
-    background-image: url(../../components/img/bg-line.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 166px;
-    display: flex;
-    align-items: center;
-} */
-
-/* .ticker {
-    display: flex;
-    animation: tickerMove 20s linear infinite;
-    white-space: nowrap;
-} */
-/* 
-.ticker {
-    display: flex;
-    animation: tickerMove 20s linear infinite;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: hidden; 
-    white-space: nowrap;
-} */
-
-/* .tradingview-widget-container {
-    display: inline-block;
-    white-space: nowrap;
-    width: 100%; 
-    height: 100px;
-}
-
-.tradingview-widget-container__widget {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.tradingview-widget-container__widget {
-    padding-right: 30px;
-}
-.ticker-item {
-    padding: 0 20px;
-    color: #fff; 
-    white-space: nowrap;
-    font-size: 16px; 
-} */
-
-/* @keyframes tickerMove {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-} */
 
 .main-heading {
     font-size: 36px;
@@ -169,10 +98,11 @@ tbody tr {
 .small-cards {
     padding: 20px;
     background: #fff;
-    box-shadow: 0 0 20px 20px #cccccc21;
+    box-shadow: 0px 3.84px 95.93px 0px #75757542;
     border-radius: 50%;
     height: 220px;
     width: 220px;
+    /* border: 2px solid #1E6E76; */
 }
 
 .small-cards img {
@@ -221,32 +151,7 @@ tbody tr {
     z-index: -1;
 }
 
-.tradingview-widget-container {
-    overflow: hidden;
-    /* Prevents the content from overflowing outside the container */
-    width: 100%;
-    /* Ensure it takes the full width of its parent container */
-}
-
-.tradingview-widget-container__widget {
-    display: flex;
-    /* To arrange items horizontally */
-    justify-content: start;
-    /* Align items to the start */
-    white-space: nowrap;
-    /* Prevent wrapping */
-    animation: scroll-left 20s linear infinite;
-    /* Scroll animation */
-}
-
-@keyframes scroll-left {
-    0% {
-        transform: translateX(100%);
-        /* Start from the right */
-    }
-
-    100% {
-        transform: translateX(-100%);
-        /* End at the left */
-    }
+.underlined {
+    text-decoration: underline; /* Underline the text */
+    cursor: pointer; /* Change cursor to pointer for interactive elements */
 }

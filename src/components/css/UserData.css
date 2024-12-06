@@ -1,8 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,400;8..144,700;8..144,800&display=swap');
 
 @font-face {
-    font-family: "Roboto-bold";
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Roboto";
     src: url("../fonts/Roboto/Roboto-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Medium.ttf");
+    font-weight: 600;
 }
 
 body {
@@ -15,7 +28,7 @@ div p {
 }
 
 section {
-    margin: 60px 0;
+    margin: 50px 0;
 }
 
 .list-group-sidebar {
@@ -60,46 +73,57 @@ section {
     color: #1D666D;
     font-size: 24px;
     font-weight: 400;
+    font-family: "Roboto";
+
 }
 
 .content1 {
     font-family: "Roboto";
     font-size: 16px;
+    font-weight: 400;
+    color: #3A3A3C;
 }
 
 .graph-box table tr {
     height: 56px;
 }
 
-.graph-box table th {
+.user-data .graph-box table th {
     background-color: #fff;
     font-family: "Roboto";
-    font-size: 14px;
+    font-size: 16px;
     padding: 0;
     line-height: 10.6px;
     padding-left: 10px;
+    font-weight: 400;
+    color: #3A3A3C;
 }
 
-.graph-box table td {
+.user-data .graph-box table td {
     color: #73BBC3;
     font-family: "Roboto";
-    font-size: 16px;
-    padding: 0 0 0 15px;
+    font-size: 18px;
+    padding: 0 0 0 30px;
     text-align: right;
     background-color: #fff;
     line-height: 21.6px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .graph-box {
-    border: 1.5px solid #BDF8FE;
-    border-radius: 8px;
+    border: 0.5px solid #AEAEB2;
+    border-radius: 10px;
     padding: 4px;
+    /* box-shadow: 0px 4px 70px 0px #4C4C4C1F; */
+}
+
+.blue-border {
+    border: 2px solid #BDF8FE;
 }
 
 .graph-box p {
-    font-size: 20px;
-    color: #343A40;
+    /* font-size: 20px; */
+    /* color: #343A40; */
 }
 
 .dark-bg {
@@ -107,7 +131,7 @@ section {
     border-radius: 8px;
     position: relative;
     /* min-height: 230px; */
-    margin-left: 30px;
+    margin-left: 15px;
     height: auto;
 }
 
@@ -186,12 +210,15 @@ section {
 
 .heading2 {
     font-size: 24px;
-    font-family: 'Roboto-bold';
+    font-family: 'Roboto';
     color: #242424;
+    font-weight: 600;
 }
+
 .heading3 {
     font-size: 16px;
 }
+
 .content2 {
     color: #747474;
     font-size: 16px;
@@ -201,7 +228,7 @@ section {
 
 .quality-box {
     border: 2px solid #1D666D;
-    padding: 8px;
+    padding: 15px 12px;
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -284,7 +311,7 @@ section {
 }
 
 .list-box.headwinds {
-    border: 1.5px solid #6D1D1D;
+    border: 2px solid #6D1D1D;
     margin-bottom: 10px;
 }
 
@@ -293,7 +320,7 @@ section {
 }
 
 .list-box.tailwind {
-    border: 1.5px solid #236D1D;
+    border: 2px solid #236D1D;
 }
 
 .list-box.tailwind h3 {
@@ -301,7 +328,7 @@ section {
 }
 
 .graph-box.grey-bordered {
-    border: 1.5px solid #AEAEB2;
+    border: 1.5px solid #D9D9D9;
 }
 
 .user-data .list-group-item {
@@ -310,7 +337,7 @@ section {
     color: #8E8E93;
     font-family: 'Roboto';
     padding: 14px 10px 14px 20px;
-  
+    border-left: 4px solid #E8F0F0;
 }
 
 .user-data .list-group-item.list-group-item-action.active {
@@ -333,17 +360,43 @@ section {
 }
 
 .graph-data {
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid #E5E5EA;
+    padding: 10px;
+    border-radius: 0px 0px 10px 10px;
+    border: 1px solid #D9D9D9;
     text-align: center;
     color: #747474;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-top: 0;
 }
 
+.graph-data div {
+    flex: 1;
+    text-align: center;
+}
+.graph-data h2 {
+    color: #242424;
+    font-size: 16px;
+    margin-bottom: 0;
+}
 .graph-data span {
-    font-size: 11px;
+    font-size: 14px;
+    color: #747474;
 }
-
+.after-line{
+    position: relative;
+}
+.after-line::after{
+    position: absolute;
+    content: "";
+    height: 42px;
+    width: 1px;
+    background-color: #7C7C7C2E;
+    right: 0;
+    top: 1px;
+}
 .graph-data h5 {
     font-size: 10px;
     font-family: 'Roboto';
@@ -351,7 +404,7 @@ section {
     font-weight: 500;
 }
 
-.navbar-scrolled {
+nav.navbar-scrolled {
     position: fixed;
     top: 0;
     left: 0;
@@ -390,17 +443,23 @@ h3.appendix {
     -webkit-transform: rotate(-45deg);
     margin-left: 5px;
 }
+
 .modal-90w.modal-dialog {
-    max-width: 90%; /* Adjust this percentage or use pixels for a fixed width */
-    width: 80%;
-  }
-  .w-20{
-    width: 20%;
+    max-width: 90%;
+    /* Adjust this percentage or use pixels for a fixed width */
+    min-width: 80%;
 }
-.dupont-section{
+
+.w-20 {
+    width: 300px;
+}
+
+.dupont-section {
     display: inline-flex;
     column-gap: 10px;
+    padding-bottom: 20px;
 }
+
 @media screen and (min-width: 1200px) {
     .list-group-sidebar {
         width: 280px;
@@ -410,7 +469,7 @@ h3.appendix {
 .value-box {
     width: 170px;
     background-color: #DCFBFE;
-    margin-bottom: 14px;
+    margin-bottom: 0;
     padding: 8px 16px 8px 16px;
     border-radius: 4px;
     /* position: absolute; */
@@ -438,7 +497,7 @@ h3.appendix {
 
 .graph-lines img {
     position: absolute;
-    right: 27%;
+    right: 32%;
 }
 
 .graph-lines {
@@ -452,11 +511,14 @@ h3.appendix {
 .value-box.box4 {
     margin-top: 80px;
 }
+
 .value-box.box5 {
     position: relative;
-    left: 330px;
+    left: 300px;
     height: 180px;
+    margin-top: 12px;
 }
+
 .g-img1 {
     top: 180px;
 }
@@ -502,20 +564,24 @@ h3.appendix {
     position: fixed;
     top: 0;
     right: 0;
-    margin: 0; /* Removes any default margin */
-    width: auto; /* Allows the modal to take its natural width */
+    margin: 0;
+    /* Removes any default margin */
+    width: auto;
+    /* Allows the modal to take its natural width */
     height: auto;
     border-radius: 0;
 }
 
 .right-corner-modal .modal-dialog {
-    margin: 0; /* Removes the default margin applied to the modal */
+    margin: 0;
+    /* Removes the default margin applied to the modal */
     border-radius: 0;
 }
 
-.right-corner-modal .modal-content{
+.right-corner-modal .modal-content {
     border-radius: 0;
 }
+
 .back-box {
     width: 100%;
     position: absolute;
@@ -527,22 +593,26 @@ h3.appendix {
     z-index: -1;
     border-radius: 8px;
 }
+
 @media screen and (max-width: 768px) {
     div p {
         color: #747474;
         font-size: 14px;
     }
-    
+
 }
 
 
 .recharts-bar-rectangle:hover {
-    fill-opacity: 1 !important; /* Ensure no opacity change */
-    filter: none !important;    /* Remove any grey hover effect */
-    background-color: transparent !important; /* Ensure no background color change */
-  }
+    fill-opacity: 1 !important;
+    /* Ensure no opacity change */
+    filter: none !important;
+    /* Remove any grey hover effect */
+    background-color: transparent !important;
+    /* Ensure no background color change */
+}
 
-  .circle-label text {
+.circle-label text {
     font-size: 14px;
     fill: #fff;
     background-color: #1D666D;
@@ -554,17 +624,74 @@ h3.appendix {
     line-height: 30px;
     padding: 5px;
     font-weight: bold;
-  }
-  .with-arrow{
-    height: 250px!important;
+}
+
+.with-arrow {
+    height: 250px !important;
     margin-top: 70px;
 }
-.with-arrow::after{
+
+.with-arrow::after {
     position: absolute;
     content: "";
     right: 0;
-    width:4px;
-    height: 200px!important;
+    width: 4px;
+    height: 200px !important;
     background: #1D666D;
     top: 0;
+}
+
+.custom-tooltip {
+    background: white;
+    /* White background */
+    border: 1px solid #ccc;
+    /* Optional: Add a border */
+    border-radius: 4px;
+    /* Optional: Rounded corners */
+    padding: 10px;
+    /* Optional: Padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Shadow for better visibility */
+}
+
+.custom-tooltip p {
+    margin: 0;
+    /* Remove default margin from paragraphs */
+    color: black;
+    /* Black text color */
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Full viewport height */
+    width: 100vw;
+    /* Full viewport width */
+    position: fixed;
+    /* Fix to the entire viewport */
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Optional: Add a subtle background while loading */
+    z-index: 9999;
+    /* Ensure it stays on top */
+}
+
+.spinner {
+    width: 4rem;
+    height: 4rem;
+}
+
+.chart-heading2 {
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Roboto-md';
+}
+
+.graph-heading1 {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: "Roboto";
 }

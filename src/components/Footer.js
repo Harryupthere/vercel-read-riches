@@ -9,9 +9,34 @@ import LinkedIn from '../components/img/icon/linkedIn.svg'
 import Twitter from '../components/img/icon/twitter.svg'
 import Phone from '../components/img/icon/phone.svg'
 import Email from '../components/img/icon/email.svg'
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   const location = useLocation();
+//   const handlePageChane=(e,path)=>{
+// e.preventDefault()
+// navigate(path);
+
+//   }
+const handlePageChane = (e, path) => {
+  e.preventDefault();
+  window.location.href = path; // This forces a full page reload to the specified path
+};
+
+const handleNavigateAndScroll = () => {
+  navigate('/join-membership', { state: { scrollTo: true } });
+};
+
+    const handleScrollToSection = () => {
+        const scrollPercentage = 1.9; // Adjust the scroll percentage here
+        const scrollY = window.innerHeight * scrollPercentage; // Calculate the Y position to scroll to
+        window.scrollTo({
+          top: scrollY,
+          behavior: 'smooth' // Smooth scrolling
+        });
+      };
   return (
     <footer className='light-bg-Img py-4 mx-0 '>
       <Container>
@@ -23,7 +48,7 @@ const Footer = () => {
                 Your money deserves more
               </h3>
               <p className='heading4 mb-1'>Join the movement</p>
-              <button className='view mt-0' type='button' style={{ fontWeight: "500" }}>Be a Member</button>
+              <button className='view mt-0' type='button' style={{ fontWeight: "500" }} onClick={handleNavigateAndScroll}>Be a Member</button>
             </div>
           </Col>
           <Col md={9} lg={6}>
@@ -34,7 +59,7 @@ const Footer = () => {
                 </h3>
                 <ul>
                   <li><Link to="/">Home</Link></li>
-                  {/* <li><Link to="/stockview">Stocks Tracker</Link></li> */}
+                  <li><Link to="/stockview">Stocks Tracker</Link></li>
                   <li><Link to="/about">About us</Link></li>
                   <li><Link to="/contact">Contact us</Link></li>
                 </ul>
@@ -43,10 +68,15 @@ const Footer = () => {
                 <h3 className='heading4 hide-mobile'>
                   Others
                 </h3>
-                <ul>
+                {/* <ul>
                   <li><Link to="/tearms-and-conditions">Terms and conditions</Link></li>
                   <li><Link to="/privacy-policy">Privacy policy</Link></li>
                   <li><Link to="/disclaimer-disclosures">Disclaimer Disclosures</Link></li>
+                </ul> */}
+                <ul>
+                  <li onClick={e=>handlePageChane(e,'/tearms-and-conditions')}><Link>Terms and conditions</Link></li>
+                  <li onClick={e=>handlePageChane(e,'/privacy-policy')}><Link>Privacy policy</Link></li>
+                  <li onClick={e=>handlePageChane(e,'/disclaimer-disclosures')}><Link>Disclaimer Disclosures</Link></li>
                 </ul>
               </div>
               <div className='footer-list hide-mobile'>
@@ -54,30 +84,18 @@ const Footer = () => {
                   Contact Us
                 </h3>
                 <ul>
-                  <li><Link to=""><img src={Phone} className='me-2'/>+91- 7340283616</Link></li>
-                  <li><Link to=""><img src={Email} className='me-2' /> info@readriches.com</Link></li>
+                  <li><Link to=""><img src={Phone} className='me-2'/> +91- 7340283616</Link></li>
+                  <li><Link to=""><img src={Email} className='me-2' />info@readriches.com</Link></li>
                 </ul>
               </div>
             </div>
             <div className='mobile-social-icons footer-list'>
-            <ul>
-                                        {/* <li><Link to=""><img src={Facebook} alt="Facebook" /></Link></li> */}
-                                        <li>
-                                            <Link to="https://www.instagram.com/readriches?igsh=MXY3ZnBmOWRjMWMwZA==" target="_blank" rel="noopener noreferrer">
-                                                <img src={Insta} alt="Instagram" />
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="https://www.linkedin.com/company/read-riches/" target="_blank" rel="noopener noreferrer">
-                                                <img src={LinkedIn} alt="LinkedIn" />
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="https://x.com/ReadRiches?t=RwnqDBwEFI5s4Twnx1KSMw&s=09" target="_blank" rel="noopener noreferrer">
-                                                <img src={Twitter} alt="Twitter" />
-                                            </Link>
-                                        </li>
-                                    </ul>
+              <ul>
+                <li><Link to=""><img src={Facebook} className='' /></Link></li>
+                <li><Link to=""><img src={Insta} className='' /></Link></li>
+                <li><Link to=""><img src={LinkedIn} className='' /></Link></li>
+                <li><Link to=""><img src={Twitter} className='' /></Link></li>
+              </ul>
             </div>
           </Col>
           <Col lg={3} md={12} className='d-flex justify-content-lg-end  justify-content-center'>

@@ -194,14 +194,23 @@ import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, 
 import SearchImg from "../../components/img/search.svg";
 import Modal from 'react-bootstrap/Modal';
 
-const OverView = ({ comname, data }) => {
+const OverView = ({ loading,comname, data }) => {
+    
     const [show, setShow] = useState(false);
     const [expandedDetails, setExpandedDetails] = useState(false); // For details section
     const [expandedWhy, setExpandedWhy] = useState(false); // For 'why' section
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
+    // Check if data has content
+    if (!data || data.length === 0) {
+        return <div>No data available.</div>;
+    }
+    const ddl = data[0].DailyPriceChange
     const datax = [
         { category: 'Meaning', rating: data[0].overviewChart?.['Meaning'] },
         { category: 'Moat', rating: data[0].overviewChart?.['Moat'] },
@@ -219,16 +228,21 @@ const OverView = ({ comname, data }) => {
     const tooltipData2 = "Daily Volume of the stock.";
     const tooltipData3 = "10 year Sales growth measured in CAGR.";
     const tooltipData4 = "10 year Net Profit growth rate in CAGR.";
-
+    const isPositive = ddl >= 0;
+    const color = isPositive ? "#08AE05" : "#FF0000"; // Green for positive, red for negative
+    const icon = isPositive ? "fa-caret-up" : "fa-caret-down"; // Up icon for positive, down for negative
+    if (loading) {
+        return <div>Loading...</div>;
+      }
     return (
         <>
-            <div id="list-item-1">
+            <div >
                 <div className="data-heading d-flex justify-content-between mb-4">
                     <h2 className="cursor-pointer" onClick={handleShow}>{data[0].company_name}</h2>
                     <div className="d-flex align-items-center">
-                        <h2>₹{data[0]?.['StockPrice']}</h2>
-                        <span className="pb-2 ms-1" style={{ color: "#08AE05", fontSize: "13px" }}>
-                            <i className="fa fa-caret-up me-2"></i> (990)
+                    <h2>₹{data[0]?.['StockPrice'] ? new Intl.NumberFormat('en-IN').format(data[0]['StockPrice']) : ''}</h2>
+                    <span className="pb-2 ms-1" style={{ color: color, fontSize: "13px" }}>
+                            <i className={`fa ${icon} me-2`}></i> ({ddl})
                         </span>
                     </div>
                 </div>
@@ -236,24 +250,19 @@ const OverView = ({ comname, data }) => {
                     <h3 className="data-heading2">Overview</h3>
                     <div className="rule" style={{ width: "100px" }}></div>
                     <p className="content1 mt-3">
-                        {/* Conditionally render truncated or full content */}
                         {expandedDetails ? data[0].details : truncateText(data[0].details, 48)}
                         {data[0].details.split(" ").length > 48 && (
-                        <button onClick={() => setExpandedDetails(!expandedDetails)} className="btn btn-link p-0 readmore">
-                            {expandedDetails ? "Show Less" : "Read more"}
-                        </button>
-                    )}
+                            <button onClick={() => setExpandedDetails(!expandedDetails)} className="btn btn-link p-0 readmore">
+                                {expandedDetails ? "Show Less" : "Read more"}
+                            </button>
+                        )}
                     </p>
-                    {/* Show "Read more" button if the content is longer than 48 words */}
-                    {/* {data[0].details.split(" ").length > 48 && (
-                        <button onClick={() => setExpandedDetails(!expandedDetails)} className="btn btn-link p-0 readmore">
-                            {expandedDetails ? "Show Less" : "Read more"}
-                        </button>
-                    )} */}
+                  
                 </div>
                 <Row>
                     <Col lg={7}>
-                        <div className="graph-box d-flex">
+                        <div className="graph-box d-flex blue-border">
+                            <div className="w-50">
                             <table>
                                 <tr>
                                     <th>Stock PE <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content1" />
@@ -261,50 +270,46 @@ const OverView = ({ comname, data }) => {
                                             id="quality-content1"
                                             place="bottom"
                                             content={tooltipData1}
-                                            //  className="custom-tooltip"
-                                            style={{ fontSize: "12px" }}
-                                        />  </th>
-                                    <td>₹ {data[0]?.['StockPrice']}</td>
+                                            style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}                                        />  </th>
+                                    <td>{data[0]?.['StockPE']? new Intl.NumberFormat('en-IN').format(data[0]?.['StockPE']):''}</td>
                                 </tr>
                                 <tr>
-                                    <th>Volume <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content2"/><ReactTooltip
-                                            id="quality-content2"
-                                            place="bottom"
-                                            content={tooltipData2}
-                                            //  className="custom-tooltip"
-                                            style={{ fontSize: "12px" }}
-                                        /></th>
-                                    <td>{data[0]?.['Volume']} %</td>
+                                    <th>Volume <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content2" /><ReactTooltip
+                                        id="quality-content2"
+                                        place="bottom"
+                                        content={tooltipData2}
+                                        style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}                                    /></th>
+                                    <td>{data[0]?.['Volume']}%</td>
                                 </tr>
                                 <tr>
                                     <th>52 Week High</th>
-                                    <td>₹ {data[0]?.['52WeekH']}</td>
+                                    <td>₹ {data[0]?.['52WeekH']? new Intl.NumberFormat('en-IN').format(data[0]?.['52WeekH']):''}</td>
                                 </tr>
                                 <tr>
                                     <th>52 Week Low</th>
-                                    <td>₹ {data[0]?.['52WeekL']}</td>
+                                    <td>₹ {data[0]?.['52WeekL']? new Intl.NumberFormat('en-IN').format(data[0]?.['52WeekL']):''}</td>
                                 </tr>
                             </table>
-                            <table className="ms-5">
+                            </div>
+                            <div className="w-50">
+                            <table >
                                 <tr>
-                                    <th>Sales Growth <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content3"/><ReactTooltip
-                                            id="quality-content3"
-                                            place="bottom"
-                                            content={tooltipData3}
-                                            //  className="custom-tooltip"
-                                            style={{ fontSize: "12px" }}
-                                        /></th>
-                                    <td>{data[0]?.SalesGrowth} %</td>
+                                    <th>Sales Growth <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content3" /><ReactTooltip
+                                        id="quality-content3"
+                                        place="bottom"
+                                        content={tooltipData3}
+                                        //  className="custom-tooltip"
+                                        style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}                                    /></th>
+                                    <td>{data[0]?.SalesGrowth}%</td>
                                 </tr>
                                 <tr>
                                     <th>Net Profit CAGR <img src={Info} alt="info" className="ms-1 info-icon" data-tooltip-id="quality-content3" /><ReactTooltip
-                                            id="quality-content4"
-                                            place="bottom"
-                                            content={tooltipData4}
-                                            //  className="custom-tooltip"
-                                            style={{ fontSize: "12px" }}
-                                        /></th>
-                                    <td>{data[0]?.NetProfitGrowth} %</td>
+                                        id="quality-content4"
+                                        place="bottom"
+                                        content={tooltipData4}
+                                        //  className="custom-tooltip"
+                                        style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}                                    /></th>
+                                    <td>{data[0]?.NetProfitGrowth}%</td>
                                 </tr>
                                 <tr>
                                     <th>Debt/Equity</th>
@@ -312,13 +317,14 @@ const OverView = ({ comname, data }) => {
                                 </tr>
                                 <tr>
                                     <th>ROE</th>
-                                    <td>{data[0]?.ROE} %</td>
+                                    <td>{data[0]?.ROE}%</td>
                                 </tr>
                             </table>
+                            </div>
                         </div>
                     </Col>
                     <Col md={5}>
-                        <div className="graph-box">
+                        <div className="graph-box" style={{border:"1.5px solid #E5E5EA"}}>
                             <p className="text-center" style={{ fontSize: "12px" }}>Overview</p>
 
                             <RadarChart cy={100} outerRadius={80} width={300} height={190} data={datax} style={{ display: "flex", margin: "auto" }}>
@@ -326,11 +332,11 @@ const OverView = ({ comname, data }) => {
                                 <PolarGrid />
 
                                 <PolarAngleAxis dataKey="month" style={{ fontSize: "9px" }}
-                                tickFormatter={(value, index) => datax[index].category} />
+                                    tickFormatter={(value, index) => datax[index].category} />
 
                                 <PolarRadiusAxis angle={72} domain={[0, data[0].maxChartValue]} />
 
-                                <Radar name="Company" dataKey="rating" stroke="#3a9aa1" fill="#69ccd3" fillOpacity={0.6} 
+                                <Radar name="Company" dataKey="rating" stroke="#3a9aa1" fill="#69ccd3" fillOpacity={0.6}
                                 />
 
                                 <Tooltip formatter={(value, name, props) => [` ${value}`, ` ${props.payload.category}`]} />
@@ -352,10 +358,10 @@ const OverView = ({ comname, data }) => {
                                         {/* Conditionally render truncated or full content */}
                                         {expandedWhy ? data[0].why : truncateText(data[0].why, 48)}
                                         {data[0].why.split(" ").length > 48 && (
-                                        <button onClick={() => setExpandedWhy(!expandedWhy)} className="btn btn-link p-0 readmore">
-                                            {expandedWhy ? "Show Less" : "Read more"}
-                                        </button>
-                                    )}
+                                            <button onClick={() => setExpandedWhy(!expandedWhy)} className="btn btn-link p-0 readmore">
+                                                {expandedWhy ? "Show Less" : "Read more"}
+                                            </button>
+                                        )}
                                     </p>
                                     {/* Show "Read more" button if the content is longer than 48 words */}
                                     {/* {data[0].why.split(" ").length > 48 && (

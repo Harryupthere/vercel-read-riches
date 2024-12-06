@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '../components/img/icon/menu.svg'
 import User from '../components/img/Userman.png'
 import { FiChevronLeft } from 'react-icons/fi';
-import Avatar from "../components/img/avatar.png"
 
 
 const Header = () => {
@@ -73,7 +72,7 @@ const Header = () => {
     return (
         <>
         <div className='web-header'>
-            <nav className={`navbar  px-5  ${scrolling ? 'navbar-scrolled' : ''} ${location.pathname.startsWith('/home/card/') ? 'nonavbar' : ''} ${location.pathname === '/membershipcard' ? 'navbar_top' : ''} ${location.pathname === '/userprofile' ? 'navbar_top' : ''} ${location.pathname !== '/login' ? 'navbar-white' : ''} ${location.pathname === '/dashboard' ? 'navbar_dash' : ''} ${location.pathname === '/about' ? 'navbar_top' : ''}  ${location.pathname === '/login' || location.pathname === '/forgotpass' || location.pathname === '/newpass' || location.pathname === '/signup' ? 'nonavbar' : ''} ${location.pathname === '/signup' ? 'navbar_top' : ''} ${location.pathname === '/userdashboard' ? 'navbar_top' : ''} ${location.pathname === '/pricing' ? 'navbar_top' : ''} ${location.pathname === '/otp' ? 'nonavbar' : ''}`}>
+            <nav className={`navbar px-md-5 px-2  ${scrolling ? 'navbar-scrolled' : ''} ${location.pathname.startsWith('/home/card/') ? 'nonavbar' : ''} ${location.pathname === '/membershipcard' ? 'navbar_top' : ''} ${location.pathname === '/userprofile' ? 'navbar_top' : ''} ${location.pathname !== '/login' ? 'navbar-white' : ''} ${location.pathname === '/dashboard' ? 'navbar_dash' : ''} ${location.pathname === '/about' ? 'navbar_top' : ''}  ${location.pathname === '/login' || location.pathname === '/forgotpass' || location.pathname === '/newpass' || location.pathname === '/signup' ? 'nonavbar' : ''} ${location.pathname === '/signup' ? 'navbar_top' : ''} ${location.pathname === '/userdashboard' ? 'navbar_top' : ''} ${location.pathname === '/pricing' ? 'navbar_top' : ''} ${location.pathname === '/otp' ? 'nonavbar' : ''}`}>
                 <Logo scrolling={scrolling} />
 
                 <ul className="nav-links">
@@ -86,9 +85,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
-                    </li> */}
+                    </li>
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
@@ -108,9 +107,9 @@ const Header = () => {
                        <FiChevronLeft/> <button alt="Back Icon" onClick={toggleMenu} className="back-icon">Back</button>
                     </div>
                     <div className='mobile-login'>
-                        <img src={Avatar}/>
-                        <p>Seems you havent logged in yet </p>
-                        <button className="logoutbtn">Log In</button>
+                        {/* <img src={User}/>
+                        <p>Seems you havent logged in yet </p> */}
+                        {/* <button className="logoutbtn">Log In</button> */}
                     </div>
                     <ul className="nav-links-mobile mt-4">
                     <li>
@@ -125,9 +124,9 @@ const Header = () => {
                     <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
-                    {/* <li>
+                    <li>
                         <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
-                    </li> */}
+                    </li>
                     </ul>
                 </div>
             </div>

@@ -3,9 +3,7 @@ import '../components/css/Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import '../components/css/Trading.css'
-import { set } from 'mongoose';
-// import TradingViewTicker from './TradingViewTicker';
-// import { set } from 'mongoose';
+
 
 const Navbar = ({loginStatus,setLoginStatus,name,setName,picture,setPicture,newname,setUserid,email}) => {
   const location = useLocation();
@@ -30,42 +28,6 @@ const Navbar = ({loginStatus,setLoginStatus,name,setName,picture,setPicture,newn
     };
   }, []);
 
-  // useEffect(() => {
-  //   const scriptId = 'tradingview-widget-script';
-
-  //   // Check if the script has already been added
-  //   if (!document.getElementById(scriptId)) {
-  //     const script = document.createElement('script');
-  //     script.id = scriptId;
-  //     script.type = 'text/javascript';
-  //     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-  //     script.async = true;
-
-  //     // You might need to adjust the configuration based on your requirements
-  //     script.innerHTML = JSON.stringify({
-  //       symbols: [
-  //         {
-  //           proName: 'OANDA:SPX500USD',
-  //           title: 'S&P 500',
-  //         },
-  //         {
-  //           proName: 'OANDA:EURUSD',
-  //           title: 'EUR/USD',
-  //         },
-  //       ],
-  //       colorTheme: 'light',
-  //       isTransparent: false,
-  //       displayMode: 'adaptive',
-  //       locale: 'en',
-  //     });
-
-  //     // Append the script to the specific container within the component
-  //     const scriptContainer = document.getElementById('tv-miniwidget-iframe-container');
-  //     if (scriptContainer) {
-  //       scriptContainer.appendChild(script);
-  //     }
-  //   }
-  // }, []);
 
  
   const navLinks = document.querySelector('.nav-links-mobile');

@@ -5,6 +5,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Read from "../components/img/readCompany.svg";
 import Footer from './Footer';
 export default function Tnc() {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top
+  }, [10]);
   return (
     <>
       <Header />

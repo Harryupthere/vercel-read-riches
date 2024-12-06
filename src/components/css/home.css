@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,400;8..144,700;8..144,800&display=swap');
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+    font-weight: 400;
+}
 
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Medium.ttf");
+    font-weight: 600;
+}
 .main-heading {
     color: #3A3A3C;
     font-size: 36px;
@@ -47,6 +63,8 @@ p.para {
     justify-content: center;
     width: 150px;
     height: 75px;
+    z-index: 1;
+    position: relative;
 }
 
 .company-box h3 {
@@ -83,12 +101,13 @@ p.para {
     background-image: url(../../components/img/home-bg.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    margin:10px;
+    margin:18px;
     border-radius: 8px;
     border: 2px solid #73BBC3;
 }
 
 .landing-content h1 {
+    line-height: 62px;
     font-size: 64px;
     color: #fff;
     font-family: "Helvetica", sans-serif;
@@ -101,6 +120,7 @@ p.para {
     letter-spacing: 0.25px;
     font-weight: 400;
     margin-right: 20px;
+    line-height: 29px;
 }
 
  button.view {
@@ -123,6 +143,7 @@ p.para {
     padding: 20px; 
 
 } */
+
 .bg-lines img {
     margin: 40px;
 }
@@ -203,9 +224,11 @@ h1 span {
     color: #8E8E93;
 }
 .ana-card {
-    padding: 8px;
+    padding: 16px 24px;
     border-radius: 8px;
-    box-shadow: 0px 0px 15px 0px #BCBCBC40;
+    /* box-shadow: 0px 0px 15px 2px #bcbcbc4f; */
+    box-shadow: 0px 4px 70px 0px #4C4C4C1F;
+
     background-color: #fff;
     margin:0 10px;
     height: 145px;
@@ -222,7 +245,7 @@ h1 span {
 }
 .ana-card p{
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-family: "Roboto";
     font-weight: 400;
     /* display: none; */
@@ -231,7 +254,7 @@ h1 span {
     opacity: 0;
     text-align: center;
     margin-bottom: 0;
-    line-height: 20px;
+    line-height: 24px;
 }
 .ana-card .card-img img {
     height: 50px;
@@ -250,7 +273,7 @@ h1 span {
     color: #FFFFFF;
 }
 .ana-card:hover{
-    min-height:190px;
+    min-height:210px;
 background-color: #1E6E76;
 }
 .ana-card:hover img{
@@ -297,7 +320,8 @@ background-color: #1E6E76;
     border-radius: 8px;
     padding-left: 37px;
     background-color: transparent;
-    color: #fff;
+    color: #000;
+    background: #fff;
 }
 .search-box input:focus{
     outline: none;
@@ -313,7 +337,7 @@ background-color: #1E6E76;
     position: absolute;
     left: 10px;
     top: 12px;
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
 }
 .round-bg .text {
     position: absolute;
@@ -431,8 +455,12 @@ background-color: #1E6E76;
     background: linear-gradient(90deg, #1F6F77 0%, #4E969E 103.36%);
     border: none;
 }
-
-  
+.search-box input::placeholder{
+    color: #8E8E93;
+}
+.hero-img {
+    margin-left: 22px;
+}
 
 
 
@@ -449,7 +477,7 @@ background-color: #1E6E76;
         font-size: 45px;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width:767.98px) {
     .company-box h3 {
         color: #fff;
         font-size: 18px;
@@ -493,7 +521,7 @@ background-color: #1E6E76;
         height: 90px;
         width: 91px;
         background-color: #13474c;
-        left: 41%;
+        /* left: 41%; */
         border-radius: 50%;
         bottom: 50px;
     }
@@ -522,6 +550,9 @@ background-color: #1E6E76;
     .max-height-box {
         /* height: 100px; */
     }
+   
+}
+@media screen and (max-width:991px) {
     .finance-sidebar {
         background-color: #fff;
         padding: 10px;
@@ -532,9 +563,7 @@ background-color: #1E6E76;
         border-radius: 8px;
         color: #000;
     }
-    .search-box input::placeholder{
-        color: #8E8E93;
-    }
+   
     .search-box img {
         filter: none;
     }
@@ -567,7 +596,9 @@ background-color: #1E6E76;
     }
     .company-box {
         height: 100%;
+        position: relative;
     }
+
     .finance-sidebar ul li a {
         white-space: nowrap;
         color: #8E8E93;
@@ -585,7 +616,6 @@ background-color: #1E6E76;
         filter: blur(0)brightness(1);
     }
 }
-
 
 
 .spinner-container {
@@ -606,4 +636,22 @@ background-color: #1E6E76;
     height: 4rem;
   }
   
-  
+  .search-box .home-search{
+    background-color: transparent;
+ }
+ .search-box .home-search-img{
+   filter: brightness(0)invert(1);
+ }
+ .search-box .home-search::placeholder{
+   color:  #FFFFFF70;
+   font-family: "Roboto";
+   font-weight: 400;
+   font-size: 14px;
+ }
+ .slider-container.home-slider{
+    height: 220px;
+    margin: 0;
+ }
+.home-slider .slick-list{
+    padding: 40px 0;
+}
