@@ -1,6 +1,7 @@
 {
   "name": "readriches",
   "version": "0.1.0",
+  "homepage": "https://www.readriches.com/",
   "dependencies": {
     "@canvasjs/charts": "^3.10.11",
     "@canvasjs/react-charts": "^1.0.2",
