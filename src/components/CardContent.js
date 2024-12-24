@@ -4,6 +4,7 @@ import { BASE_URL } from './Godurl';
 import '../components/css/cardcontent.css';
 import { ProgressContext } from '../App';
 import { set } from 'mongoose';
+import config from '../config';
 
 function CardContent({ loginStatus,userid }) {
   const location = useLocation();
@@ -27,7 +28,7 @@ function CardContent({ loginStatus,userid }) {
   useEffect(() => {
     if (location.pathname.startsWith('/home/card/')) {
       if (!loginStatus.success) {
-        navigate('/login');
+        navigate(`${config.baseUrl}login`);
       }
     }
   }, [location.pathname, loginStatus, navigate]);

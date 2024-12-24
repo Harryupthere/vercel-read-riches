@@ -14,7 +14,7 @@ function AddCompany() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -87,7 +87,7 @@ function AddCompany() {
             if (response.ok) {
                 toast.success(result.message);
                 setTimeout(() => {
-                    navigate('/admin/companies');
+                    navigate(`${config.baseUrl}admin/companies`);
                 }, 3000);
             } else {
                 toast.error(result.message || 'Failed to add company.');

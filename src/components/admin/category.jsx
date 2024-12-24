@@ -13,7 +13,7 @@ function Category() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -59,7 +59,7 @@ function Category() {
                 <h2 className='dash-heading'>
                     Cards
                 </h2>
-                    <Link to="/admin/add-category">
+                    <Link to={`${config.baseUrl}admin/add-category`}>
                         <button type='button' className='theme-btn'>Add category</button>
                     </Link>
                 </div>

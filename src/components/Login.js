@@ -79,9 +79,9 @@ export default function Login() {
             localStorage.setItem("token", data.token)
             localStorage.setItem("role", data.role)
             if (data.role == 0) {
-              navigate("/")
+              navigate(`${config.baseUrl}`)
             } else {
-              navigate("/admin/dashboard")
+              navigate(`${config.baseUrl}admin/dashboard`)
             }
           } else {
             toast.error(data.message ? data.message : data.error ? data.error : "Something went wrong. Please try again.")
@@ -217,7 +217,7 @@ export default function Login() {
                 <button type="submit" className="lbtn">Sign In</button>
                 <div id="google-login-button" className='google-btn mt-3' style={{ width: '100%' }}></div>
                 <p style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '16px' }}>
-                  Don't have an account? <u onClick={() => navigate('/signup')} style={{ color: '#007AFF', textDecoration: 'none', cursor: 'pointer' }}>Sign Up</u>
+                  Don't have an account? <u onClick={() => navigate(`${config.baseUrl}signup`)} style={{ color: '#007AFF', textDecoration: 'none', cursor: 'pointer' }}>Sign Up</u>
                 </p>
               </form>
             </div></Col>

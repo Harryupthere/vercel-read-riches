@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { BASE_URL } from './Godurl';
 import "../components/css/Userprofile.css"
-
+import config from '../config';
 const Userprofile = ({ loginStatus, email, picture, userid, setName, setEmail, setPicture, name }) => {
 
     const navigate = useNavigate();
@@ -31,7 +31,6 @@ const Userprofile = ({ loginStatus, email, picture, userid, setName, setEmail, s
                 // Assuming the server returns a success message or token, you can redirect here
                 // navigate('/userprofile');
 
-                console.log(data);
 
                 setName(newName); // Update the name state with the new name
                 // setEmail(newEmail);
@@ -56,7 +55,7 @@ const Userprofile = ({ loginStatus, email, picture, userid, setName, setEmail, s
 
 
     if (location.pathname.startsWith('/userprofile') && !loginStatus.success) {
-        navigate('/login');
+        navigate(`${config.baseUrl}login`);
     }
 
 

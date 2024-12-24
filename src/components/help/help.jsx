@@ -11,7 +11,7 @@ import Arrow from '../../components/img/icon/arrowRight.svg';
 import ArrowDown from '../../components/img/icon/downArrow.svg';
 import './help.css'; // Make sure this path is correct
 import { useNavigate } from 'react-router-dom';
-
+import config from "../../config";
 const Help = () => {
     const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ const Help = () => {
     );
 
     const handleNavigateAndScroll = () => {
-        navigate('/contact');
+        navigate(`${config.baseUrl}contact`);
       };
     return (
         <>

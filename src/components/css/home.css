@@ -98,14 +98,20 @@ p.para {
 }
 
 .home-color {
-    background-image: url(../../components/img/home-bg.svg);
+    background-image: url(../../components/img/home-bg2.svg);
     background-repeat: no-repeat;
     background-size: cover;
     margin:18px;
     border-radius: 8px;
-    border: 2px solid #73BBC3;
+    /* border: 2px solid #73BBC3; */
+    background-position: bottom;
+    padding-bottom: 50px;
 }
-
+.lining-bg{
+    background-image: url(../../components/img/clip.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .landing-content h1 {
     line-height: 62px;
     font-size: 64px;
@@ -171,12 +177,12 @@ h1 span {
     position: relative;
     height: 124px;
     width: 124px;
-    background-color: #13474c;
+    /* background-color: #13474c; */
     left: 50%;
     border-radius: 50%;
-    border-bottom: 2px solid #73BBC3;
+    /* border-bottom: 2px solid #73BBC3; */
     transform: translate(-50%, -50%);
-    top: -15px;
+    top: -78px;
 }
 
 .char1 {
@@ -478,6 +484,9 @@ background-color: #1E6E76;
     }
 }
 @media screen and (max-width:767.98px) {
+    .home-color{
+        padding-bottom: 80px;
+    }
     .company-box h3 {
         color: #fff;
         font-size: 18px;
@@ -502,7 +511,8 @@ background-color: #1E6E76;
         border-radius: 15px;
     }
     .landing-content h1{
-        font-size: 32px;
+        font-size: 35px;
+        line-height: 45px;
     }
     .landing-content{
         padding: 0 10px;
@@ -520,16 +530,16 @@ background-color: #1E6E76;
         position: relative;
         height: 90px;
         width: 91px;
-        background-color: #13474c;
+        /* background-color: #13474c; */
         /* left: 41%; */
         border-radius: 50%;
         bottom: 50px;
     }
     .round-bg .text {
-        left: 4px;
-        top: 8px;
-        height: 80px;
-        width: 80px;
+        left: 0px;
+        top: 20px;
+        height: 90px;
+        width: 90px;
     }
     .round-bg .arrowText {
         left: 26px;
@@ -539,8 +549,8 @@ background-color: #1E6E76;
     }
 
     .round-bg .arrowText {
-        left: 30px;
-        top: 36px;
+        left: 33px;
+        top: 55px;
     }
     .main-heading {
         font-size: 24px;

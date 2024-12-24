@@ -4,55 +4,64 @@ import { Link, useLocation } from 'react-router-dom';
 import MenuIcon from '../../components/img/icon/menu.svg'
 import MobileSearch from "../../components/img/icon/mobileSearch.svg"
 import { FiChevronLeft } from 'react-icons/fi';
-
+import config from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
     const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false); // State to handle mobile menu toggle
+  const navigate = useNavigate();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen); // Toggle menu state on click
     };
+    const goToLogOut = (e) => {
+        e.preventDefault();
 
+        // Remove specific items from localStorage
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        navigate(`${config.baseUrl}login`);
+    }
     return (
         <>
             <div className='sidebar'>
                 <div className='sidebar-menu'>
                     <div className='logo'>
-                        <Link to="/">
+                        <Link to={`${config.baseUrl}`}>
                             <img src={Logo} alt='logo' />
                         </Link>
                     </div>
                     <ul>
                         <li>
-                            <Link to="/admin/dashboard" className={`${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/dashboard`} className={`${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/users" className={`${location.pathname === '/admin/users' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/users`} className={`${location.pathname === '/admin/users' ? 'active' : ''}`}>
                                 User
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/tickerData" className={`${location.pathname === '/admin/tickerData' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/tickerData`}  className={`${location.pathname === '/admin/tickerData' ? 'active' : ''}`}>
                                 Ticker
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/companies" className={`${location.pathname === '/admin/companies' ? 'active' : ''} ${location.pathname === '/admin/add-company' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/companies`} className={`${location.pathname === '/admin/companies' ? 'active' : ''} ${location.pathname === '/admin/add-company' ? 'active' : ''}`}>
                                 Companies
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/category" className={`${location.pathname === '/admin/category' ? 'active' : ''} ${location.pathname === '/admin/add-category' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/category`} className={`${location.pathname === '/admin/category' ? 'active' : ''} ${location.pathname === '/admin/add-category' ? 'active' : ''}`}>
                                 Category
                             </Link>
                         </li>
                     </ul>
                     <ul className='side-logout'>
-                        <li>
-                            <Link to="">Logout</Link>
+                    <li onClick={(e)=>goToLogOut(e)}>
+                            <Link >Logout</Link>
                         </li>
                     </ul>
                 </div>
@@ -74,32 +83,28 @@ function Sidebar() {
 
                     <ul className="nav-links-mobile mt-4">
                         <li>
-                            <Link to="/admin/dashboard" className={`${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/dashboard`} className={`${location.pathname === '/admin/dashboard' ? 'active' : ''}`}>
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/users" className={`${location.pathname === '/admin/users' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/users`} className={`${location.pathname === '/admin/users' ? 'active' : ''}`}>
                                 User
                             </Link>
                         </li>
+
                         <li>
-                            <Link to="/admin/cards" className={`${location.pathname === '/admin/cards' ? 'active' : ''}`}>
-                                Cards
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/admin/companies" className={`${location.pathname === '/admin/companies' ? 'active' : ''} ${location.pathname === '/admin/add-company' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/companies`} className={`${location.pathname === '/admin/companies' ? 'active' : ''} ${location.pathname === '/admin/add-company' ? 'active' : ''}`}>
                                 Companies
                             </Link>
                         </li>
                         <li>
-                            <Link to="/admin/category" className={`${location.pathname === '/admin/category' ? 'active' : ''} ${location.pathname === '/admin/add-category' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}admin/category`} className={`${location.pathname === '/admin/category' ? 'active' : ''} ${location.pathname === '/admin/add-category' ? 'active' : ''}`}>
                                 Category
                             </Link>
                         </li>
-                        <li>
-                            <Link to="">Logout</Link>
+                        <li onClick={(e)=>goToLogOut(e)}>
+                            <Link >Logout</Link>
                         </li>
                     </ul>
                 </div>

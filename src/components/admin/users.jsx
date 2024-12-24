@@ -11,7 +11,7 @@ function Users() {
     const checkRole = localStorage.getItem("role")
 
     if(checkRole && checkRole==0){
-        navigate("/")
+        navigate(`${config.baseUrl}`)
     }
 
    }

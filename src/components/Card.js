@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import '../components/css/Card.css';
 import { BASE_URL } from './Godurl';
 import { ProgressContext } from '../App';
-
+import config from '../config';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import { hover } from '@testing-library/user-event/dist/hover';
@@ -79,7 +79,7 @@ const Card = ({ index, company_name, title, images, images2, primarycolor, secon
         res.json().then((data) => {
           if (data.creditscore >= 0||membershipsubscription==true) {
             sessionStorage.setItem('creditscore', data.creditscore);
-            navigate(`/home/card/${index+1}`
+            navigate(`${config.baseUrl}home/card/${index+1}`
             , { state: { video: video } }
             );
           }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./sidebar";
-//import UserHeader from "./header";
+import UserHeader from "./header";
 import Form from 'react-bootstrap/Form';
 import { Row, Col } from "react-bootstrap";
 import ManImg from "../../components/img/man.png"
@@ -59,14 +59,13 @@ const UserDashboard = () => {
             const result = await response.json(); // in watchlist I will get multiple array of different companies I want to filter the latest on which was opened by user 
             if (result.status) {
                 const watchlists = result.data.watchlists;
-
                 // Sort the watchlists by openedTime (latest first)
                 const sortedWatchlists = watchlists.sort((a, b) => new Date(b.openedTime) - new Date(a.openedTime));
 
                 // Optionally, you can get the latest one (first element after sorting)
-                const latestOpenedCompany = sortedWatchlists[0];
+                const latestOpenedCompany = sortedWatchlists;
 
-                setlatestCompanyData([latestOpenedCompany]);
+                setlatestCompanyData(latestOpenedCompany);
 
                 // Set the sorted data to state
                 setWatchlistData(sortedWatchlists);
@@ -144,7 +143,7 @@ const UserDashboard = () => {
         <>
             <Sidebar />
             <div className="content">
-                {/* <UserHeader /> */}
+                <UserHeader />
                 <div className="p-3">
                     <Row>
                         <Col lg={8}>
@@ -154,7 +153,9 @@ const UserDashboard = () => {
                                         <div>
                                             <span>Latest Uploads</span>
                                             <h3>"Hello {userData.length > 0 && userData[0].name}<br />
-                                                Check out our latest upload: in-depth financial <br />insights for <b>{latestCompanyData.length > 0 && latestCompanyData[0].companyName}</b> now available!"</h3>
+                                                Check out our latest upload: in-depth financial <br />insights for <b>
+                                                    {latestCompanyData.length > 0 && latestCompanyData[0].companyName}
+                                                    </b> now available!"</h3>
                                             <button type="button" className="view">View now</button>
                                         </div>
                                         :
@@ -188,33 +189,36 @@ const UserDashboard = () => {
                                     <div className="dashcard">
                                         <h3>Pdf usage summery </h3>
                                         <h2>{watchlistData.length > 0 ? watchlistData.length : 0}</h2>
-                                        <p><span>{watchlistData.length > 0 ? watchlistData.length : 0}/{companies.length > 0 && companies.length}</span>Pdf opened</p>
+                                        <p><span>{watchlistData.length > 0 ? watchlistData.length : 0}/{userData.length > 0 && userData[0].creditscore}</span>Pdf opened</p>
                                     </div>
                                 </Col>
-                                <Col lg={4}>
+                                {orderData &&<Col lg={4}>
                                     <div className="dashcard">
                                         <h3>Subscription Status </h3>
                                         <h2>{orderData.length > 0 ? "Active" : "Inactive"}</h2>
-                                        {console.log(orderData)}
-                                        {orderData.length > 0 && (
+                                        {/* {orderData.length > 0 && (
                                             <p>
                                                 <span>{convertTimestampToDate(orderData[0].orderEndTime)}</span> Next Billing Date
                                             </p>
-                                        )}                                    </div>
-                                </Col>
+                                        )} */}
+                                        </div>
+                                </Col>}
                                 <Col lg={4}>
                                     <div className="dashcard">
                                         <h3>Last pdf opened</h3>
-                                        {console.log(latestCompanyData)}
-                                        <h2>{latestCompanyData.length > 0 ? latestCompanyData[0].companyName : "-"}</h2>
+                                        <h2>
+                                            {latestCompanyData.length > 0 ? latestCompanyData[0].companyName : "No Records"}
+                                            </h2>
                                         {/* Convert lastSeenTime to readable format */}
-                                        <p><span>{latestCompanyData.length > 0 ? formatDate(latestCompanyData[0].lastSeenTime) : "-"}</span></p>
+                                        <p><span>
+                                            {latestCompanyData.length > 0 ? formatDate(latestCompanyData[0].lastSeenTime) : "-"}
+                                            </span></p>
                                     </div>
                                 </Col>
                             </Row>
                             <div className="white-box mt-3">
                                 <h2 className="heading2">Recently watched</h2>
-                                {watchlistData.length > 0 &&
+                                {watchlistData.length > 0 ?
                                     watchlistData.map((item) => (
                                         <div className="progress-box active">
                                             <div className="tLogo"><span>T</span></div>
@@ -229,7 +233,9 @@ const UserDashboard = () => {
                                                 />
                                                 <label style={{ float: "right" }}>{item.progress}% Read</label>
                                             </div>
-                                        </div>))}
+                                        </div>))
+                                        :
+                                        <p>No Records</p>}
                                 {/* <div className="progress-box">
                                     <div className="tLogo"><span>T</span></div>
                                     <div className="w-100">
@@ -278,12 +284,38 @@ const UserDashboard = () => {
                                     <Link to="" style={{ float: "right", fontSize: "12px", color: "#73BBC3", marginTop: "7px" }}>
                                    </Link></h2>
                                 <div className="watchList">
-                                   {watchlistData.length > 0 &&
+                                   {watchlistData.length > 0 ?
                                      watchlistData.map((item) => (<div className="watch-item">
                                         <h3>{item.companyName}</h3>
                                         {/* <p>Tata Motors is a major Indian automaker, part of the Tata Group conglomerate</p> */}
                                         <FiChevronRight />
-                                    </div>))}
+                                    </div>))
+                                    :
+                                    <p>No Records</p>}
+                                    {/* <div className="watch-item">
+                                        <h3>Tata motors</h3>
+                                        <p>Tata Motors is a major Indian automaker, part of the Tata Group conglomerate</p>
+                                    </div>
+                                    <div className="watch-item">
+                                        <h3>Tata motors</h3>
+                                        <p>Tata Motors is a major Indian automaker, part of the Tata Group conglomerate</p>
+                                    </div> */}
+                                </div>
+                            </div>
+
+                            <div className="white-box mt-3 watchlist">
+                                <h2 className="heading2 mb-4">Your Whislist
+                                    <Link to="" style={{ float: "right", fontSize: "12px", color: "#73BBC3", marginTop: "7px" }}>
+                                   </Link></h2>
+                                <div className="watchList">
+                                   {watchlistData.length > 0 ?
+                                     watchlistData.map((item) => (<div className="watch-item">
+                                        <h3>{item.companyName}</h3>
+                                        {/* <p>Tata Motors is a major Indian automaker, part of the Tata Group conglomerate</p> */}
+                                        <FiChevronRight />
+                                    </div>))
+                                    :
+                                    <p>No Records</p>}
                                     {/* <div className="watch-item">
                                         <h3>Tata motors</h3>
                                         <p>Tata Motors is a major Indian automaker, part of the Tata Group conglomerate</p>

@@ -15,7 +15,7 @@ function Companies() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -70,7 +70,7 @@ function Companies() {
                 <h2 className='dash-heading'>
                     Companies
                 </h2>
-                    <Link to="/admin/add-company">
+                    <Link to={`${config.baseUrl}admin/add-company`}>
                         <button type='button' className='theme-btn'>Add company</button>
                     </Link>
                 </div>

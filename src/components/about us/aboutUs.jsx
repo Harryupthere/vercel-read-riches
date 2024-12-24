@@ -16,7 +16,7 @@ import Stars from "../../components/img/fiveStar.svg"
 import { useNavigate } from 'react-router-dom';
 
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'; // Importing icons for custom arrows
-
+import config from '../../config'
 
 function AboutUs() {
   const navigate = useNavigate();
@@ -149,7 +149,7 @@ function AboutUs() {
         return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
     };
     const handleNavigateAndScroll = () => {
-        navigate('/join-membership', { state: { scrollTo: true } });
+        navigate(`${config.baseUrl}join-membership`, { state: { scrollTo: true } });
       };
     return (
         <>
@@ -242,11 +242,8 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>1. One-Stop Company Analysis</h3>
-                                    <p>One-Stop Company Analysis/
-                                        Save yourself hours of sifting through scattered information by accessing all important
-                                        information in one centralised platform making it easier than ever to access the insights you
-                                        need, when you need them.</p>
+                                    <h3>1. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -255,10 +252,7 @@ function AboutUs() {
                                         <img src={Cube} />
                                     </div>
                                     <h3>2. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left
-                                        unturned, from introducing word cloud analysis to cover concalls and Management discussions
-                                        to ROE breakdown through Dupont Analysis offering insights into market trends and company
-                                        fundamentals</p>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -266,10 +260,8 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>3. Narrating Numbers</h3>
-                                    <p>Read Riches delves deeper than basic data by providing insights into business performance
-                                        beyond numerical values. We integrate qualitative factors equally to ensure you grasp the full
-                                        scenario—numbers and narratives alike.</p>
+                                    <h3>3. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -277,11 +269,8 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>1. One-Stop Company Analysis</h3>
-                                    <p>One-Stop Company Analysis/
-                                        Save yourself hours of sifting through scattered information by accessing all important
-                                        information in one centralised platform making it easier than ever to access the insights you
-                                        need, when you need them.</p>
+                                    <h3>4. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -289,11 +278,8 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>2. 360° Analysis</h3>
-                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left
-                                        unturned, from introducing word cloud analysis to cover concalls and Management discussions
-                                        to ROE breakdown through Dupont Analysis offering insights into market trends and company
-                                        fundamentals</p>
+                                    <h3>5. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                             <div className='about-slider-item'>
@@ -301,10 +287,8 @@ function AboutUs() {
                                     <div className='icon'>
                                         <img src={Cube} />
                                     </div>
-                                    <h3>3. Narrating Numbers</h3>
-                                    <p>Read Riches delves deeper than basic data by providing insights into business performance
-                                        beyond numerical values. We integrate qualitative factors equally to ensure you grasp the full
-                                        scenario—numbers and narratives alike.</p>
+                                    <h3>6. 360° Analysis</h3>
+                                    <p>We thoroughly evaluate companies from every conceivable angle, ensuring no stone is left unturned, from introducing word cloud analysis to cover concalls and Management discussions to ROE breakdown through Dupont Analysis offering insights into market trends and company fundamentals</p>
                                 </div>
                             </div>
                         </Slider>
@@ -385,7 +369,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Rudransh Singhal</h3>
                                         <h4>Co-founder</h4>
-                                        <p>A diligent person who is highly inquisitive and believes in focus and efficiency. Finance enthusiast who is excited about the equity research.</p>
+                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
                                     </div>
                                 </div>
                             </Col>
@@ -397,7 +381,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Pranay Agarwal</h3>
                                         <h4>Co-founder</h4>
-                                        <p>He is diving deep into finance and buzzing with excitement for startups. From pioneering a Web3 startup to shaping strategies in finance, he is now channeling his energy into developing exciting new financial solutions.</p>
+                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
                                     </div>
                                 </div>
                             </Col>
@@ -409,7 +393,7 @@ function AboutUs() {
                                     <div className='p-3'>
                                         <h3>Sanchi Sikka</h3>
                                         <h4>Co-founder</h4>
-                                        <p>She is a passionate UI/UX designer with a knack for creating delightful experiences that make a positive impact. Creative mind with diverse background is her strength</p>
+                                        <p>May wears a double hat at Read Riches! He's not just an explorer in finance but </p>
                                     </div>
                                 </div>
                             </Col>

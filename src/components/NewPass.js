@@ -62,7 +62,7 @@ export const NewPass = () => {
             const data = await response.json();
             if (data.status) {
                 toast.success('Password reset successfully. You can now log in.');
-                setTimeout(() => navigate('/login'), 3000); // Navigate after 3 seconds
+                setTimeout(() => navigate(`${config.baseUrl}login`), 3000); // Navigate after 3 seconds
             } else {
                 toast.error(data.message);
             }
@@ -132,7 +132,7 @@ export const NewPass = () => {
                                     <div className="or">
                                         <hr  className='w-100'/>
                                     </div>
-                                    <p className='justrem'>Just remember? <u onClick={() => navigate('/signup')} style={{ color: "#007AFF", textDecoration: "none", cursor: "pointer" }}>sign up now</u></p>
+                                    <p className='justrem'>Just remember? <u onClick={() => navigate(`${config.baseUrl}signup`)} style={{ color: "#007AFF", textDecoration: "none", cursor: "pointer" }}>sign up now</u></p>
                                 </form>
                             </div></Col>
                     </Row>

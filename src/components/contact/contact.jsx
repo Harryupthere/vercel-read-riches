@@ -17,6 +17,8 @@ import ArrowDown from '../../components/img/icon/downArrow.svg';
 import emailjs from 'emailjs-com'; // or the appropriate path
 import axios from 'axios';
 import config from '../../config';
+import toast, { Toaster } from "react-hot-toast";
+
 function Contact() {
     const [activeKey, setActiveKey] = useState(null);
     useEffect(() => {
@@ -122,18 +124,63 @@ function Contact() {
             `
         };
 
-        try {
-            const response = await axios.post('https://api.elasticemail.com/v2/email/send', {
-                ...emailData,
-                // Include your API key here
-                apiKey: 'D23315C3BE25047C1B71004DEF362A02DB91'
-            });
-            console.log('Email sent successfully:', response.data);
-            // just referesh page 
-        } catch (error) {
-            console.error("Error sending email:", error);
-            alert('Error sending email. Please try again later.');
-        }
+        // try {
+        //     const response = await axios.post('https://api.elasticemail.com/v4/email/', {
+        //         ...emailData,
+        //         // Include your API key here
+        //         apiKey: '195918D803C495585D20B2524BC394D421760D7C380A786AF4729F830AA9A317D0925DB201C74FBF30B9E1C6CD41210E'
+        //     });
+        //     console.log('Email sent successfully:', response.data);
+        //     // just referesh page 
+        // } catch (error) {
+        //     console.error("Error sending email:", error);
+        //     alert('Error sending email. Please try again later.');
+        // }
+
+
+       try{
+        fetch(`https://api.elasticemail.com/v4/email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorizations':'195918D803C495585D20B2524BC394D421760D7C380A786AF4729F830AA9A317D0925DB201C74FBF30B9E1C6CD41210E'
+            },
+            body: emailData,
+          })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            }).catch((error) => {
+                console.error('Error:', error);
+                  toast.error(error.message ? error.message : error)
+                     // Handle error (e.g., display error message)
+                   });
+
+       }catch(error){
+        console.log(error)
+       } 
+
+        // fetch(`${config.apiUrl}contactEmail`, {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(formData),
+        //   })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //       if (data.status) {
+        //         toast.success(data.message);
+
+        //       } else {
+        //         toast.error(data.message ? data.message : data.error ? data.error : "Something went wrong. Please try again.")
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.error('Error:', error);
+        //       toast.error(error.message ? error.message : error)
+        //       // Handle error (e.g., display error message)
+        //     });
     };
     return (
         <div>

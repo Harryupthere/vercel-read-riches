@@ -26,7 +26,7 @@ export default function VerifyEmail() {
           setManageStatus(data.status);
 
           setTimeout(() => {
-            navigate('/login');
+            navigate(`${config.baseUrl}login`);
           }, 3000);
         })
         .catch((error) => {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ProgressContext } from '../App';
 import { BASE_URL } from './Godurl';
-
+import config from '../config';
 export default function Userdashboard({ loginStatus, carddata, userid }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,7 +16,7 @@ export default function Userdashboard({ loginStatus, carddata, userid }) {
 
   if (location.pathname.startsWith('/userdashboard')) {
     if (!loginStatus.success) {
-      navigate('/login');
+      navigate(`${config.baseUrl}login`);
     }
   }
 
@@ -80,7 +80,6 @@ export default function Userdashboard({ loginStatus, carddata, userid }) {
 
   }, [userid]);
 
-  console.log(membershipsubscription)
 
 
   if (isLoading) {

@@ -27,12 +27,12 @@ export default function JoinMemberShip() {
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    let token = ''
+    const [token,setToken]= useState('');
     useEffect(() => {
         const checkToken = localStorage.getItem("token");
         if (checkToken) {
             setIsLoggedIn(true);
-            token = checkToken
+            setToken(checkToken)
         } else {
             setIsLoggedIn(false);
         }
@@ -41,9 +41,6 @@ export default function JoinMemberShip() {
     const purchasePlan = async (e, planId) => {
         e.preventDefault();
         try {
-            alert("Plan purchased")
-            return
-            console.log(isLoggedIn && token != '')
 
             if (isLoggedIn && token != '') {
 
@@ -69,7 +66,6 @@ export default function JoinMemberShip() {
                 }
 
                 let payload = {
-                    orderTrxId: "Exapmle transation",
                     orderTypeId: planId,
                 }
                 const response2 = await fetch(`${config.apiUrl}createOrder`, {
@@ -85,13 +81,19 @@ export default function JoinMemberShip() {
 
                 if (result2.success) {
                     toast.success(result2.message)
+
+                    const paymentLink = result2.data.web; // Extract the payment link
+                    console.log(result2.data)
+                    setTimeout(() => {
+                        window.location.href = paymentLink; // Redirect to the payment link
+                    }, 3000);
                 } else {
                     toast.error(result2.message)
                     return
                 }
 
             } else {
-                navigate('/login');
+                navigate(`${config.baseUrl}login`);
 
             }
 
@@ -124,6 +126,14 @@ export default function JoinMemberShip() {
           });
         }
       }, [location]);
+
+
+      const [toggleButtonStatus,setToggleButtonStatus]= useState(false)
+
+      const setToggle=()=>{
+        setToggleButtonStatus(!toggleButtonStatus)
+      }
+
     return (
         <>
             <div className='line-bg'>
@@ -232,57 +242,61 @@ export default function JoinMemberShip() {
                                         type="switch"
                                         id="custom-switch"
                                         className="custom-switch"
+                                        onClick={setToggle}
                                     />
                                     <h3 style={{color:"#000"}}>Per report</h3>
                                     <img src={Clip}/>
                                 </div>
                                 <Row className='d-flex align-items-center'>
-                                    <Col md={4}>
+                                    {!toggleButtonStatus?
+                                        <><Col md={6}>
                                         <div className='plan-card light-bg'>
                                             <h3>Value report</h3>
-                                            {/* <p>Unlock exclusive insights, community access, and financial tools with one report.</p> */}
-                                            <div className='d-flex align-items-center'>
-                                                <h2 className='price'>₹199</h2>
-                                                <span>per report</span>
-                                            </div>
-                                            <hr className='w-100' />
-                                            {/* <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p> */}
-                                            <ul>
-                                                <li><img src={Check} />Access to Detailed Research: Get an in-depth analysis of a specific company of interest.</li>
-                                                <li><img src={Check} />Comprehensive Insights: Dive into key metrics, industry positioning, and financial health.</li>
-                                                <li><img src={Check} />No Long-Term Commitment: Purchase only the reports you need, as you need them.</li>
-                                                {/* <li><img src={Check} />Access to financial tools</li> */}
-                                            </ul>
-                                            <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
-                                        </div>
-                                    </Col>
-                                    <Col md={4}>
-                                        <div className='plan-card light-bg'>
-                                            <h3>Quarter Plan</h3>
-                                            {/* <p>Unlock exclusive insights, community access, and financial tools with one report.</p> */}
+                                            <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
                                             {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
-                                                <h2 className='price'>₹999</h2>
-                                                <span>per quarter</span>
+                                                <h2 className='price'>₹500</h2>
+                                                <span>per year</span>
                                             </div>
                                             <hr className='w-100' />
-                                            {/* <p>The membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p> */}
+                                            <p>The free plan gives you a taste, but the membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
                                             <ul>
-                                                <li><img src={Check} />Access to Detailed Research: Get an in-depth analysis of a specific company of interest.</li>
-                                                <li><img src={Check} />Comprehensive Insights: Dive into key metrics, industry positioning, and financial health.</li>
-                                                <li><img src={Check} />No Long-Term Commitment: Purchase only the reports you need, as you need them.</li>
-                                                {/* <li><img src={Check} />Access to financial tools</li> */}
+                                                <li><img src={Check} />Access to all Companies Synopsis</li>
+                                                <li><img src={Check} />Exclusive community</li>
+                                                <li><img src={Check} />Events and Workshops</li>
+                                                <li><img src={Check} />Access to financial tools</li>
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
                                         </div>
                                     </Col>
-                                    <Col md={4}>
-                                        {/* <div className='plan-card light-bg theme-bg'>
+                                    <Col md={6}>
+                                        <div className='plan-card light-bg'>
+                                            <h3>Value report</h3>
+                                            <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
+                                            {/* <img src={Plan} className='plan' /> */}
+                                            <div className='d-flex align-items-center'>
+                                                <h2 className='price'>₹1000</h2>
+                                                <span>per year</span>
+                                            </div>
+                                            <hr className='w-100' />
+                                            <p>The free plan gives you a taste, but the membership unlocks full access to all research, exclusive insights, and community. Don’t miss out—upgrade today to get the most out of your membership!</p>
+                                            <ul>
+                                                <li><img src={Check} />Access to all Companies Synopsis</li>
+                                                <li><img src={Check} />Exclusive community</li>
+                                                <li><img src={Check} />Events and Workshops</li>
+                                                <li><img src={Check} />Access to financial tools</li>
+                                            </ul>
+                                            <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
+                                        </div>
+                                    </Col></>
+                                    :<Col md={6}>
+                                        <div className='plan-card light-bg theme-bg'>
                                             <div className='pop-plan'>
                                                 Most Popular
                                             </div>
                                             <h3>Value report</h3>
                                             <p>Unlock exclusive insights, community access, and financial tools with one report.</p>
+                                            {/* <img src={Plan} className='plan' /> */}
                                             <div className='d-flex align-items-center'>
                                                 <h2 className='price'>₹1500</h2>
                                                 <span>per year</span>
@@ -296,8 +310,9 @@ export default function JoinMemberShip() {
                                                 <li><img src={Check} />Access to financial tools</li>
                                             </ul>
                                             <button type="button" className="view w-100" onClick={e => { purchasePlan(e, 1) }}>Get started</button>
-                                        </div> */}
+                                        </div>
                                     </Col>
+                                    }
                                 </Row>
 
                             </Container>

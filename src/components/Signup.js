@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Modal, Button, Col, Row, Container } from 'react-bootstrap';
+
 import "../components/css/Signup.css"
 import loginsvg from '../components/img/login-img.png';
 import config from '../config';
 import toast, { Toaster } from "react-hot-toast";
-import { Col,Row, Container } from 'react-bootstrap';
 import { FiChevronLeft } from 'react-icons/fi';
 import LoginMobile from '../components/img/loginMobile.png';
 
@@ -18,9 +19,25 @@ export default function Signup() {
     phone: '',
     country: ''
   });
-
+  const [userId, setUserId] = useState('');
+  const [modalOpen, setModalOpen] = useState(false)
+  const [otp, setOtp] = useState('');
+  const [timer, setTimer] = useState(60);  // Timer set to 60 seconds
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    let interval;
+    if (modalOpen && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+    if (timer === 0) clearInterval(interval);
+
+    return () => clearInterval(interval);
+  }, [modalOpen, timer]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -87,7 +104,6 @@ export default function Signup() {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log('Form submitted', formData);
       fetch(`${config.apiUrl}signup`, {
         method: 'POST',
         headers: {
@@ -97,12 +113,11 @@ export default function Signup() {
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data.status);
           if (data.status) {
             toast.success(data.message);
-            setTimeout(() => {
-              navigate('/login');
-            }, 3000);
+            setUserId(data.data)
+            setModalOpen(true)
+            setTimer(60); // Start the timer for OTP
           } else {
             toast.error(data.message)
           }
@@ -114,6 +129,60 @@ export default function Signup() {
     }
   };
 
+
+  const handleOtpChange = (e) => {
+    setOtp(e.target.value);
+  };
+
+  const handleOtpSubmit = () => {
+    // Make an API call to verify the OTP
+    fetch(`${config.apiUrl}otpverify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, enteredOTP:otp }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status) {
+          toast.success(data.message);
+          setModalOpen(false);
+          navigate(`${config.baseUrl}login`); // after 3 seconds 
+        } else {
+          toast.error(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        toast.error('Failed to verify OTP');
+      });
+  };
+
+  const resendOtp = () => {
+    // API call to resend OTP
+    fetch(`${config.apiUrl}signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status) {
+          toast.success(data.message);
+// here I want to start the timer again
+setTimer(60); // Restart the timer
+        } else {
+          toast.error(data.message)
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        toast.error(error.message ? error.message : error)
+      });
+  };
 
   return (
     <><Toaster />
@@ -210,7 +279,7 @@ export default function Signup() {
                   </div>
                   <button type="submit" className="lbtn">Create an account</button>
                   <p style={{ display: "flex", justifyContent: "start", gap: "10px", marginTop: "16px" }}>
-                    Have an account? <u onClick={() => navigate('/login')} style={{ color: "#007AFF", textDecoration: "none", cursor: "pointer" }}>Login</u>
+                    Have an account? <u onClick={() => navigate(`${config.baseUrl}login`)} style={{ color: "#007AFF", textDecoration: "none", cursor: "pointer" }}>Login</u>
                   </p>
                 </form>
               </div>
@@ -218,7 +287,29 @@ export default function Signup() {
           </Row>
         </Container>
       </section>
-
+      <Modal show={modalOpen} onHide={() => setModalOpen(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Enter OTP</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+            type="text"
+            value={otp}
+            onChange={handleOtpChange}
+            placeholder="Enter OTP"
+            maxLength={6}
+            className="form-control"
+          />
+          {timer > 0 ? (
+            <p style={{ color: "gray", marginTop: "10px" }}>Resend OTP in {timer}s</p>
+          ) : (
+            <Button variant="link" onClick={resendOtp}>Resend OTP</Button>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleOtpSubmit}>Submit OTP</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

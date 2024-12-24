@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Logo from "../components/img/logoLatest.svg"
-
+import config from '../config';
 
 const Sidebar = () => {
     const location = useLocation();
@@ -28,13 +28,13 @@ const Sidebar = () => {
             <img src={Logo}/>
         <ul className="sidenav-links">
                 <li>
-                    <Link to="/userdashboard"  className={`${location.pathname === '/userdashboard' ? 'active' : ''}`}>Dashboard</Link>
+                    <Link to={`${config.baseUrl}user/dashboard`}  className={`${location.pathname === '/user/dashboard' ? 'active' : ''}`}>Dashboard</Link>
                 </li>
                 <li>
-                    <Link to="/userprofile" className={`${location.pathname === '/userprofile' ? 'active' : ''}`}>User Profile</Link>
+                    <Link to={`${config.baseUrl}user/profile`}  className={`${location.pathname === '/user/profile' ? 'active' : ''}`}>User Profile</Link>
                 </li>
                 <li>
-                    <Link to="/membershipcard" className={`${location.pathname === '/membershipcard' ? 'active' : ''}`}>Membership Card</Link>
+                    <Link to={`${config.baseUrl}membershipcard`} className={`${location.pathname === '/membershipcard' ? 'active' : ''}`}>Membership Card</Link>
                 </li>
             </ul>
         </div>

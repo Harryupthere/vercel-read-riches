@@ -4,6 +4,7 @@ import bull from '../components/img/a-bull-in-corporate-coat--wearing-specs--smi
 import bullbg from '../components/img/mike-kononov-lFv0V3_2H6s-unsplash 1.png'
 import aviation from '../components/img/aviation.png';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 const Banner = () => {
   // const [scrolling, setScrolling] = useState(false);
   const [bannerHeight, setBannerHeight] = useState('100vh');
@@ -60,7 +61,7 @@ const Banner = () => {
           <button>Explore</button>
         </div> */}
         <button className="frame" onClick={() => {
-          navigate('/pricing');
+          navigate(`${config.baseUrl}pricing`);
         }
         }>
           <div className="text-wrapper">Join us</div>

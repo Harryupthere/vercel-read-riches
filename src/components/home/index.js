@@ -292,13 +292,13 @@ const Home = () => {
 
 
 
-                navigate(`/overview/${itemId}`);
+                navigate(`${config.baseUrl}overview/${itemId}`);
 
 
             } else {
                 setLoading(false)
 
-                navigate('/login');
+                navigate(`${config.baseUrl}login`);
 
             }
         } catch (error) {
@@ -366,7 +366,9 @@ const Home = () => {
             <div className="mobile-view-show">
                 <Header />
             </div>
+           
             <section className="home-color white-header hero-section">
+            <div className="lining-bg mt-0">
                 {loading && <div className="spinner-container">
                     <Spinner animation="border" variant="primary" className="spinner" />
                 </div>
@@ -391,8 +393,9 @@ const Home = () => {
                         </Row>
                     </div>
                 </Container>
-
+                </div>
             </section>
+         
             <div className="round-bg">
                 <img src={CircleText} className="text rotate" />
                 <img src={Down} className="arrowText" />
@@ -497,7 +500,7 @@ const Home = () => {
                 </div>
                 <div className="buttons"></div>
             </div>
-            {/* <Container className="mb-md-5">
+            <Container className="mb-md-5">
                 <Row>
                     <Col md={12}>
                         <div className="d-flex align-items-center mb-md-5 mb-3">
@@ -507,9 +510,23 @@ const Home = () => {
                             </h2>
                         </div>
                     </Col>
-                </Row> 
+                </Row>
                 <Row>
-                   
+                    {/* <Col md={3}>
+                        <div className="finance-sidebar">
+                            <ul>
+                                <li className="active">
+                                    <Link onClick={() => handleCategory('')}>All companies</Link>
+                                </li>
+                                {categories.map((item => (
+                                    <li key={item._id} onClick={() => handleCategory(item.categoryName)}>
+                                        <img src={`${config.apiUrl}categoryImage/${item._id}`} />
+                                        <Link>{item.categoryName}</Link>
+                                    </li>
+                                )))}
+                            </ul>
+                        </div>
+                    </Col> */}
                     <Col lg={3} sm={12}>
 
                         <div className="finance-sidebar">
@@ -534,6 +551,13 @@ const Home = () => {
                                     </ul>
                                 )}
                             </div>
+                            {/* <ul>
+                                <li className="active"><Link>All companies</Link></li>
+                                {list.map((item => (
+                                    <li><img src={item.img} /><Link>{item.name}</Link></li>
+                                )))}
+                            </ul> */}
+
 
 
                             <ul>
@@ -571,11 +595,100 @@ const Home = () => {
                                 )) :
                                 <p> No data found</p>}
 
-                           
+                            {/* <Col md={4} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(54.02% 54.02% at 50% 50%, #FFFFFF 0%, #AFBBE7 33.1%, #7E92D9 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Tata} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Motors</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #BCE4EB 40.1%, #7DCAD8 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Wipro} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Wipro</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #E8BDEB 0.01%, #E7BCEB 51.6%, #D17DD8 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Hindu} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Hindustan uniliver</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(54.02% 54.02% at 50% 50%, #FFFFFF 0%, #ECEDC1 40.1%, #D7D97E 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Tata} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Hindustan uniliver</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #F4D5B9 29.6%, #F4D5B9 48.1%, #E8A96E 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Wipro} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Hindustan uniliver</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #ECC0C0 42.1%, #D87D7D 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Hindu} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Hindustan uniliver</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #BCE4EB 40.1%, #7DCAD8 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Wipro} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Wipro</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #BCE4EB 40.1%, #7DCAD8 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Wipro} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Wipro</h3>
+                                </div>
+                            </Col>
+                            <Col lg={4} sm={6} className="max-height-box">
+                                <div className="company-box" style={{ background: "radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, #BCE4EB 40.1%, #7DCAD8 100%)" }}>
+                                    <div className="date">
+                                        <span>23 July 24</span>
+                                    </div>
+                                    <img src={Hindu} />
+                                    <button className="hover-btn">Automobiles</button>
+                                    <h3>Wipro</h3>
+                                </div>
+                            </Col> */}
                         </Row>
                     </Col>
                 </Row>
-            </Container> */}
+            </Container>
             <Footer />
         </>
     )

@@ -10,7 +10,7 @@ const Logo = ({scrolling}) => {
   // const location = useLocation();
   return (
     <div className="logo">
-      <Link to='/'>
+      <Link to={`${config.baseUrl}`}>
       <img src={logo2} alt='Logo' width={100}  id='logo'/>
       </Link>
     </div>

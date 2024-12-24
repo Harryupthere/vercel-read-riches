@@ -10,6 +10,7 @@ import Twitter from '../components/img/icon/twitter.svg'
 import Phone from '../components/img/icon/phone.svg'
 import Email from '../components/img/icon/email.svg'
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const handlePageChane = (e, path) => {
 };
 
 const handleNavigateAndScroll = () => {
-  navigate('/join-membership', { state: { scrollTo: true } });
+  navigate(`${config.baseUrl}join-membership`, { state: { scrollTo: true } });
 };
 
     const handleScrollToSection = () => {
@@ -58,10 +59,10 @@ const handleNavigateAndScroll = () => {
                   Quick links
                 </h3>
                 <ul>
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/stockview">Stocks Tracker</Link></li>
-                  <li><Link to="/about">About us</Link></li>
-                  <li><Link to="/contact">Contact us</Link></li>
+                  <li><Link to={`${config.baseUrl}`}>Home</Link></li>
+                  <li><Link to={`${config.baseUrl}stockview`}>Stocks Tracker</Link></li>
+                  <li><Link to={`${config.baseUrl}about`}>About us</Link></li>
+                  <li><Link to={`${config.baseUrl}contact`}>Contact us</Link></li>
                 </ul>
               </div>
               <div className='footer-list'>
@@ -74,9 +75,9 @@ const handleNavigateAndScroll = () => {
                   <li><Link to="/disclaimer-disclosures">Disclaimer Disclosures</Link></li>
                 </ul> */}
                 <ul>
-                  <li onClick={e=>handlePageChane(e,'/tearms-and-conditions')}><Link>Terms and conditions</Link></li>
-                  <li onClick={e=>handlePageChane(e,'/privacy-policy')}><Link>Privacy policy</Link></li>
-                  <li onClick={e=>handlePageChane(e,'/disclaimer-disclosures')}><Link>Disclaimer Disclosures</Link></li>
+                  <li onClick={e=>handlePageChane(e,`${config.baseUrl}tearms-and-conditions`)}><Link>Terms and conditions</Link></li>
+                  <li onClick={e=>handlePageChane(e,`${config.baseUrl}privacy-policy`)}><Link>Privacy policy</Link></li>
+                  <li onClick={e=>handlePageChane(e,`${config.baseUrl}disclaimer-disclosures`)}><Link>Disclaimer Disclosures</Link></li>
                 </ul>
               </div>
               <div className='footer-list hide-mobile'>

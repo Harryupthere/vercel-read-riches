@@ -15,7 +15,7 @@ function UpdateCompany({ match }) {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -127,7 +127,7 @@ function UpdateCompany({ match }) {
                 
                 toast.success(data.message);
                 setTimeout(() => {
-                    navigate('/admin/companies');
+                    navigate(`${config.baseUrl}admin/companies`);
                 }, 3000);
             } else {
                 toast.error(data.message);

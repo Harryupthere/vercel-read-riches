@@ -30,7 +30,7 @@ const UserHeader = () => {
     if (!checkToken) {
         const checkRole = localStorage.getItem("role");
         if (checkRole && checkRole == 1) {
-            navigate("/");
+            navigate(`${config.baseUrl}`);
         }
     }
 
@@ -49,7 +49,6 @@ const UserHeader = () => {
 
             const result = await response.json();
             if (response.ok) {
-                console.log(result.user)
                 setUserDetails([result.user]);
             } else {
             }
@@ -97,17 +96,17 @@ const UserHeader = () => {
 
                     <ul className="nav-links-mobile mt-4">
                         <li>
-                            <Link to="/user/dashboard" className={`nav-link ${location.pathname === '/user/dashboard' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}user/dashboard`} className={`nav-link ${location.pathname === '/user/dashboard' ? 'active' : ''}`}>
                                 <img src={HomeIcon} className='me-2' />Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link to="/user/profile" className={`nav-link ${location.pathname === '/user/profile' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}user/profile`} className={`nav-link ${location.pathname === '/user/profile' ? 'active' : ''}`}>
                                 <img src={ProfileIcon} className='me-2' /> Profile
                             </Link>
                         </li>
                         <li>
-                            <Link to="/user/membership-card" className={`nav-link ${location.pathname === '/user/card-detail' ? 'active' : ''} ${location.pathname === '/user/membership-card' ? 'active' : ''}`}>
+                            <Link to={`${config.baseUrl}user/membership-card`}  className={`nav-link ${location.pathname === '/user/card-detail' ? 'active' : ''} ${location.pathname === '/user/membership-card' ? 'active' : ''}`}>
                                 <img src={MembershipIcon} className='me-2' />  Memberships Card
                             </Link>
                         </li>

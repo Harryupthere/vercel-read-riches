@@ -14,7 +14,7 @@ function AddCard() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -48,7 +48,7 @@ function AddCard() {
                 toast.success(result.message);
                 // Navigate to /admin/cards after successful submission
                 setTimeout(() => {
-                    navigate('/admin/cards');
+                    navigate(`${config.baseUrl}admin/cards`);
                 }, 3000);
             } else {
                 toast.error(result.message);

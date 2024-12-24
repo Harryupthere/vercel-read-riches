@@ -1,0 +1,28 @@
+.donut-chart-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .donut-chart {
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .donut-segment {
+    transition: stroke-width 0.3s ease;
+  }
+  
+  .donut-segment.active {
+    stroke-width: 5; /* Make the active segment thicker */
+  }
+  
+  .description-box {
+    margin-left: 20px;
+    padding: 10px;
+    border: 1px solid #73BBC3;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 200px;
+  }
+  

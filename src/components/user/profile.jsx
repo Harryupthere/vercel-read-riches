@@ -16,9 +16,10 @@ const Profile = () => {
     if (!checkToken) {
         const checkRole = localStorage.getItem("role");
         if (checkRole && checkRole == 1) {
-            navigate("/");
+            navigate(`${config.baseUrl}`);
         }
     }
+    const [selectedValue, setSelectedValue] = useState(""); // State to store selected value
 
     const [userDetails, setUserDetails] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -50,6 +51,43 @@ const Profile = () => {
         fetchUserDetails();
     }, []);
 
+
+    const updatePro = async (e) => {
+        e.preventDefault();
+      
+        try {
+          // Prepare the payload
+          console.log(selectedValue,"selectedValue")
+          userDetails[0].profession = selectedValue; // Assuming `selectedValue` is defined elsewhere
+          const payload = userDetails[0];
+      
+          // Make the API call
+          const response = await fetch(`${config.apiUrl}updateProfile`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json', // Ensure payload is sent as JSON
+              'Authorization': `Bearer ${checkToken}` // Replace with actual token
+            },
+            body: JSON.stringify(payload) // Convert payload to JSON string
+          });
+      
+          // Parse and handle the response
+          const result = await response.json();
+          if (response.ok) {
+            fetchUserDetails()
+          } else {
+            console.error("Failed to update profile:", result);
+          }
+        } catch (error) {
+          console.error("Error updating profile:", error);
+        }
+      };
+      
+
+    const handleChange = (event) => {
+    
+      setSelectedValue(event.target.value); // Update the state when a new option is selected
+    };
     return (
         <>
             <Sidebar />
@@ -103,17 +141,22 @@ const Profile = () => {
                                                 
                                                 { userDetails[0].profession?
                                                  <Form.Control type="text" placeholder="Enter your name " value={userDetails[0].profession}/>
-                                                :<Form.Select aria-label="Enter your  last name ">
-                                                    <option value="1">Student</option>
-                                                    <option value="2">Working Professional</option>
-                                                    <option value="3">Businessman</option>
-                                                    <option value="3">Other</option>
-                                                </Form.Select>}
+                                                : <Form.Select
+                                                aria-label="Select your profession"
+                                                value={selectedValue} // Bind the state to the select value
+                                                onChange={handleChange} // Handle changes
+                                              >
+                                                <option value="" disabled>Select your profession</option>
+                                                <option value="Student">Student</option>
+                                                <option value="Working Professional">Working Professional</option>
+                                                <option value="Businessman">Businessman</option>
+                                                <option value="Other">Other</option>
+                                              </Form.Select>}
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <div className=''>
-                                        <button type='submit' className='theme-btn mt-4'>Save</button>
+                                        <button type='submit' onClick={(e)=>{updatePro(e)}} className='theme-btn mt-4'>Save</button>
                                     </div>
                                 </Form>
                             </div></Col>

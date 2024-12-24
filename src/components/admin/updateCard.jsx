@@ -16,7 +16,7 @@ function UpdateCard() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -73,7 +73,7 @@ function UpdateCard() {
                 fetchCardDetails();
 
                 setTimeout(() => {
-                    navigate('/admin/cards');
+                    navigate(`${config.baseUrl}admin/cards`);
                 }, 3000);
             } else {
                 toast.error(result.message);

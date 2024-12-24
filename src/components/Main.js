@@ -10,7 +10,7 @@ import "../components/css/Aside.css";
 import '../components/css/News.css';
 import { useNavigate} from 'react-router-dom';
 import financial from './img/smallgraph.png';
-
+import config from '../config';
 // import Img from '../components/img/img1.webp'
 // import indigo from '../components/img/indigo2.png';
 // import ihcl from '../components/img/ihcl2.png';
@@ -110,7 +110,7 @@ const Main = ({ getCarddata, carddata, reload, loading, loginStatus, setCardvide
             <div className='btnoptions'>
 
               <button onClick={() => {
-                navigate('/login');
+                navigate(`${config.baseUrl}login`);
               }}>
                 yes
               </button>
@@ -142,7 +142,7 @@ const Main = ({ getCarddata, carddata, reload, loading, loginStatus, setCardvide
             <div className='btnoptions'>
 
               <button onClick={() => {
-                navigate('/pricing');
+                navigate(`${config.baseUrl}pricing`);
               }}>
                 yes
               </button>

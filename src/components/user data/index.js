@@ -278,6 +278,9 @@ import { useParams } from 'react-router-dom'; // Import useParams
 import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import toast, { Toaster } from "react-hot-toast";
+
 // const UserData = () => {
 //   const { compId } = useParams(); // Extract compId from URL parameters
 //   const checkToken = localStorage.getItem("token");
@@ -686,6 +689,85 @@ const UserData = () => {
     };
   }, []);
 
+
+  const [isInWishList,setIsInWishList]=useState(false)
+
+  const addToWishlistMethod = async (e) => {
+    e.preventDefault(); // Prevent default button behavior
+
+    try {
+        // Replace with your API URL and token handling
+        const apiUrl = `${config.apiUrl}wishlist`; 
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${checkToken}`, // Add JWT token for authentication
+            },
+            body: JSON.stringify({ companyId:compId }), // Send the company ID as request body
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.status) {
+            // Display success message
+            toast.success(result.message);
+            fetchWishlistData()
+            //setIsInWishList(!isInWishList)
+        } else {
+            // Display error message
+            toast.success(result.error || 'An error occurred.');
+            fetchWishlistData()
+           //setIsInWishList(!isInWishList)
+
+
+        }
+        fetchWishlistData()
+
+    } catch (error) {
+        console.error('Error adding/removing from wishlist:', error);
+        toast.success('Internal Server Error. Please try again later.');
+    }
+};
+
+const fetchWishlistData = async () => {
+
+  try {
+      // Replace with your API URL and token handling
+      const apiUrl = `${config.apiUrl}wishlist`; 
+
+      const response = await fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${checkToken}`, // Add JWT token for authentication
+          },
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.status) {
+          // Display success message
+          if(result.data.wishlists.length>0){
+
+            for(let i=0;i<result.data.wishlists.length;i++){
+              if(result.data.wishlists[i].companyId==compId){
+                setIsInWishList(true)
+              }
+            }
+          }
+      }
+  } catch (error) {
+      console.error('Error adding/removing from wishlist:', error);
+  }
+};
+
+useEffect(() => {
+
+  fetchWishlistData()
+
+},[])
   return (
     <>
     
@@ -694,6 +776,7 @@ const UserData = () => {
       </div>}
       <Header />
       <div className='user-data' >
+        <Toaster/>
         <Container fluid className='my-3 pt-md-2 px-0'>
           <Row>
             <Col lg={3} style={{ position: "relative" }} className='p-0'>
@@ -710,6 +793,8 @@ const UserData = () => {
               </div>
             </Col>
             <Col lg={9} className='p-0'>
+        <button className='logoutbtn mb-3' onClick={e=>{addToWishlistMethod(e)}}>{isInWishList?"Remove From Wishlist":"Add To Wishlist"}</button>
+
               <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" className="scrollspy-example all-menus" tabIndex="0">
                 <div id="list-item-1"><OverView loading={loading} comname={companyName} data={overviewData} /></div>
 

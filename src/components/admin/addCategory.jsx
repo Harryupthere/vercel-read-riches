@@ -12,7 +12,7 @@ function AddCategory() {
     if (!checkToken) {
         const checkRole = localStorage.getItem("role");
         if (checkRole && checkRole == 0) {
-            navigate("/");
+            navigate(`${config.baseUrl}`);
         }
     }
 
@@ -44,7 +44,7 @@ function AddCategory() {
                 toast.success(result.message);
                 // Navigate to /admin/category after successful submission
                 setTimeout(() => {
-                    navigate('/admin/category');
+                    navigate(`${config.baseUrl}admin/category`);
                 }, 3000);
             } else {
                 toast.error(result.message);

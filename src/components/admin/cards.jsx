@@ -13,7 +13,7 @@ function Cards() {
         const checkRole = localStorage.getItem("role")
 
         if (checkRole && checkRole == 0) {
-            navigate("/")
+            navigate(`${config.baseUrl}`)
         }
 
     }
@@ -87,7 +87,7 @@ function Cards() {
                 <h2 className='dash-heading'>
                     Cards
                 </h2>
-                    <Link to="/admin/add-card">
+                    <Link to={`${config.baseUrl}admin/add-card`}>
                         <button type='button' className='theme-btn'>Add card</button>
                     </Link>
                 </div>

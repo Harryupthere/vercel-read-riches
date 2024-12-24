@@ -4,15 +4,56 @@ import { Col, Row } from "react-bootstrap";
 import { PieChart, Pie, Sector, Cell, Label, LabelList } from "recharts";
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
+const forcesData = [
+  {
+    id: 1,
+    title: "Threat of Substitute",
+    text: "The threat of substitutes is low. In rural markets, limestone is a substitute for paint. Absences to paint and wall coverings exist in urban areas.",
+    label: "1",
+  },
+  {
+    id: 2,
+    title: "Bargaining Power of Buyers",
+    text: "Buyers have moderate power due to the availability of multiple paint brands and products.",
+    label: "2",
+  },
+  {
+    id: 3,
+    title: "Bargaining Power of Suppliers",
+    text: "Suppliers have low power due to the high number of suppliers and availability of raw materials.",
+    label: "3",
+  },
+  {
+    id: 4,
+    title: "Industry Rivalry",
+    text: "High competition exists among established paint companies, leading to price wars and marketing battles.",
+    label: "4",
+  },
+  {
+    id: 5,
+    title: "Threat of New Entrants",
+    text: "The threat is moderate due to high initial investment but attractive market growth opportunities.",
+    label: "5",
+  },
+];
 
 const Headwinds = ({ loading, data }) => {
   const [selectedSection, setSelectedSection] = useState(null);
   const [showFullText, setShowFullText] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null);
+  // const [activeIndex, setActiveIndex] = useState(null);
   const [showFullHeadwinds, setShowFullHeadwinds] = useState(false);
   const [showFullTailwinds, setShowFullTailwinds] = useState(false);
   const MAX_WORDS = 18;
+  const [activeIndex, setActiveIndex] = useState(0);
 
+  const handleClick = (index) => {
+    setActiveIndex(index);
+  };
+  const radiusOuter = 80;
+  const radiusInner = 50;
+  const center = 100;
+  const totalSegments = forcesData.length;
+  const angleStep = (2 * Math.PI) / totalSegments;
   useEffect(() => {
     if (data && data.length > 0) {
       setSelectedSection(data[0].Porter[0]);
@@ -83,7 +124,7 @@ const Headwinds = ({ loading, data }) => {
             place="bottom"
             content={tooltipData1111}
             //  className="custom-tooltip"
-            style={{ fontSize: "12px", width: "200px" ,zIndex:'1200'}}          /></h2>
+            style={{ fontSize: "12px", width: "200px", zIndex: '1200' }} /></h2>
           <div className="rule" style={{ width: "350px" }}></div>
         </div>
 
@@ -143,11 +184,113 @@ const Headwinds = ({ loading, data }) => {
         <div>
 
           <Row className="w-100 align-items-center mb-4">
-
-
-
-
+            {/* <div className="porters-container"> */}
             <Col md={6}>
+            <svg viewBox="0 0 200 200" className="donut-chart">
+  {forcesData.map((force, index) => {
+    const startAngle = index * angleStep;
+    const endAngle = (index + 1) * angleStep;
+
+    // Calculate the outer arc coordinates
+    const x1Outer = center + radiusOuter * Math.cos(startAngle);
+    const y1Outer = center + radiusOuter * Math.sin(startAngle);
+    const x2Outer = center + radiusOuter * Math.cos(endAngle);
+    const y2Outer = center + radiusOuter * Math.sin(endAngle);
+
+    // Calculate the inner arc coordinates
+    const x1Inner = center + radiusInner * Math.cos(endAngle);
+    const y1Inner = center + radiusInner * Math.sin(endAngle);
+    const x2Inner = center + radiusInner * Math.cos(startAngle);
+    const y2Inner = center + radiusInner * Math.sin(startAngle);
+
+    const largeArcFlag = endAngle - startAngle > Math.PI ? 1 : 0;
+
+    // Define path data for the donut segment
+    const pathData = `
+      M ${x1Outer} ${y1Outer}
+      A ${radiusOuter} ${radiusOuter} 0 ${largeArcFlag} 1 ${x2Outer} ${y2Outer}
+      L ${x1Inner} ${y1Inner}
+      A ${radiusInner} ${radiusInner} 0 ${largeArcFlag} 0 ${x2Inner} ${y2Inner}
+      Z
+    `;
+
+    // Midpoint angle for positioning and translation
+    const midAngle = (startAngle + endAngle) / 2;
+
+    // Calculate translation for active segment
+    const isActive = activeIndex === index;
+    const offsetDistance = isActive ? 10 : 0; // Adjust this value to control the pop-out effect
+    const translateX = offsetDistance * Math.cos(midAngle);
+    const translateY = offsetDistance * Math.sin(midAngle);
+
+    // Text positioning
+    const textX = center + (radiusInner + (radiusOuter - radiusInner) / 2) * Math.cos(midAngle);
+    const textY = center + (radiusInner + (radiusOuter - radiusInner) / 2) * Math.sin(midAngle);
+
+    // Text background rectangle
+    const textWidth = 17;
+    const textHeight = 17;
+    const rectX = textX - textWidth / 2;
+    const rectY = textY - textHeight / 2;
+
+    return (
+      <g
+        key={force.id}
+        transform={`translate(${translateX}, ${translateY})`}
+        onClick={() => handleClick(index)}
+      >
+        {/* Donut segment */}
+        <path
+          d={pathData}
+          className={`segment ${isActive ? "active" : ""}`}
+        />
+        {/* Background rectangle for text */}
+        <rect
+          x={rectX}
+          y={rectY}
+          width={textWidth}
+          height={textHeight}
+          rx="10"
+          ry="10"
+          className={`segment-label-bg ${isActive ? "active-bg" : ""}`}
+        />
+        {/* Text label */}
+        <text
+          x={textX}
+          y={textY}
+          textAnchor="middle"
+          dy=".35em"
+          className={`segment-label ${isActive ? "active-label" : ""}`}
+        >
+          {force.label}
+        </text>
+      </g>
+    );
+  })}
+
+  <text x="50%" y="48%" textAnchor="middle" dy=".3em" className="center-text">
+    Porter's Five
+  </text>
+  <text x="50%" y="54%" textAnchor="middle" dy=".3em" className="center-text">
+    Forces
+  </text>
+</svg>
+
+            </Col>
+            <Col md={6}>
+              <div className="">
+                <div className="force-details">
+                  <h3>{forcesData[activeIndex].title}</h3>
+                  <p>{forcesData[activeIndex].text}</p>
+                </div>
+              </div>
+            </Col>
+
+            {/* </div> */}
+
+
+
+            {/* <Col md={6}>
               <div className="mt-4">
                 <PieChart width={400} height={350}>
                   <Pie
@@ -192,11 +335,9 @@ const Headwinds = ({ loading, data }) => {
                   <>
                     <div>
                       <h3 style={{ fontSize: "20px" }}>
-                        {/* Safely access keys and join them to display as a string */}
                         {selectedSection.data ? Object.keys(selectedSection.data).join(', ') : 'No keys available'}
                       </h3>
                       <p>
-                        {/* Access the first key's value to display */}
                         {selectedSection.data && Object.keys(selectedSection.data).length > 0 ? (
                           getDisplayText(
                             selectedSection.data[Object.keys(selectedSection.data)[0]] || 'No data available'
@@ -222,7 +363,7 @@ const Headwinds = ({ loading, data }) => {
                   <p>Click on a section to see the details.</p>
                 )}
               </div>
-            </Col>
+            </Col> */}
           </Row>
 
 

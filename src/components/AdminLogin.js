@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import config from '../config';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const AdminLogin = () => {
                     <form onSubmit={
                         (e) => {
                             e.preventDefault();
-                            navigate('/dashboard')
+                            navigate(`${config.baseUrl}dashboard`)
                         }
                     }>
                         <label for="username">Username</label>

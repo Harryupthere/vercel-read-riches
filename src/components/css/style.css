@@ -1420,7 +1420,7 @@ img.arro-bg {
 }
 
 .custom-switch .form-check-input {
-    width: 50px;
+    width: 50px!important;
     /* Width of the input */
     height: 25px;
     /* Height of the input */
@@ -1588,4 +1588,8 @@ img.arro-bg {
 .scroll-mob{
     width: 100%;
     overflow-x: auto;
+}
+.web-header .header_btn{
+   display: flex;
+   gap: 10px; 
 }

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '../components/img/icon/menu.svg'
 import User from '../components/img/Userman.png'
 import { FiChevronLeft } from 'react-icons/fi';
+import config from '../config';
 
 
 const Header = () => {
@@ -59,7 +60,7 @@ const Header = () => {
 
     const goToLogin=async(e)=>{
         e.preventDefault()
-        navigate('/login');
+        navigate(`${config.baseUrl}login`);
     }
     const goToLogOut = (e) => {
         e.preventDefault();
@@ -77,24 +78,24 @@ const Header = () => {
 
                 <ul className="nav-links">
                     <li>
-                        <Link className={`nav-link  ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/" onClick={navlinclickfunc} title='Home'>Home</Link>
-                    </li>
-                    {/* <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/stockview" onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
-                    </li> */}
-                    <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
+                        <Link className={`nav-link  ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}`} onClick={navlinclickfunc} title='Home'>Home</Link>
                     </li>
                     <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}stockview`} onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
                     </li>
                     <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}about`} onClick={navlinclickfunc} title='About Us'>About Us</Link>
+                    </li>
+                    <li>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to={`${config.baseUrl}join-membership`} title='Pricing'>Pricing</Link>
+                    </li>
+                    <li>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}contact`} onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
                     </li>
                 </ul>
-                {/* <div>
-                {isLoggedIn ? <button className="logoutbtn" onClick={e=>{goToLogOut(e)}}>Log Out</button>:<button className="logoutbtn" onClick={e=>{goToLogin(e)}}>Log In</button>}
-                </div> */}
+                <div className='header_btn'>
+                {isLoggedIn ? <><button className="logoutbtn" onClick={e=>{goToLogOut(e)}}>Log Out</button><Link to={`${config.baseUrl}user/profile`}><button className="logoutbtn" >Profile</button></Link></>:<button className="logoutbtn" onClick={e=>{goToLogin(e)}}>Log In</button>}
+                </div>
             </nav>
             </div>
             <div className='mobile-header'>
@@ -110,22 +111,23 @@ const Header = () => {
                         {/* <img src={User}/>
                         <p>Seems you havent logged in yet </p> */}
                         {/* <button className="logoutbtn">Log In</button> */}
+                        {isLoggedIn ? <><button className="logoutbtn" onClick={e=>{goToLogOut(e)}}>Log Out</button><Link to={`${config.baseUrl}user/profile`}><button className="logoutbtn" >Profile</button></Link></>:<button className="logoutbtn" onClick={e=>{goToLogin(e)}}>Log In</button>}
                     </div>
                     <ul className="nav-links-mobile mt-4">
                     <li>
-                        <Link className={`nav-link  ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/" onClick={navlinclickfunc} title='Home'>Home</Link>
+                        <Link className={`nav-link  ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}`} onClick={navlinclickfunc} title='Home'>Home</Link>
                     </li>
                     <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/about" onClick={navlinclickfunc} title='About Us'>About Us</Link>
-                    </li>
-                    {/* <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/stockview" onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
-                    </li> */}
-                    <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to="/contact" onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/about' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}about`} onClick={navlinclickfunc} title='About Us'>About Us</Link>
                     </li>
                     <li>
-                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to="/join-membership" title='Pricing'>Pricing</Link>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/stockview' ? 'active' : ''} ${location.pathname === '/stockview' && scrolling ? 'activescrolled' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}stockview`} onClick={navlinclickfunc} title='Stocks'>Stocks Tracker</Link>
+                    </li>
+                    <li>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/contact' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} to={`${config.baseUrl}contact`} onClick={navlinclickfunc} title='Contact Us'>Contact Us</Link>
+                    </li>
+                    <li>
+                        <Link className={`nav-link ${scrolling ? 'nav-links-scrolled' : ''} ${location.pathname === '/join-membership' ? 'active' : ''} ${location.pathname !== '/' ? 'nav-link-white' : ''}`} onClick={navlinclickfunc} to={`${config.baseUrl}join-membership`} title='Pricing'>Pricing</Link>
                     </li>
                     </ul>
                 </div>

@@ -13,7 +13,7 @@ function TickerData() {
     if (!checkToken) {
         const checkRole = localStorage.getItem("role");
         if (checkRole && checkRole === "0") {
-            navigate("/");
+            navigate(`${config.baseUrl}`);
         }
     }
 
@@ -42,7 +42,7 @@ function TickerData() {
             if (result.status) {
                 toast.success(result.message);
                 setTimeout(() => {
-                    navigate('/admin/tickerData'); // Redirect or update after success
+                    navigate(`${config.baseUrl}admin/tickerData`); // Redirect or update after success
                 }, 3000);
             } else {
                 toast.error(result.message);

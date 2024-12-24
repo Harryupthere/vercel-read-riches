@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import config from '../config';
 
 function OTPInput() {
   const [otp, setOTP] = useState(['', '', '', '', '', '']); // Array to store each digit
   const inputRefs = useRef([]);
   const location = useLocation();
   const { gotp } = location.state;  // Array to store each digit
+  
   const navigate = useNavigate();
 
   // console.log('Got OTP:', gotp);  
@@ -47,7 +48,7 @@ function OTPInput() {
       .then((response) => response.json())
       .then((data) => {
         // console.log('Success:', data);
-        navigate('/login');
+        navigate(`${config.baseUrl}login`);
         
       })
       .catch((error) => {

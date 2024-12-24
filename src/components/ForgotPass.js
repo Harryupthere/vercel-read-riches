@@ -35,7 +35,7 @@ const ForgotPass = () => {
             if (data.status) {
                 toast.success('Password reset link sent successfully. Please check your email.');
                 setTimeout(() => {
-                    navigate('/login');
+                    navigate(`${config.baseUrl}login`);
                 }, 5000);
             } else {
                 toast.error(data.message);
@@ -79,7 +79,7 @@ const ForgotPass = () => {
                                         <hr className='w-100 my-md-4 my-3'/>
 
                                     <p className='justrem'> New Member? <u onClick={() => {
-                                        navigate('/signup');
+                                        navigate(`${config.baseUrl}signup`);
                                     }} style={{ color: "#007AFF", textDecoration: "none", cursor: "pointer" }}>sign up now</u></p>
 
                                 </form>
